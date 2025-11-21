@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Temi – Medicina Interna</string>
+
+    <string name="voice_welcome">
+        Hola, soy Temi. ¿Te guío a Admisiones o a la habitación tres cero dos?
+    </string>
+
+    <string name="voice_arrived">
+        Hemos llegado. ¿Necesitas algo más?
+    </string>
+
+    <string name="metadata_permissions">metadata_permissions</string>
+</resources>
