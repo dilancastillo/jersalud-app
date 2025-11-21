@@ -1,0 +1,6 @@
+com.esbot.temi.esbot_health.test.app-core-1.7.0-0 C:\Users\usuario\.gradle\caches\8.13\transforms\7f9583803f9792907b357895484d64f7\transformed\core-1.7.0\res
+com.esbot.temi.esbot_health.test.app-tracing-1.2.0-1 C:\Users\usuario\.gradle\caches\8.13\transforms\9d5d82fab9554779d35138665ebd41ea\transformed\tracing-1.2.0\res
+com.esbot.temi.esbot_health.test.app-androidTest-2 C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\build\generated\res\resValues\androidTest\debug
+com.esbot.temi.esbot_health.test.app-mergeDebugAndroidTestResources-3 C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.esbot.temi.esbot_health.test.app-mergeDebugAndroidTestResources-4 C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.esbot.temi.esbot_health.test.app-debugAndroidTest-5 C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

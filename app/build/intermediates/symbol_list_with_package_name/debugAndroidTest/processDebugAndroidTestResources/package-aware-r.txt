@@ -1,0 +1,3 @@
+com.esbot.temi.esbot_health.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

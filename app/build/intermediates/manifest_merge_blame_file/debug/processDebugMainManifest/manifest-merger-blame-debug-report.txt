@@ -1,0 +1,212 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.esbot.temi.esbot_health"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="30"
+9        android:targetSdkVersion="36" />
+10
+11    <!-- Permiso para reconocimiento de voz -->
+12    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+12-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:6:5-70
+12-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:6:22-68
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:7:5-81
+13-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:7:22-78
+14
+15    <queries>
+15-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:9:5-12:15
+16        <package android:name="com.roboteam.teamy.usa" />
+16-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:10:9-58
+16-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:10:18-55
+17        <package android:name="com.roboteam.teamy.china" />
+17-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:11:9-60
+17-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:11:18-57
+18    </queries>
+19
+20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+21
+22    <permission
+22-->[androidx.core:core:1.17.0] C:\Users\usuario\.gradle\caches\8.13\transforms\7df159ff643005428ce5988458e05df1\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
+23        android:name="com.esbot.temi.esbot_health.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+23-->[androidx.core:core:1.17.0] C:\Users\usuario\.gradle\caches\8.13\transforms\7df159ff643005428ce5988458e05df1\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
+24        android:protectionLevel="signature" />
+24-->[androidx.core:core:1.17.0] C:\Users\usuario\.gradle\caches\8.13\transforms\7df159ff643005428ce5988458e05df1\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
+25
+26    <uses-permission android:name="com.esbot.temi.esbot_health.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+26-->[androidx.core:core:1.17.0] C:\Users\usuario\.gradle\caches\8.13\transforms\7df159ff643005428ce5988458e05df1\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
+26-->[androidx.core:core:1.17.0] C:\Users\usuario\.gradle\caches\8.13\transforms\7df159ff643005428ce5988458e05df1\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
+27
+28    <application
+28-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:8:5-60:19
+29        android:name="com.esbot.temi.esbot_health.App"
+29-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:9:9-28
+30        android:allowBackup="true"
+30-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:10:9-35
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.17.0] C:\Users\usuario\.gradle\caches\8.13\transforms\7df159ff643005428ce5988458e05df1\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
+32        android:dataExtractionRules="@xml/data_extraction_rules"
+32-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:11:9-65
+33        android:debuggable="true"
+34        android:extractNativeLibs="false"
+35        android:fullBackupContent="@xml/backup_rules"
+35-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:12:9-54
+36        android:icon="@mipmap/ic_launcher"
+36-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:13:9-43
+37        android:label="@string/app_name"
+37-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:14:9-41
+38        android:roundIcon="@mipmap/ic_launcher_round"
+38-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:15:9-54
+39        android:supportsRtl="true"
+39-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:16:9-35
+40        android:theme="@style/Theme.Esbot_health" >
+40-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:17:9-50
+41        <meta-data
+41-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:19:9-21:48
+42            android:name="com.robotemi.sdk.metadata.SKILL"
+42-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:20:13-59
+43            android:value="@string/app_name" />
+43-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:21:13-45
+44        <meta-data
+44-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:23:9-25:36
+45            android:name="com.robotemi.sdk.metadata.KIOSK"
+45-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:24:13-59
+46            android:value="TRUE" />
+46-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:25:13-33
+47        <meta-data
+47-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:27:9-29:125
+48            android:name="@string/metadata_permissions"
+48-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:28:13-56
+49            android:value="com.robotemi.permission.sequence,com.robotemi.permission.map,com.robotemi.permission.settings" />
+49-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:29:13-122
+50
+51        <activity
+51-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:31:9-34:52
+52            android:name="com.esbot.temi.esbot_health.ui.AutoRoundActivity"
+52-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:32:13-49
+53            android:exported="false"
+53-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:33:13-37
+54            android:screenOrientation="portrait" />
+54-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:34:13-49
+55        <activity
+55-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:36:9-39:52
+56            android:name="com.esbot.temi.esbot_health.ui.IndividualEducationActivity"
+56-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:37:13-59
+57            android:exported="false"
+57-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:38:13-37
+58            android:screenOrientation="portrait" />
+58-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:39:13-49
+59        <activity
+59-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:41:9-44:52
+60            android:name="com.esbot.temi.esbot_health.ui.EducationActivity"
+60-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:42:13-49
+61            android:exported="false"
+61-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:43:13-37
+62            android:screenOrientation="portrait" />
+62-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:44:13-49
+63        <activity
+63-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:46:9-49:52
+64            android:name="com.esbot.temi.esbot_health.ui.PainRoundActivity"
+64-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:47:13-49
+65            android:exported="false"
+65-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:48:13-37
+66            android:screenOrientation="portrait" />
+66-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:49:13-49
+67        <activity
+67-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:51:9-59:20
+68            android:name="com.esbot.temi.esbot_health.ui.MainActivity"
+68-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:52:13-44
+69            android:exported="true" >
+69-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:53:13-36
+70            <intent-filter>
+70-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:54:13-58:29
+71                <action android:name="android.intent.action.MAIN" />
+71-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:55:17-69
+71-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:55:25-66
+72
+73                <category android:name="android.intent.category.LAUNCHER" />
+73-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:57:17-77
+73-->C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\AndroidManifest.xml:57:27-74
+74            </intent-filter>
+75        </activity>
+76
+77        <provider
+77-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:15:9-19:40
+78            android:name="com.robotemi.sdk.TemiSdkContentProvider"
+78-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:16:13-67
+79            android:authorities="com.esbot.temi.esbot_health.com.robotemi.sdk"
+79-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:17:13-68
+80            android:enabled="true"
+80-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:18:13-35
+81            android:exported="false" />
+81-->[com.robotemi:sdk:1.136.0] C:\Users\usuario\.gradle\caches\8.13\transforms\67dfea831ab1a7e97890df9fe519b135\transformed\sdk-1.136.0\AndroidManifest.xml:19:13-37
+82        <provider
+82-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+83            android:name="androidx.startup.InitializationProvider"
+83-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+84            android:authorities="com.esbot.temi.esbot_health.androidx-startup"
+84-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+85            android:exported="false" >
+85-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+86            <meta-data
+86-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+87                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+87-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+88                android:value="androidx.startup" />
+88-->[androidx.emoji2:emoji2:1.3.0] C:\Users\usuario\.gradle\caches\8.13\transforms\cfcf725d86efe76aba4c7a27ef17d640\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+89            <meta-data
+89-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\usuario\.gradle\caches\8.13\transforms\ec698adf2d34ce75fa4ccddac5c140fa\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+90                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+90-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\usuario\.gradle\caches\8.13\transforms\ec698adf2d34ce75fa4ccddac5c140fa\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+91                android:value="androidx.startup" />
+91-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\usuario\.gradle\caches\8.13\transforms\ec698adf2d34ce75fa4ccddac5c140fa\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+92            <meta-data
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+93                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+93-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+94                android:value="androidx.startup" />
+94-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+95        </provider>
+96
+97        <receiver
+97-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+98            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+98-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+99            android:directBootAware="false"
+99-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+100            android:enabled="true"
+100-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+101            android:exported="true"
+101-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+102            android:permission="android.permission.DUMP" >
+102-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+103            <intent-filter>
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+104                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+104-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+104-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+105            </intent-filter>
+106            <intent-filter>
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+107                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+107-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+107-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+108            </intent-filter>
+109            <intent-filter>
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+110                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+110-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+110-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+111            </intent-filter>
+112            <intent-filter>
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+113                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+113-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+113-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\usuario\.gradle\caches\8.13\transforms\00b0e1014f1c894b7756e4147734e5b6\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+114            </intent-filter>
+115        </receiver>
+116    </application>
+117
+118</manifest>

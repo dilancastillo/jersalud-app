@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.esbot.temi.esbot_health.app-mergeDebugResources-34:/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\usuario\\.gradle\\caches\\8.13\\transforms\\67dfea831ab1a7e97890df9fe519b135\\transformed\\sdk-1.136.0\\res\\values-v29\\values-v29.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "199"
+                    }
+                }
+            ]
+        }
+    ]
+}
