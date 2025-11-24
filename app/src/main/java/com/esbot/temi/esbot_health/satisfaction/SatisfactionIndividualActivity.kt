@@ -3,9 +3,6 @@ package com.esbot.temi.esbot_health.satisfaction
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,11 +14,14 @@ import com.esbot.temi.esbot_health.education.HospitalConfig
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
+import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
 import java.util.Locale
 
-class SatisfactionIndividualActivity : AppCompatActivity(), OnGoToLocationStatusChangedListener {
+class SatisfactionIndividualActivity : AppCompatActivity(),
+    OnGoToLocationStatusChangedListener,
+    Robot.AsrListener {
     private lateinit var robot: Robot
 
     private lateinit var tvTitle: TextView
@@ -45,7 +45,6 @@ class SatisfactionIndividualActivity : AppCompatActivity(), OnGoToLocationStatus
     private var selectedBed: BedInfo? = null
     private var inSurvey: Boolean = false
 
-    private var speechRecognizer: SpeechRecognizer? = null
     private val recordAudioPerm = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
@@ -68,12 +67,34 @@ class SatisfactionIndividualActivity : AppCompatActivity(), OnGoToLocationStatus
     override fun onStart() {
         super.onStart()
         robot.addOnGoToLocationStatusChangedListener(this)
+        robot.addAsrListener(this)
     }
 
     override fun onStop() {
         robot.removeOnGoToLocationStatusChangedListener(this)
-        speechRecognizer?.destroy()
+        robot.removeAsrListener(this)
         super.onStop()
+    }
+
+    override fun onAsrResult(asrResult: String, sttLanguage: SttLanguage) {
+        runOnUiThread {
+            if (!inSurvey) return@runOnUiThread
+
+            val transcript = asrResult
+                .lowercase(Locale.getDefault())
+                .trim()
+
+            if (transcript.isBlank()) {
+                Toast.makeText(
+                    this,
+                    "No entendí. Intenta de nuevo o usa los botones.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@runOnUiThread
+            }
+
+            handleVoiceAnswer(transcript)
+        }
     }
 
     private fun bindViews() {
@@ -229,6 +250,8 @@ class SatisfactionIndividualActivity : AppCompatActivity(), OnGoToLocationStatus
     }
 
     private fun ensureMicAndListen() {
+        if (!inSurvey) return
+
         val granted = ContextCompat.checkSelfPermission(
             this,
             Manifest.permission.RECORD_AUDIO
@@ -244,50 +267,10 @@ class SatisfactionIndividualActivity : AppCompatActivity(), OnGoToLocationStatus
     private fun startListeningForAnswer() {
         if (!inSurvey) return
 
-        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
-            Toast.makeText(this, "Reconocimiento de voz no disponible.", Toast.LENGTH_LONG).show()
-            return
-        }
+        val q = surveyQuestions[currentQuestionIndex]
+        val prompt = q.textTts + " Puedes responder ahora en voz alta."
 
-        speechRecognizer?.destroy()
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this).apply {
-            setRecognitionListener(object : RecognitionListener {
-                override fun onReadyForSpeech(params: Bundle?) {}
-                override fun onBeginningOfSpeech() {}
-                override fun onRmsChanged(rmsdB: Float) {}
-                override fun onBufferReceived(buffer: ByteArray?) {}
-                override fun onEndOfSpeech() {}
-                override fun onError(error: Int) {
-                    Toast.makeText(
-                        this@SatisfactionIndividualActivity,
-                        "No entendí. Intenta de nuevo o usa los botones.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                override fun onResults(results: Bundle) {
-                    val list = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                        ?: arrayListOf()
-                    val transcript =
-                        list.firstOrNull()?.lowercase(Locale.getDefault()) ?: ""
-                    handleVoiceAnswer(transcript)
-                }
-
-                override fun onPartialResults(partialResults: Bundle?) {}
-                override fun onEvent(eventType: Int, params: Bundle?) {}
-            })
-        }
-
-        val intent = android.content.Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es-CO")
-            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
-            putExtra(RecognizerIntent.EXTRA_PROMPT, "Responda diciendo una de las opciones.")
-        }
-        speechRecognizer?.startListening(intent)
+        robot.askQuestion(prompt)
     }
 
     private fun handleVoiceAnswer(transcript: String) {
@@ -320,8 +303,8 @@ class SatisfactionIndividualActivity : AppCompatActivity(), OnGoToLocationStatus
             text.contains("muy mala") || text.contains("muy insatisfecho") -> 0
             text.contains("mala") || text.contains("insatisfecho") -> 1
             text.contains("regular") || text.contains("ni satisfecho") -> 2
-            text.contains("buena") || text.contains("satisfecho") -> 3
             text.contains("muy buena") || text.contains("muy satisfecho") -> 4
+            text.contains("buena") || text.contains("satisfecho") -> 3
             else -> {
                 Regex("""\d""").find(text)?.value?.toIntOrNull()?.let {
                     if (it in 1..5) it - 1 else null

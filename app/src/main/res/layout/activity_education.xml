@@ -25,6 +25,13 @@
         android:paddingBottom="32dp"
         android:gravity="center_horizontal">
 
+        <Button
+            android:id="@+id/btnEduHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volver al inicio"
+            android:layout_marginBottom="16dp" />
+
         <TextView
             android:id="@+id/tvEduIntro"
             android:layout_width="match_parent"

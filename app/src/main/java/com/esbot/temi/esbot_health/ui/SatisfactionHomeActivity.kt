@@ -17,6 +17,7 @@ class SatisfactionHomeActivity : AppCompatActivity() {
     private lateinit var tvIntro: TextView
     private lateinit var btnAutoRound: MaterialButton
     private lateinit var btnIndividual: MaterialButton
+    private lateinit var btnHome: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +25,20 @@ class SatisfactionHomeActivity : AppCompatActivity() {
 
         robot = Robot.getInstance()
 
+        btnHome = findViewById(R.id.btnSatHome)
         tvIntro = findViewById(R.id.tvSatIntro)
         btnAutoRound = findViewById(R.id.btnSatAutoRound)
         btnIndividual = findViewById(R.id.btnSatIndividual)
 
         speak("Estás en el módulo de encuestas de satisfacción. Puedes hacer una ronda corta cama por cama o una sesión individual.")
+
+        btnHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+            startActivity(intent)
+            finish()
+        }
 
         btnAutoRound.setOnClickListener {
             val intent = Intent(this, SatisfactionAutoRoundActivity::class.java)

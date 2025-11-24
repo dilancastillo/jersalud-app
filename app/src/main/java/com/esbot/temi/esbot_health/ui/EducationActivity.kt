@@ -18,6 +18,7 @@ class EducationActivity : AppCompatActivity() {
 
     private lateinit var btnModeIndividual: Button
     private lateinit var btnModeAuto: Button
+    private lateinit var btnEduHome: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class EducationActivity : AppCompatActivity() {
 
         btnModeIndividual = findViewById(R.id.btnModeIndividual)
         btnModeAuto = findViewById(R.id.btnModeAuto)
+        btnEduHome = findViewById(R.id.btnEduHome)
 
         speak("Estás en el módulo de educación al paciente. Puedes elegir una sesión individual o una ronda automática.")
 
@@ -38,6 +40,14 @@ class EducationActivity : AppCompatActivity() {
         btnModeAuto.setOnClickListener {
             val intent = Intent(this, AutoRoundActivity::class.java)
             startActivity(intent)
+        }
+
+        btnEduHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+            startActivity(intent)
+            finish()
         }
     }
 
