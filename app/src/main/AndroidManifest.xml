@@ -2,8 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permiso para reconocimiento de voz -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
 
     <application
         android:name=".App"
@@ -47,6 +54,18 @@
             android:name=".ui.PainRoundActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.SatisfactionHomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".satisfaction.SatisfactionAutoRoundActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".satisfaction.SatisfactionIndividualActivity"
+            android:exported="false" />
 
         <activity
             android:name=".ui.MainActivity"

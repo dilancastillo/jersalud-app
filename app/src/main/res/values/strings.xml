@@ -9,5 +9,5 @@
         Hemos llegado. ¿Necesitas algo más?
     </string>
 
-    <string name="metadata_permissions">metadata_permissions</string>
+    <string name="metadata_permissions">com.robotemi.sdk.metadata.PERMISSIONS</string>
 </resources>

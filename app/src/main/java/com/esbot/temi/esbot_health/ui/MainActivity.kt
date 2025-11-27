@@ -3,6 +3,7 @@ package com.esbot.temi.esbot_health.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import com.google.android.material.button.MaterialButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     private lateinit var btnPainRound: Button
     private lateinit var btnEducation: Button
     private lateinit var btnExitKiosk: Button
+    private lateinit var btnSatisfaction: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         btnBackToBase = findViewById(R.id.btnBackToBase)
         btnPainRound = findViewById(R.id.btnPainRound)
         btnEducation = findViewById(R.id.btnEducation)
+        btnSatisfaction = findViewById(R.id.btnSatisfaction)
         btnExitKiosk = findViewById(R.id.btnExitKiosk)
 
         btnSpeak.setOnClickListener {
@@ -71,6 +74,11 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
         btnEducation.setOnClickListener {
             val intent = Intent(this, EducationActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnSatisfaction.setOnClickListener {
+            val intent = Intent(this, SatisfactionHomeActivity::class.java)
             startActivity(intent)
         }
 
