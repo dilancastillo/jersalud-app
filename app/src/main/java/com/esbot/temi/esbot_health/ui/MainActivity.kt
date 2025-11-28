@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
         btnSpeak.setOnClickListener {
             say(
-                "Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en tu hospitalización."
+                "Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en IPS Jersalud."
             )
         }
 
@@ -83,13 +83,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         }
 
         btnExitKiosk.setOnClickListener {
-            try {
-                robot.setKioskModeOn(false, HomeScreenMode.DEFAULT)
-                Toast.makeText(this, "Modo kiosko desactivado.", Toast.LENGTH_LONG).show()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(this, "No se pudo desactivar kiosko.", Toast.LENGTH_LONG).show()
-            }
+            exitApp()
         }
     }
 
@@ -105,17 +99,34 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         super.onStop()
     }
 
+    private fun exitApp() {
+        try {
+            if (robot.isKioskModeOn()) {
+                robot.setKioskModeOn(false, HomeScreenMode.CUSTOM_SCREEN)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                this,
+                "No se pudo desactivar modo kiosko, pero la aplicación se cerrará.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        finishAffinity()
+    }
+
     override fun onRobotReady(isReady: Boolean) {
         if (!isReady) return
 
         try {
-            robot.setKioskModeOn(true, HomeScreenMode.DEFAULT)
+            robot.setKioskModeOn(true, HomeScreenMode.CUSTOM_SCREEN)
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
         runOnUiThread {
-            tvStatus.text = "Estado: Temi listo en Medicina Interna"
+            tvStatus.text = "Estado: Temi listo en IPS Jersalud"
         }
     }
 

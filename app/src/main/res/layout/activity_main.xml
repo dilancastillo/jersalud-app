@@ -243,7 +243,7 @@
                         android:layout_weight="1"
                         android:textColor="@color/alert_red_text"
                         app:strokeColor="@color/alert_red_text"
-                        android:text="Salir Kiosco" />
+                        android:text="Salir de la aplicación" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

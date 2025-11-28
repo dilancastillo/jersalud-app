@@ -61,7 +61,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         setupBeds()
         setupButtons()
 
-        speak("Selecciona primero la cama del paciente. Después iré hasta allí y realizaremos una encuesta corta de satisfacción.")
+        speak("Selecciona primero la habitación del paciente. Después iré hasta allí y realizaremos una encuesta corta de satisfacción.")
     }
 
     override fun onStart() {
@@ -134,7 +134,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         btnGo.setOnClickListener {
             val checkedId = rgBeds.checkedRadioButtonId
             if (checkedId == -1) {
-                Toast.makeText(this, "Seleccione una cama.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Seleccione una habitación.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             val rb = findViewById<RadioButton>(checkedId)
@@ -215,7 +215,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         currentAnswers.clear()
         currentQuestionIndex = 0
 
-        speak("Estamos en la ${bed.label}. Le haré algunas preguntas cortas sobre la atención recibida. Puede responder por voz o tocando la pantalla.")
+        speak("Estamos en la ${bed.label}. Le haré algunas preguntas cortas sobre la atención recibida e IPS Jersalud. Puede responder por voz o tocando la pantalla.")
         showCurrentQuestion()
     }
 

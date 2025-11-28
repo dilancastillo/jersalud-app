@@ -93,7 +93,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         setupBeds()
         setupButtons()
 
-        speak("Configura la ronda de satisfacción: primero elige las camas, luego inicia la ronda. Haré pocas preguntas cortas a cada paciente.")
+        speak("Configura la ronda de satisfacción: primero elige las habitaciones, luego inicia la ronda. Haré pocas preguntas cortas a cada paciente.")
     }
 
     override fun onStart() {
@@ -221,7 +221,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
             collectSelectedBeds()
 
             if (selectedBeds.isEmpty()) {
-                Toast.makeText(this, "Seleccione al menos una cama.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Seleccione al menos una habitación.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -312,7 +312,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         currentBedIndex++
         if (currentBedIndex >= selectedBeds.size) {
             tvRunningState.text = "Ronda finalizada."
-            speak("He terminado la ronda de satisfacción.")
+            speak("He terminado la ronda de satisfacción de IPS Jersalud.")
             if (returnToNursing) {
                 speak("Voy a regresar a enfermería.")
                 robot.goTo(HospitalConfig.NURSING_LOCATION)
@@ -354,7 +354,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
             } else if (status.equals("aborted", ignoreCase = true)
                 || status.equals("failed", ignoreCase = true)
             ) {
-                tvRunningState.text = "No se pudo llegar a la cama. Saltando a la siguiente."
+                tvRunningState.text = "No se pudo llegar a la habitación. Saltando a la siguiente."
                 goToNextBed()
             }
         }
@@ -364,9 +364,9 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         waitingAvailability = true
         panelAvailability.visibility = View.VISIBLE
         panelQuestion.visibility = View.GONE
-        tvAvailabilityQuestion.text = "Hola, soy Temi. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido?"
+        tvAvailabilityQuestion.text = "Hola, soy Temi. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido en IPS Jersalud?"
 
-        speak("Hola. Soy Temi, el asistente de la clínica. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido?")
+        speak("Hola. Soy Temi, el asistente de IPS Jersalud. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido?")
     }
 
     private fun startSurveyForCurrentBed() {
@@ -378,7 +378,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         currentAnswers.clear()
         currentQuestionIndex = 0
 
-        speak("Le haré algunas preguntas cortas sobre la atención recibida. Puede responder tocando la pantalla o por voz.")
+        speak("Le haré algunas preguntas cortas sobre la atención recibida en IPS Jersalud. Puede responder tocando la pantalla o por voz.")
         showCurrentQuestion()
     }
 

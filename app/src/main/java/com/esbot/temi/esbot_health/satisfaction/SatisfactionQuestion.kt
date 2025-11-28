@@ -33,6 +33,55 @@ object SatisfactionSurvey {
 
         return listOf(
             SatisfactionQuestion(
+                id = "P001_SERVICE_EVALUATED",
+                label = "Servicio evaluado",
+                textTts = "Por favor indique el servicio que desea evaluar en IPS Jersalud.",
+                type = SatisfactionQuestionType.LIKERT_5, // tipo no importa mucho; 5 opciones o más
+                options = listOf(
+                    "ECIS-M (Visita de Caracterización familiar)",
+                    "Medicina Laboral",
+                    "Terapia Física",
+                    "Medicina General",
+                    "Enfermería",
+                    "Odontología",
+                    "Farmacia",
+                    "Toma de muestra de laboratorio",
+                    "Admisión (activación y asignación de citas)",
+                    "Medicina Especializada",
+                    "Trabajo Social",
+                    "Psicología",
+                    "Administrativos"
+                ),
+                isRegulatoryKey = false
+            ),
+            SatisfactionQuestion(
+                id = "P002_RECOMMEND",
+                label = "¿Recomendaría a sus familiares y amigos Jersalud S.A.S?",
+                textTts = "¿Recomendaría a sus familiares y amigos Jersalud S.A.S?",
+                type = SatisfactionQuestionType.RECOMMEND_4,
+                options = listOf(
+                    "Definitivamente Sí",
+                    "Probablemente Sí",
+                    "Probablemente No",
+                    "Definitivamente No"
+                ),
+                isRegulatoryKey = true
+            ),
+            SatisfactionQuestion(
+                id = "P003_GLOBAL_EXPERIENCE",
+                label = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Jersalud S.A.S?",
+                textTts = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Jersalud S.A.S?",
+                type = SatisfactionQuestionType.LIKERT_5,
+                options = listOf(
+                    "Muy Buena",
+                    "Buena",
+                    "Regular",
+                    "Mala",
+                    "Muy mala"
+                ),
+                isRegulatoryKey = true
+            )
+            /*SatisfactionQuestion(
                 id = "P314_GLOBAL_EXPERIENCE",
                 label = "Experiencia global con la atención",
                 textTts = "En general, ¿cómo calificaría su experiencia global con los servicios de salud recibidos en esta clínica?",
@@ -86,7 +135,7 @@ object SatisfactionSurvey {
                 type = SatisfactionQuestionType.LIKERT_5,
                 options = likert5,
                 isRegulatoryKey = false
-            )
+            )*/
         )
     }
 }
