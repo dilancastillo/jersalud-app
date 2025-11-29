@@ -37,6 +37,7 @@
     <string name="btn_view_module">Ver módulo</string>
 
     <string name="title_system">Sistema</string>
+    <string name="title_restroom">Baños</string>
     <string name="body_system">Opciones del robot.</string>
     <string name="btn_go_to_base">Ir a Base</string>
     <string name="btn_exit_app">Salir de la aplicación</string>

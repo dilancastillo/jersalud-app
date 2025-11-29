@@ -31,7 +31,8 @@
         <string name="body_system">Robot options.</string>
         <string name="btn_go_to_base">Go to Base</string>
         <string name="btn_exit_app">Exit application</string>
+        <string name="title_restroom">Restroom</string>
 
-        <string name="voice_welcome_long_desc">Hello, I\'m Temi. I\'m here to help you get to your destination and accompany you at Jersalud IPS.</string>
+        <string name="voice_welcome_long_desc">Hi there! I\'m Temi, and I\'m here to guide you around Jersalud Clinic today.</string>
 
 </resources>
