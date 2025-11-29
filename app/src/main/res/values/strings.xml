@@ -10,4 +10,36 @@
     </string>
 
     <string name="metadata_permissions">com.robotemi.sdk.metadata.PERMISSIONS</string>
+    <string name="main_title">Asistente Temi – Clínica Jersalud</string>
+    <string name="content_description_settings">Configuración</string>
+    <string name="status_connecting">Estado: Conectando...</string>
+    <string name="card_welcome_title">Hola, bienvenido</string>
+    <string name="card_welcome_body">Temi está listo para asistir al paciente y guiarlo en el servicio.</string>
+    <string name="btn_speak_with_patient">Hablar con el paciente ›</string>
+
+    <string name="title_admissions">Ir a Admisiones</string>
+    <string name="body_admissions">Guía hacia Admisiones.</string>
+    <string name="btn_start_route">Iniciar ruta</string>
+
+    <string name="title_room_302">Ir a habitación 302</string>
+    <string name="body_room_302">Lleva al paciente.</string>
+
+    <string name="title_satisfaction">Satisfacción</string>
+    <string name="body_satisfaction">Realizar encuesta.</string>
+    <string name="btn_open_survey">Abrir encuesta</string>
+
+    <string name="title_pain_round">Ronda de dolor</string>
+    <string name="body_pain_round">Escala NRS 0–10.</string>
+    <string name="btn_start_round">Iniciar ronda</string>
+
+    <string name="title_education">Educación</string>
+    <string name="body_education">Videos y derechos.</string>
+    <string name="btn_view_module">Ver módulo</string>
+
+    <string name="title_system">Sistema</string>
+    <string name="body_system">Opciones del robot.</string>
+    <string name="btn_go_to_base">Ir a Base</string>
+    <string name="btn_exit_app">Salir de la aplicación</string>
+
+    <string name="voice_welcome_long_desc">Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en IPS Jersalud.</string>
 </resources>

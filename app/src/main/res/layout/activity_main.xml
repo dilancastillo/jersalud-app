@@ -14,7 +14,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Asistente Temi – Clínica Jersalud"
+        android:text="@string/main_title"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/text_dark_title"
@@ -27,7 +27,19 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:padding="4dp"
-        android:contentDescription="Configuración"
+        android:contentDescription="@string/content_description_settings"
+        android:src="@android:drawable/ic_menu_info_details"
+        app:tint="@color/text_gray_body"
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <ImageView
+        android:id="@+id/btnSettings2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toStartOf="@id/btnSettings"
+        android:padding="4dp"
+        android:contentDescription="@string/content_description_settings"
         android:src="@android:drawable/ic_menu_info_details"
         app:tint="@color/text_gray_body"
         app:layout_constraintTop_toTopOf="@id/tvTitle"
@@ -39,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Estado: Conectando..."
+        android:text="@string/status_connecting"
         android:textSize="16sp"
         android:textColor="@color/text_gray_body"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
@@ -72,14 +84,14 @@
                 app:layout_constraintEnd_toStartOf="@id/imgTemiWelcome">
 
                 <TextView
-                    android:text="Hola, bienvenido"
+                    android:text="@string/card_welcome_title"
                     style="@style/CardTitleText"
                     android:textSize="24sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:text="Temi está listo para asistir al paciente y guiarlo en el servicio."
+                    android:text="@string/card_welcome_body"
                     style="@style/CardBodyText"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -90,7 +102,7 @@
                     style="@style/ModernSolidButton"
                     android:layout_width="match_parent"
                     android:layout_marginTop="24dp"
-                    android:text="Hablar con el paciente ›"
+                    android:text="@string/btn_speak_with_patient"
                     app:icon="@android:drawable/ic_btn_speak_now"
                     app:iconTint="@color/white"
                     app:iconGravity="textStart" />
@@ -129,13 +141,13 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1">
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <TextView android:text="Ir a Admisiones" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:text="Guía hacia Admisiones." style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
+                <TextView android:text="@string/title_admissions" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:text="@string/body_admissions" style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGoAdmis"
                     style="@style/ModernSolidButton"
                     android:layout_width="match_parent"
-                    android:text="Iniciar ruta"
+                    android:text="@string/btn_start_route"
                     android:backgroundTint="#4A90E2"/> </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -147,13 +159,13 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1">
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <TextView android:text="Ir a habitación 302" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:text="Lleva al paciente." style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
+                <TextView android:text="@string/title_room_302" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:text="@string/body_room_302" style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGoHab"
                     style="@style/ModernSolidButton"
                     android:layout_width="match_parent"
-                    android:text="Iniciar ruta"
+                    android:text="@string/btn_start_route"
                     android:backgroundTint="#4A90E2"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -166,13 +178,13 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1">
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <TextView android:text="Satisfacción" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:text="Realizar encuesta." style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
+                <TextView android:text="@string/title_satisfaction" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:text="@string/body_satisfaction" style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSatisfaction"
                     style="@style/ModernSolidButton"
                     android:layout_width="match_parent"
-                    android:text="Abrir encuesta"
+                    android:text="@string/btn_open_survey"
                     android:backgroundTint="#9C27B0"/> </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -184,13 +196,13 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1">
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <TextView android:text="Ronda de dolor" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:text="Escala NRS 0–10." style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
+                <TextView android:text="@string/title_pain_round" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:text="@string/body_pain_round" style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPainRound"
                     style="@style/ModernSolidButton"
                     android:layout_width="match_parent"
-                    android:text="Iniciar ronda"
+                    android:text="@string/btn_start_round"
                     android:backgroundTint="#FF7043"/> </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -202,13 +214,13 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1">
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <TextView android:text="Educación" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:text="Videos y derechos." style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
+                <TextView android:text="@string/title_education" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:text="@string/body_education" style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnEducation"
                     style="@style/ModernSolidButton"
                     android:layout_width="match_parent"
-                    android:text="Ver módulo"
+                    android:text="@string/btn_view_module"
                     android:backgroundTint="#FF7043"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -221,8 +233,8 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1">
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <TextView android:text="Sistema" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:text="Opciones del robot." style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
+                <TextView android:text="@string/title_system" style="@style/CardTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:text="@string/body_system" style="@style/CardBodyText" android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -234,7 +246,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        android:text="Ir a Base" />
+                        android:text="@string/btn_go_to_base" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnExitKiosk"
@@ -243,7 +255,7 @@
                         android:layout_weight="1"
                         android:textColor="@color/alert_red_text"
                         app:strokeColor="@color/alert_red_text"
-                        android:text="Salir de la aplicación" />
+                        android:text="@string/btn_exit_app" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

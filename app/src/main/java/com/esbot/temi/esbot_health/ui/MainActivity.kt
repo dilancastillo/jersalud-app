@@ -1,6 +1,8 @@
 package com.esbot.temi.esbot_health.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
 import com.google.android.material.button.MaterialButton
@@ -8,16 +10,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.esbot.temi.esbot_health.ui.EducationActivity
-import com.esbot.temi.esbot_health.ui.PainRoundActivity
+import com.esbot.temi.esbot_health.R
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.constants.HomeScreenMode
 import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
 import com.robotemi.sdk.listeners.OnRobotReadyListener
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.esbot.temi.esbot_health.R
+import java.util.Locale
 
 class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationStatusChangedListener {
 
@@ -32,6 +31,46 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     private lateinit var btnEducation: Button
     private lateinit var btnExitKiosk: Button
     private lateinit var btnSatisfaction: MaterialButton
+    private lateinit var btnSettings2: android.widget.ImageView
+
+    // ----------------------------------------------------
+    // CONSTANTES Y HELPERS DE LOCALIZACIÓN
+    // ----------------------------------------------------
+    private val PREFS_NAME = "Settings"
+    private val KEY_LANG = "MyLang"
+    private val DEFAULT_LANG = "es"
+
+    // Helper para leer la preferencia de idioma
+    private fun getLocalePreference(context: Context): String {
+        val prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        return prefs.getString(KEY_LANG, DEFAULT_LANG) ?: DEFAULT_LANG
+    }
+
+    // Helper para guardar la preferencia de idioma
+    private fun saveLocalePreference(context: Context, languageCode: String) {
+        val editor = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit()
+        editor.putString(KEY_LANG, languageCode)
+        editor.apply()
+    }
+
+    // CRÍTICO: Este método aplica el idioma guardado ANTES de que se cree la Activity
+    override fun attachBaseContext(newBase: Context) {
+        val languageCode = getLocalePreference(newBase)
+        val locale = Locale(languageCode)
+
+        val config = Configuration(newBase.resources.configuration)
+        config.setLocale(locale)
+
+        val context = newBase.createConfigurationContext(config)
+        super.attachBaseContext(context)
+    }
+
+    // Función que guarda el idioma y fuerza el reinicio de la Activity
+    private fun setLocale(languageCode: String) {
+        saveLocalePreference(this, languageCode)
+        recreate()
+    }
+    // ----------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +87,12 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         btnEducation = findViewById(R.id.btnEducation)
         btnSatisfaction = findViewById(R.id.btnSatisfaction)
         btnExitKiosk = findViewById(R.id.btnExitKiosk)
+        btnSettings2 = findViewById(R.id.btnSettings2) as android.widget.ImageView
+
+        // ... [Resto de Listeners de navegación/Temi] ...
 
         btnSpeak.setOnClickListener {
+            // NOTA: Recuerda reemplazar el texto codificado aquí por una referencia a @string/voice_welcome_long_desc
             say(
                 "Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en IPS Jersalud."
             )
@@ -78,12 +121,20 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         }
 
         btnSatisfaction.setOnClickListener {
-            val intent = Intent(this, SatisfactionHomeActivity::class.java)
+            // Nota: Se asume que SatisfactionHomeActivity está definida
+            val intent = Intent(this, Class.forName("com.esbot.temi.esbot_health.ui.SatisfactionHomeActivity"))
             startActivity(intent)
         }
 
         btnExitKiosk.setOnClickListener {
             exitApp()
+        }
+
+        // Listener del botón de idioma
+        btnSettings2.setOnClickListener {
+            val currentLang = getLocalePreference(this)
+            val newLang = if (currentLang == "en") "es" else "en"
+            setLocale(newLang) // Guardar y recrear Activity
         }
     }
 
@@ -126,6 +177,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         }
 
         runOnUiThread {
+            // NOTA: Reemplaza este texto codificado
             tvStatus.text = "Estado: Temi listo en IPS Jersalud"
         }
     }
@@ -137,6 +189,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         description: String
     ) {
         runOnUiThread {
+            // NOTA: Reemplaza este texto codificado
             tvStatus.text = "Navegación: $location ($status)"
             if (status == "error" || status == "abort") {
                 Toast.makeText(
@@ -157,25 +210,12 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     private fun goToLocation(location: String) {
         try {
             robot.goTo(location)
+            // NOTA: Reemplaza este texto codificado
             tvStatus.text = "Estado: yendo a $location"
         } catch (e: Exception) {
             e.printStackTrace()
+            // NOTA: Reemplaza este texto codificado
             Toast.makeText(this, "No pude ir a $location", Toast.LENGTH_LONG).show()
         }
     }
-
-    /*private fun goTo(dest: String) {
-        robot.goTo(dest)
-    }*/
-
-    /*override fun onGoToLocationStatusChanged(
-        location: String,
-        status: String,
-        descriptionId: Int,
-        description: String
-    ) {
-        runOnUiThread {
-            tvStatus.text = "Navegación: $location ($status)"
-        }
-    }*/
 }

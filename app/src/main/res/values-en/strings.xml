@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string name="main_title">Temi Assistant – Jersalud Clinic</string>
+        <string name="content_description_settings">Settings</string>
+        <string name="status_connecting">Status: Connecting...</string>
+        <string name="card_welcome_title">Hello, welcome</string>
+        <string name="card_welcome_body">Temi is ready to assist the patient and guide them in the service.</string>
+        <string name="btn_speak_with_patient">Speak with patient ›</string>
+
+        <string name="title_admissions">Go to Admissions</string>
+        <string name="body_admissions">Guidance to Admissions.</string>
+        <string name="btn_start_route">Start route</string>
+
+        <string name="title_room_302">Go to room 302</string>
+        <string name="body_room_302">Takes the patient.</string>
+
+        <string name="title_satisfaction">Satisfaction</string>
+        <string name="body_satisfaction">Take survey.</string>
+        <string name="btn_open_survey">Open survey</string>
+
+        <string name="title_pain_round">Pain round</string>
+        <string name="body_pain_round">NRS Scale 0–10.</string>
+        <string name="btn_start_round">Start round</string>
+
+        <string name="title_education">Education</string>
+        <string name="body_education">Videos and rights.</string>
+        <string name="btn_view_module">View module</string>
+
+        <string name="title_system">System</string>
+        <string name="body_system">Robot options.</string>
+        <string name="btn_go_to_base">Go to Base</string>
+        <string name="btn_exit_app">Exit application</string>
+
+        <string name="voice_welcome_long_desc">Hello, I\'m Temi. I\'m here to help you get to your destination and accompany you at Jersalud IPS.</string>
+
+</resources>
