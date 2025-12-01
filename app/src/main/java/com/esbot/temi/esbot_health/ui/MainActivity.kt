@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.esbot.temi.esbot_health.R
+import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.constants.HomeScreenMode
 import com.robotemi.sdk.TtsRequest
@@ -24,14 +25,14 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
     private lateinit var tvStatus: TextView
     private lateinit var btnSpeak: Button
-    private lateinit var btnGoAdmis: Button
-    private lateinit var btnGoHab: Button
-    private lateinit var btnBackToBase: Button
-    private lateinit var btnPainRound: Button
-    private lateinit var btnEducation: Button
-    private lateinit var btnExitKiosk: Button
-    private lateinit var btnSatisfaction: MaterialButton
-    private lateinit var btnSettings2: android.widget.ImageView
+    private lateinit var btnGoAdmis: MaterialCardView
+    private lateinit var btnGoHab: MaterialCardView
+    private lateinit var btnBackToBase: android.widget.ImageView
+    private lateinit var btnPainRound: MaterialCardView
+    private lateinit var btnEducation: MaterialCardView
+    private lateinit var btnExitKiosk: android.widget.ImageView
+    private lateinit var btnSatisfaction: MaterialCardView
+    private lateinit var btnTranslate: android.widget.ImageView
 
     // ----------------------------------------------------
     // CONSTANTES Y HELPERS DE LOCALIZACIÓN
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         btnEducation = findViewById(R.id.btnEducation)
         btnSatisfaction = findViewById(R.id.btnSatisfaction)
         btnExitKiosk = findViewById(R.id.btnExitKiosk)
-        btnSettings2 = findViewById(R.id.btnSettings2) as android.widget.ImageView
+        btnTranslate = findViewById(R.id.btnTranslate) as android.widget.ImageView
 
         // ... [Resto de Listeners de navegación/Temi] ...
 
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         }
 
         // Listener del botón de idioma
-        btnSettings2.setOnClickListener {
+        btnTranslate.setOnClickListener {
             val currentLang = getLocalePreference(this)
             val newLang = if (currentLang == "en") "es" else "en"
             setLocale(newLang) // Guardar y recrear Activity
@@ -177,7 +178,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
         runOnUiThread {
             // NOTA: Reemplaza este texto codificado
-            tvStatus.text = "Estado: Temi listo en IPS Jersalud"
+            tvStatus.text = getString(R.string.status_temi_ready)
         }
     }
 

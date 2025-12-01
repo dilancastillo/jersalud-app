@@ -13,8 +13,18 @@
     <color name="primary_green">#2EC281</color>
     <color name="primary_green_dark">#25A06A</color>
 
-    <color name="card_bg_green_soft">#E8F8F1</color> <color name="card_bg_blue_soft">#EAF6FF</color> <color name="card_bg_orange_soft">#FFF0E6</color> <color name="card_bg_purple_soft">#F4EFFF</color> <color name="card_bg_gray_soft">#F8F9FA</color> <color name="text_dark_title">#1F3C4D</color> <color name="text_gray_body">#7A8CA0</color>   <color name="text_white">#FFFFFF</color>
+    <color name="card_bg_green_soft">#E8F8F1</color>
+    <color name="card_bg_blue_soft">#95C3ED</color>
+    <color name="card_bg_orange_soft">#FFB887</color>
+    <color name="card_bg_purple_soft">#C0AFE0</color>
+    <color name="card_bg_gray_soft">#9CCED9</color>
+    <color name="bgButtonsurvey">#6454a4 </color>
+    <color name="text_dark_title">#1F3C4D</color>
+    <color name="text_gray_body">#7A8CA0</color>
+    <color name="text_white">#FFFFFF</color>
 
     <color name="alert_red_soft">#FFF0F0</color>
     <color name="alert_red_text">#D32F2F</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

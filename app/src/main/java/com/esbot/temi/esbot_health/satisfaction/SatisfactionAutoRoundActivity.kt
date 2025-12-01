@@ -195,7 +195,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         for (bed in HospitalConfig.bedsMi) {
             val cb = CheckBox(this).apply {
                 text = bed.label
-                textSize = 16f
+                textSize = 20f
                 tag = bed
             }
             layoutBedList.addView(cb)

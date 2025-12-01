@@ -8,6 +8,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBarSatAuto"
         android:layout_width="match_parent"
+        app:titleTextColor="@color/white"
         android:layout_height="56dp"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
@@ -28,7 +29,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
             android:text="Ronda automática corta de satisfacción"
-            android:textSize="20sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -40,7 +41,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
             android:text="Paso 1 de 3"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -64,11 +65,14 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepBedsSat"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:strokeColor="#6454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -82,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:text="Seleccione las camas para esta ronda"
                             android:textStyle="bold"
-                            android:textSize="16sp" />
+                            android:textSize="22sp" />
 
                         <LinearLayout
                             android:id="@+id/layoutSatBedList"
@@ -117,11 +121,13 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepRulesSat"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#6454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -134,19 +140,21 @@
                             android:layout_height="wrap_content"
                             android:text="Reglas de la ronda"
                             android:textStyle="bold"
-                            android:textSize="16sp" />
+                            android:textSize="22sp" />
 
                         <CheckBox
                             android:id="@+id/cbSatAskAvailability"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Preguntar si el paciente está disponible antes de iniciar la encuesta" />
+                            android:text="Preguntar si el paciente está disponible antes de iniciar la encuesta"
+                            android:textSize="18sp"/>
 
                         <CheckBox
                             android:id="@+id/cbSatReturnToNursing"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Volver a enfermería al finalizar la ronda" />
+                            android:text="Volver a enfermería al finalizar la ronda"
+                            android:textSize="18sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -278,10 +286,14 @@
             android:padding="16dp">
 
             <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/bgButtonsurvey"
                 android:id="@+id/btnSatStartRound"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="18sp"
                 android:text="Iniciar ronda" />
 
             <com.google.android.material.button.MaterialButton
@@ -290,6 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:textSize="18sp"
                 android:text="Cancelar" />
         </LinearLayout>
 
