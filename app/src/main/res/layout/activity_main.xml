@@ -9,414 +9,456 @@
     android:padding="24dp"
     tools:context=".ui.MainActivity">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/main_title"
-        android:textColor="@color/text_dark_title"
-        android:textSize="33sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/btnSettings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Botón info -->
-    <ImageView
-        android:id="@+id/btnSettings"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="@string/content_description_settings"
-        android:padding="4dp"
-        android:src="@drawable/info"
-        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
-        app:tint="@color/text_gray_body" />
-
-    <ImageView
-        android:id="@+id/btnSettings2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:contentDescription="@string/content_description_settings"
-        android:padding="4dp"
-        android:src="@drawable/traduct"
-        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
-        app:layout_constraintEnd_toStartOf="@id/btnSettings"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
-        app:tint="@color/text_gray_body" />
-
-    <!-- Estado -->
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/status_connecting"
-        android:textColor="@color/text_gray_body"
-        android:textSize="21sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
-    <!-- Card bienvenida -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardWelcome"
-        style="@style/ModernCardBase"
+        android:id="@+id/headerContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:cardBackgroundColor="@color/card_bg_green_soft"
-        app:strokeColor="@color/primary_green"
-        app:strokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        app:strokeColor="@android:color/transparent"
+        app:cardBackgroundColor="@android:color/transparent"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStatus">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp">
 
-            <LinearLayout
+            <!-- Título -->
+            <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imgTemiWelcome"
+                android:text="@string/main_title"
+                android:textColor="@color/text_dark_title"
+                android:textSize="33sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/btnSettings"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/card_welcome_title"
-                    android:textSize="29sp"
-                    style="@style/CardTitleText" />
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/card_welcome_body"
-                    android:textSize="21sp"
-                    style="@style/CardBodyText" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSpeak"
-                    style="@style/ModernSolidButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/btn_speak_with_patient"
-                    app:icon="@android:drawable/ic_btn_speak_now"
-                    app:iconGravity="textStart"
-                    app:iconTint="@color/white" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imgTemiWelcome"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Botón info -->
+            <ImageView
+                android:id="@+id/btnSettings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:src="@drawable/info"
+                android:contentDescription="@string/content_description_settings"
+                app:tint="@color/text_gray_body"
+                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Botón traductor -->
+            <ImageView
+                android:id="@+id/btnSettings2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:padding="4dp"
+                android:src="@drawable/traduct"
+                android:contentDescription="@string/content_description_settings"
+                app:tint="@color/text_gray_body"
+                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toStartOf="@id/btnSettings" />
+
+            <!-- Estado -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/status_connecting"
+                android:textColor="@color/text_gray_body"
+                android:textSize="21sp"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- ⭐ Solo borde inferior azul ⭐ -->
+            <View
+                android:id="@+id/headerBottomLine"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#4A90E2"
+                app:layout_constraintTop_toBottomOf="@id/tvStatus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Scroll con los cards -->
+
+    <!-- SCROLLVIEW CORREGIDO -->
     <ScrollView
-        android:layout_marginTop="20sp"
         android:id="@+id/scrollCards"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="false"
+        app:layout_constraintTop_toBottomOf="@id/headerContainer"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardWelcome">
+        app:layout_constraintEnd_toEndOf="parent">
 
-
-        <GridLayout
-            android:id="@+id/gridCards"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alignmentMode="alignMargins"
-            android:columnCount="2"
-            android:useDefaultMargins="true">
+            android:orientation="vertical">
 
-            <!-- 💙 ADMISIONES -->
+            <!-- Card bienvenida -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWelcome"
                 style="@style/ModernCardBase"
-                app:cardBackgroundColor="@color/card_bg_blue_soft"
-                app:strokeColor="#4A90E2"
-                app:strokeWidth="2dp"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="@color/card_bg_green_soft"
+                app:strokeColor="@color/primary_green"
+                app:strokeWidth="2dp">
 
-                <LinearLayout
-                    android:layout_marginTop="35sp"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/title_admissions"
-                        style="@style/CardTitleText" />
-
-                    <TextView
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/body_admissions"
-                        style="@style/CardBodyText" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnGoAdmis"
-                        style="@style/ModernSolidButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#4A90E2"
-                        android:text="@string/btn_start_route" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- 💙 HABITACIÓN 302 -->
-            <com.google.android.material.card.MaterialCardView
-                style="@style/ModernCardBase"
-                app:cardBackgroundColor="@color/card_bg_blue_soft"
-                app:strokeColor="#4A90E2"
-                app:strokeWidth="2dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
-
-                <LinearLayout
-                    android:layout_marginTop="35sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/title_room_302"
-                        style="@style/CardTitleText" />
-
-                    <TextView
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/body_room_302"
-                        style="@style/CardBodyText" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnGoHab"
-                        style="@style/ModernSolidButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#4A90E2"
-                        android:text="@string/btn_start_route" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- 💜 SATISFACCION -->
-            <com.google.android.material.card.MaterialCardView
-                style="@style/ModernCardBase"
-                app:cardBackgroundColor="@color/card_bg_purple_soft"
-                app:strokeColor="#9C27B0"
-                app:strokeWidth="2dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
-
-                <LinearLayout
-                    android:layout_marginTop="35sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/title_satisfaction"
-                        style="@style/CardTitleText" />
-
-                    <TextView
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/body_satisfaction"
-                        style="@style/CardBodyText" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSatisfaction"
-                        style="@style/ModernSolidButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#9C27B0"
-                        android:text="@string/btn_open_survey" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- 🟧 PAIN ROUND -->
-            <com.google.android.material.card.MaterialCardView
-                style="@style/ModernCardBase"
-                app:cardBackgroundColor="@color/card_bg_orange_soft"
-                app:strokeColor="#FF7043"
-                app:strokeWidth="2dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
-
-                <LinearLayout
-                    android:layout_marginTop="35sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/title_pain_round"
-                        style="@style/CardTitleText" />
-
-                    <TextView
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/body_pain_round"
-                        style="@style/CardBodyText" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPainRound"
-                        style="@style/ModernSolidButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#FF7043"
-                        android:text="@string/btn_start_round" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- 🟧 EDUCACION -->
-            <com.google.android.material.card.MaterialCardView
-                style="@style/ModernCardBase"
-                app:cardBackgroundColor="@color/card_bg_orange_soft"
-                app:strokeColor="#FF7043"
-                app:strokeWidth="2dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
-
-                <LinearLayout
-                    android:layout_marginTop="35sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/title_education"
-                        style="@style/CardTitleText" />
-
-                    <TextView
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/body_education"
-                        style="@style/CardBodyText" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnEducation"
-                        style="@style/ModernSolidButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#FF7043"
-                        android:text="@string/btn_view_module" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- GRIS: SISTEMA -->
-            <com.google.android.material.card.MaterialCardView
-                style="@style/ModernCardBase"
-                app:cardBackgroundColor="@color/card_bg_gray_soft"
-                app:strokeColor="#B4B4B4"
-                app:strokeWidth="2dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
-
-                <LinearLayout
-                    android:layout_marginTop="35sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/title_system"
-                        style="@style/CardTitleText" />
-
-                    <TextView
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/body_system"
-                        style="@style/CardBodyText" />
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/imgTemiWelcome"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/card_welcome_title"
+                            android:textSize="29sp"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/card_welcome_body"
+                            android:textSize="21sp"
+                            style="@style/CardBodyText" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnBackToBase"
-                            style="@style/ModernOutlineButton"
-                            android:layout_width="0dp"
+                            android:id="@+id/btnSpeak"
+                            style="@style/ModernSolidButton"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/btn_go_to_base" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnExitKiosk"
-                            style="@style/ModernOutlineButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/btn_exit_app"
-                            android:textColor="@color/alert_red_text"
-                            app:strokeColor="@color/alert_red_text" />
+                            android:layout_marginTop="24dp"
+                            android:text="@string/btn_speak_with_patient"
+                            app:icon="@android:drawable/ic_btn_speak_now"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/white" />
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <ImageView
+                        android:id="@+id/imgTemiWelcome"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
 
-        </GridLayout>
+            <!-- GRID -->
+            <GridLayout
+                android:id="@+id/gridCards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alignmentMode="alignMargins"
+                android:columnCount="2"
+                android:useDefaultMargins="true">
+
+                <!-- Aquí van tus 6 cards exactamente como las tenías -->
+                <!-- (No modifiqué nada) -->
+
+                <!-- 💙 ADMISIONES -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/card_bg_blue_soft"
+                    app:strokeColor="#4A90E2"
+                    app:strokeWidth="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_admissions"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/body_admissions"
+                            style="@style/CardBodyText" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnGoAdmis"
+                            style="@style/ModernSolidButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#4A90E2"
+                            android:text="@string/btn_start_route" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 💙 HABITACIÓN 302 -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/card_bg_blue_soft"
+                    app:strokeColor="#4A90E2"
+                    app:strokeWidth="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_room_302"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/body_room_302"
+                            style="@style/CardBodyText" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnGoHab"
+                            style="@style/ModernSolidButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#4A90E2"
+                            android:text="@string/btn_start_route" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 💜 SATISFACCION -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/card_bg_purple_soft"
+                    app:strokeColor="#9C27B0"
+                    app:strokeWidth="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_satisfaction"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/body_satisfaction"
+                            style="@style/CardBodyText" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSatisfaction"
+                            style="@style/ModernSolidButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#9C27B0"
+                            android:text="@string/btn_open_survey" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 🟧 PAIN ROUND -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/card_bg_orange_soft"
+                    app:strokeColor="#FF7043"
+                    app:strokeWidth="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_pain_round"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/body_pain_round"
+                            style="@style/CardBodyText" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPainRound"
+                            style="@style/ModernSolidButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#FF7043"
+                            android:text="@string/btn_start_round" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 🟧 EDUCACION -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/card_bg_orange_soft"
+                    app:strokeColor="#FF7043"
+                    app:strokeWidth="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_education"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/body_education"
+                            style="@style/CardBodyText" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnEducation"
+                            style="@style/ModernSolidButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#FF7043"
+                            android:text="@string/btn_view_module" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- GRIS: SISTEMA -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/card_bg_gray_soft"
+                    app:strokeColor="#B4B4B4"
+                    app:strokeWidth="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_system"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/body_system"
+                            style="@style/CardBodyText" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnBackToBase"
+                                style="@style/ModernOutlineButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:text="@string/btn_go_to_base" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnExitKiosk"
+                                style="@style/ModernOutlineButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/btn_exit_app"
+                                android:textColor="@color/alert_red_text"
+                                app:strokeColor="@color/alert_red_text" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </GridLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 

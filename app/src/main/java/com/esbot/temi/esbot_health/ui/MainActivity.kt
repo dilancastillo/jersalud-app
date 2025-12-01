@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         btnSpeak.setOnClickListener {
             // NOTA: Recuerda reemplazar el texto codificado aquí por una referencia a @string/voice_welcome_long_desc
             say(getString(R.string.voice_welcome_long_desc))
+
         }
 
         btnGoAdmis.setOnClickListener {
