@@ -8,6 +8,7 @@ import com.esbot.temi.esbot_health.R
 import com.esbot.temi.esbot_health.satisfaction.SatisfactionAutoRoundActivity
 import com.esbot.temi.esbot_health.satisfaction.SatisfactionIndividualActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.TtsRequest
 
@@ -15,9 +16,10 @@ class SatisfactionHomeActivity : AppCompatActivity() {
 
     private lateinit var robot: Robot
     private lateinit var tvIntro: TextView
-    private lateinit var btnAutoRound: MaterialButton
-    private lateinit var btnIndividual: MaterialButton
+    private lateinit var btnAutoRound: MaterialCardView
+    private lateinit var btnIndividual: MaterialCardView
     private lateinit var btnHome: MaterialButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

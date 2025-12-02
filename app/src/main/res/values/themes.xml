@@ -11,6 +11,10 @@
 
         <item name="android:layout_marginBottom">16dp</item>
     </style>
+    <style name="styleWelcome" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">24dp</item>
+
+    </style>
 
     <style name="CardTitleText">
         <item name="android:textSize">28sp</item>
@@ -20,7 +24,7 @@
     <style name="CardTitleText2">
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
 
     <style name="CardBodyText">
@@ -30,7 +34,7 @@
     </style>
     <style name="CardBodyText2">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">#ffffff</item>
         <item name="android:layout_marginTop">4dp</item>
     </style>
 

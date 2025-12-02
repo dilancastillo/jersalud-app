@@ -6,19 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background"
-    android:padding="24dp"
+    android:padding="0dp"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/headerContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:cardElevation="0dp"
-        app:strokeWidth="0dp"
         app:strokeColor="@android:color/transparent"
-        app:cardBackgroundColor="@android:color/transparent"
-
+        app:cardCornerRadius="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -26,23 +22,73 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/banner"
             android:paddingBottom="12dp"
             android:paddingTop="12dp">
+            <!-- inicio de codigo-->
+            <!-- PANEL LATERAL IZQUIERDO -->
+            <LinearLayout
+                android:id="@+id/topMenuBar"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/btnMenu"
+                app:layout_constraintTop_toTopOf="@id/btnMenu">
 
-            <!-- Título -->
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/main_title"
-                android:textColor="@color/text_dark_title"
-                android:textSize="33sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/btnExitKiosk"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:id="@+id/dividerVertical"
+                    android:layout_width="2dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintStart_toEndOf="@id/btnMenu"
+                    app:layout_constraintTop_toTopOf="@id/btnMenu"/>
 
-            <!-- Botón info -->
+
+                <ImageView
+                    android:id="@+id/btnTranslate"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_translatewhite"
+                    android:layout_marginRight="25dp"
+                    android:padding="6dp" />
+
+                <ImageView
+                    android:id="@+id/btnSettings"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_settingwhite"
+                    android:layout_marginRight="25dp"
+                    android:padding="6dp" />
+
+                <ImageView
+                    android:id="@+id/btnBackToBase"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_homewhite"
+                    android:layout_marginRight="25dp"
+                    android:padding="6dp" />
+
+                <ImageView
+                    android:id="@+id/btnExitKiosk"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_closewhite"
+                    android:layout_marginRight="25dp"
+                    android:padding="6dp"/>
+
+            </LinearLayout>
+
+
+            <!-- fin de codigo-->
+            <!--
             <ImageView
                 android:id="@+id/btnExitKiosk"
                 android:layout_width="40dp"
@@ -51,11 +97,9 @@
                 android:src="@drawable/icon_close"
                 android:contentDescription="@string/content_description_settings"
                 app:tint="@color/text_gray_body"
-                app:layout_constraintTop_toTopOf="@id/tvTitle"
-                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Botón traductor -->
+
             <ImageView
                 android:id="@+id/btnBackToBase"
                 android:layout_width="45dp"
@@ -64,8 +108,6 @@
                 android:src="@drawable/icon_home"
                 android:contentDescription="@string/content_description_settings"
                 app:tint="@color/text_gray_body"
-                app:layout_constraintTop_toTopOf="@id/tvTitle"
-                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toStartOf="@id/btnExitKiosk" />
             <ImageView
                 android:id="@+id/btnSettings"
@@ -75,8 +117,6 @@
                 android:src="@drawable/icon_setting"
                 android:contentDescription="@string/content_description_settings"
                 app:tint="@color/text_gray_body"
-                app:layout_constraintTop_toTopOf="@id/tvTitle"
-                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toStartOf="@id/btnBackToBase" />
             <ImageView
                 android:id="@+id/btnTranslate"
@@ -86,11 +126,22 @@
                 android:src="@drawable/icon_translate"
                 android:contentDescription="@string/content_description_settings"
                 app:tint="@color/text_gray_body"
-                app:layout_constraintTop_toTopOf="@id/tvTitle"
-                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toStartOf="@id/btnSettings" />
+            -->
 
-            <!-- Estado -->
+            <!-- Botón menú (hamburguesa) -->
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="60dp"
+                android:padding="6dp"
+                android:src="@drawable/icon_menu"
+                android:contentDescription="@string/content_description_settings"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="0dp"
@@ -99,19 +150,10 @@
                 android:text="@string/status_connecting"
                 android:textColor="@color/text_gray_body"
                 android:textSize="21sp"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnMenu"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-            <View
-                android:id="@+id/headerBottomLine"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="#4A90E2"
-                app:layout_constraintTop_toBottomOf="@id/tvStatus"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                   -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -139,18 +181,24 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp">
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="15dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:id="@+id/leftColumn"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="60dp"
                         android:orientation="vertical"
-                        android:gravity="center"
+                        android:background="@drawable/style"
+                        android:padding="24dp"
+                        android:gravity="center_horizontal"
+                        android:elevation="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/btnSpeak"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintEnd_toStartOf="@id/rightColumn"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintHorizontal_weight="1">
 
                         <TextView
                             android:layout_height="wrap_content"
@@ -160,6 +208,7 @@
                             style="@style/CardTitleText2" />
 
                         <TextView
+                            android:id="@+id/textClinic"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="@string/card_welcome_body"
@@ -179,8 +228,20 @@
 
                     </LinearLayout>
 
-
+                    <ImageView
+                        android:id="@+id/rightColumn"
+                        android:layout_width="400dp"
+                        android:layout_height="400dp"
+                        android:layout_marginEnd="206dp"
+                        android:src="@drawable/icon_pet3"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/leftColumn"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintHorizontal_weight="1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <!-- GRID -->
             <GridLayout
@@ -195,7 +256,7 @@
 
 
 
-                <!-- 💜 SATISFACCION -->
+                <!-- SATISFACCION -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnSatisfaction"
                     style="@style/ModernCardBase"
@@ -212,7 +273,7 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <ImageView
-                            android:id="@+id/imgAdmisiones"
+                            android:id="@+id/imgSatisfaccion"
                             android:src="@drawable/survey"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
@@ -240,7 +301,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <!-- 🟧 PAIN ROUND -->
+                <!-- PAIN ROUND -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnPainRound"
                     style="@style/ModernCardBase"
@@ -256,7 +317,7 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <ImageView
-                            android:id="@+id/imgAdmisiones"
+                            android:id="@+id/imgDolor"
                             android:src="@drawable/satisfaccion"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
@@ -283,7 +344,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <!-- 🟧 EDUCACION -->
+                <!-- EDUCACION -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnEducation"
                     style="@style/ModernCardBase"
@@ -300,7 +361,7 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <ImageView
-                            android:id="@+id/imgAdmisiones"
+                            android:id="@+id/imgEducacion"
                             android:src="@drawable/teaching"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
@@ -327,7 +388,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 💙 ADMISIONES -->
+                <!-- ADMISIONES -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnGoAdmis"
                     style="@style/ModernCardBase"
@@ -370,7 +431,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 💙 HABITACIÓN 302 -->
+                <!-- HABITACIÓN 302 -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnGoHab"
                     style="@style/ModernCardBase"
@@ -387,7 +448,7 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <ImageView
-                            android:id="@+id/imgAdmisiones"
+                            android:id="@+id/imghabitacion"
                             android:src="@drawable/bed"
                             android:layout_width="100dp"
                             android:layout_height="100dp"

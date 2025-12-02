@@ -4,7 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
 import android.widget.TextView
 import android.widget.Toast
@@ -23,7 +27,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
     private lateinit var robot: Robot
 
-    private lateinit var tvStatus: TextView
+    //private lateinit var tvStatus: TextView
     private lateinit var btnSpeak: Button
     private lateinit var btnGoAdmis: MaterialCardView
     private lateinit var btnGoHab: MaterialCardView
@@ -79,7 +83,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
         robot = Robot.getInstance()
 
-        tvStatus = findViewById(R.id.tvStatus)
+        //tvStatus = findViewById(R.id.tvStatus)
         btnSpeak = findViewById(R.id.btnSpeak)
         btnGoAdmis = findViewById(R.id.btnGoAdmis)
         btnGoHab = findViewById(R.id.btnGoHab)
@@ -136,6 +140,31 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
             val newLang = if (currentLang == "en") "es" else "en"
             setLocale(newLang) // Guardar y recrear Activity
         }
+        val btnMenu = findViewById<ImageView>(R.id.btnMenu)
+        val topMenuBar = findViewById<LinearLayout>(R.id.topMenuBar)
+
+        btnMenu.setOnClickListener {
+            if (topMenuBar.visibility == View.GONE) {
+
+                topMenuBar.alpha = 0f
+                topMenuBar.visibility = View.VISIBLE
+                topMenuBar.animate()
+                    .alpha(1f)
+                    .setDuration(200)
+                    .start()
+
+            } else {
+
+                topMenuBar.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .withEndAction {
+                        topMenuBar.visibility = View.GONE
+                    }
+                    .start()
+            }
+        }
+
     }
 
     override fun onStart() {
@@ -178,7 +207,10 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
 
         runOnUiThread {
             // NOTA: Reemplaza este texto codificado
-            tvStatus.text = getString(R.string.status_temi_ready)
+            runOnUiThread {
+                Log.i("TemiStatus", getString(R.string.status_temi_ready))
+            }
+
         }
     }
 
@@ -190,7 +222,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     ) {
         runOnUiThread {
             // NOTA: Reemplaza este texto codificado
-            tvStatus.text = "Navegación: $location ($status)"
+            Log.i("TemiNavigation", "Navegación: $location ($status)")
             if (status == "error" || status == "abort") {
                 Toast.makeText(
                     this,
@@ -211,11 +243,13 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         try {
             robot.goTo(location)
             // NOTA: Reemplaza este texto codificado
-            tvStatus.text = "Estado: yendo a $location"
+            Log.i("TemiGoTo", "Estado: yendo a $location")
         } catch (e: Exception) {
             e.printStackTrace()
             // NOTA: Reemplaza este texto codificado
             Toast.makeText(this, "No pude ir a $location", Toast.LENGTH_LONG).show()
         }
     }
+
+
 }

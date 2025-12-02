@@ -122,7 +122,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             val rb = RadioButton(this).apply {
                 text = bed.label
                 id = View.generateViewId()
-                textSize = 20f
+                textSize = 25f
                 tag = bed
             }
             rgBeds.addView(rb)

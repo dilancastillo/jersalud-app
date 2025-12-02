@@ -5,7 +5,7 @@
         <string name="content_description_settings">Settings</string>
         <string name="status_connecting">Status: Connecting...</string>
         <string name="card_welcome_title">Hello, welcome</string>
-        <string name="card_welcome_body">Temi is ready to assist the patient and guide them in the service.</string>
+        <string name="card_welcome_body">Welcome to the Jersalud Clinic. Our assistant Temi is at your disposal to accompany and guide you during your visit.</string>
         <string name="btn_speak_with_patient">Speak with patient ›</string>
 
         <string name="title_admissions">Go to Admissions</string>

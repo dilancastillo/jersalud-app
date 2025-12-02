@@ -8,12 +8,22 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBarSatisfaction"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="66dp"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Encuesta de satisfacción"
         app:titleTextColor="@color/white"
         app:titleCentered="true" />
+    <ImageView
+        android:id="@+id/btnMenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="18dp"
+
+        android:layout_gravity="start|top"
+        android:src="@drawable/close"
+        android:contentDescription="@string/content_description_settings" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +39,8 @@
             android:text="Módulo de encuestas de satisfacción - Jersalud"
             android:textStyle="bold"
             android:textSize="26sp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:layout_marginStart="60dp"/>
 
         <TextView
             android:id="@+id/tvSatDescription"
@@ -37,7 +48,8 @@
             android:layout_height="wrap_content"
             android:text="Elija si desea una ronda corta cama por cama o una sesión individual con el paciente o su acompañante."
             android:textSize="20sp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:layout_marginStart="60dp"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSatHome"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -46,7 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Volver al inicio"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="60dp"/>
 
 
         <GridLayout
@@ -60,7 +73,7 @@
             android:layout_marginEnd="60dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/bnt1"
+            android:id="@+id/btnSatAutoRound"
             android:layout_width="0dp"
             style="@style/ModernCardBase"
             app:cardBackgroundColor="@color/text_white"
@@ -104,20 +117,11 @@
                     android:text="Temi visita varias camas y realiza una encuesta corta de satisfacción (incluye experiencia global y recomendación)."
                     android:textSize="20sp"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSatAutoRound"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/bgButtonsurvey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Iniciar ronda automática" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card2"
+            android:id="@+id/btnSatIndividual"
             android:layout_width="0dp"
             style="@style/ModernCardBase"
             app:cardBackgroundColor="@color/text_white"
@@ -160,15 +164,6 @@
                     android:text="Temi realiza la encuesta corta de satisfacción con un solo paciente o acompañante en una cama específica."
                     android:textSize="20sp"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSatIndividual"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/bgButtonsurvey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Iniciar sesión individual" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         </GridLayout>

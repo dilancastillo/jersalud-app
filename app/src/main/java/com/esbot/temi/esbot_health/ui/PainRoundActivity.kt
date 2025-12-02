@@ -73,6 +73,13 @@ class PainRoundActivity : AppCompatActivity(), OnGoToLocationStatusChangedListen
         }
 
         setupKeypad()
+        val btnGoHome = findViewById<ImageView>(R.id.btnGoHome)
+        btnGoHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onStart() {
@@ -96,7 +103,7 @@ class PainRoundActivity : AppCompatActivity(), OnGoToLocationStatusChangedListen
         for (n in numbers) {
             val b = Button(this).apply {
                 text = n.toString()
-                textSize = 20f
+                textSize = 25f
                 setOnClickListener {
                     currentNrs = n
                     tvResult.text = "Dolor (NRS): $n"

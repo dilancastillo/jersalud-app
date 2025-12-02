@@ -147,14 +147,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Preguntar si el paciente está disponible antes de iniciar la encuesta"
-                            android:textSize="18sp"/>
+                            android:textSize="23sp"/>
 
                         <CheckBox
                             android:id="@+id/cbSatReturnToNursing"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Volver a enfermería al finalizar la ronda"
-                            android:textSize="18sp"/>
+                            android:textSize="23sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

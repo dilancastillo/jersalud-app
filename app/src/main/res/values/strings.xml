@@ -14,7 +14,7 @@
     <string name="content_description_settings">Configuración</string>
     <string name="status_connecting">Estado: Conectando...</string>
     <string name="card_welcome_title">Hola, bienvenido</string>
-    <string name="card_welcome_body">Temi está listo para asistir al paciente y guiarlo en el servicio.</string>
+    <string name="card_welcome_body">Bienvenido a la Clínica Jersalud. Nuestro asistente Temi está a su disposición para acompañarlo y orientarlo durante su visita.</string>
     <string name="btn_speak_with_patient">Hablar con el paciente ›</string>
 
     <string name="title_admissions">Ir a Admisiones</string>
