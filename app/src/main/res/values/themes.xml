@@ -24,7 +24,7 @@
     <style name="CardTitleText2">
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">#5c64cc</item>
     </style>
 
     <style name="CardBodyText">
@@ -34,12 +34,12 @@
     </style>
     <style name="CardBodyText2">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">#5c64cc </item>
         <item name="android:layout_marginTop">4dp</item>
     </style>
 
     <style name="ModernSolidButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/primary_green</item>
+        <item name="backgroundTint">@color/color_primary</item>
         <item name="cornerRadius">1dp</item>
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textStyle">bold</item>

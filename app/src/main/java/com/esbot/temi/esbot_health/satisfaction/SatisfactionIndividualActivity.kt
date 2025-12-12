@@ -215,7 +215,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         currentAnswers.clear()
         currentQuestionIndex = 0
 
-        speak("Estamos en la ${bed.label}. Le haré algunas preguntas cortas sobre la atención recibida e IPS Jersalud. Puede responder por voz o tocando la pantalla.")
+        speak("Estamos en la ${bed.label}. Le haré algunas preguntas cortas sobre la atención recibida en Instituto Médico Oncológico IMO. Puede responder por voz o tocando la pantalla.")
         showCurrentQuestion()
     }
 

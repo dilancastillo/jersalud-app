@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.esbot.temi.esbot_health.R
 import android.content.Intent
 import com.esbot.temi.esbot_health.education.EducationLogStore
+import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.sequence.OnSequencePlayStatusChangedListener
@@ -16,9 +17,9 @@ class EducationActivity : AppCompatActivity() {
 
     private lateinit var robot: Robot
 
-    private lateinit var btnModeIndividual: Button
-    private lateinit var btnModeAuto: Button
-    private lateinit var btnEduHome: Button
+    private lateinit var btnModeIndividual: MaterialCardView
+    private lateinit var btnModeAuto: MaterialCardView
+    private lateinit var btnEduHome: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

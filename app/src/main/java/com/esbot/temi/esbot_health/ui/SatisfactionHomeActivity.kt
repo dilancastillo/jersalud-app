@@ -32,7 +32,7 @@ class SatisfactionHomeActivity : AppCompatActivity() {
         btnAutoRound = findViewById(R.id.btnSatAutoRound)
         btnIndividual = findViewById(R.id.btnSatIndividual)
 
-        speak("Estás en el módulo de encuestas de satisfacción de IPS Jersalud. Puedes hacer una ronda corta habitación por habitación o una sesión individual.")
+        speak("Estás en el módulo de encuestas de satisfacción del Instituto Médico Oncológico IMO. Puedes hacer una ronda corta habitación por habitación o una sesión individual.")
 
         btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java).apply {

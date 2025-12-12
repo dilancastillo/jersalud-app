@@ -87,47 +87,6 @@
             </LinearLayout>
 
 
-            <!-- fin de codigo-->
-            <!--
-            <ImageView
-                android:id="@+id/btnExitKiosk"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="4dp"
-                android:src="@drawable/icon_close"
-                android:contentDescription="@string/content_description_settings"
-                app:tint="@color/text_gray_body"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/btnBackToBase"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:padding="4dp"
-                android:src="@drawable/icon_home"
-                android:contentDescription="@string/content_description_settings"
-                app:tint="@color/text_gray_body"
-                app:layout_constraintEnd_toStartOf="@id/btnExitKiosk" />
-            <ImageView
-                android:id="@+id/btnSettings"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:padding="4dp"
-                android:src="@drawable/icon_setting"
-                android:contentDescription="@string/content_description_settings"
-                app:tint="@color/text_gray_body"
-                app:layout_constraintEnd_toStartOf="@id/btnBackToBase" />
-            <ImageView
-                android:id="@+id/btnTranslate"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:padding="4dp"
-                android:src="@drawable/icon_translate"
-                android:contentDescription="@string/content_description_settings"
-                app:tint="@color/text_gray_body"
-                app:layout_constraintEnd_toStartOf="@id/btnSettings" />
-            -->
 
             <!-- Botón menú (hamburguesa) -->
             <ImageView
@@ -141,19 +100,17 @@
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/status_connecting"
-                android:textColor="@color/text_gray_body"
-                android:textSize="21sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnMenu"
-                app:layout_constraintEnd_toEndOf="parent" />
-                   -->
+
+            <ImageView
+                android:id="@+id/icon_imo"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="60dp"
+                android:src="@drawable/icon_imo"
+                android:contentDescription="@string/content_description_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -181,24 +138,46 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="10dp">
+
 
                     <LinearLayout
                         android:id="@+id/leftColumn"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="60dp"
-                        android:orientation="vertical"
-                        android:background="@drawable/style"
+                        android:gravity="center"
+                        android:orientation="horizontal"
                         android:padding="24dp"
-                        android:gravity="center_horizontal"
-                        android:elevation="14dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/rightColumn"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintHorizontal_weight="1">
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <ImageView
+                            android:id="@+id/rightColumn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="190dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/icon_imo2"
+                            android:paddingTop="10dp"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="8dp"
+                            android:layout_marginEnd="30dp"
+                            app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/welcomeCardContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="30dp"
+                            android:background="@drawable/containerstyle"                            >
 
                         <TextView
                             android:layout_height="wrap_content"
@@ -210,7 +189,7 @@
                         <TextView
                             android:id="@+id/textClinic"
                             android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
+                            android:layout_width="600dp"
                             android:text="@string/card_welcome_body"
                             android:textSize="21sp"
                             style="@style/CardBodyText2" />
@@ -225,9 +204,11 @@
                             app:icon="@android:drawable/ic_btn_speak_now"
                             app:iconGravity="textStart"
                             app:iconTint="@color/white" />
-
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
+                    <!--
                     <ImageView
                         android:id="@+id/rightColumn"
                         android:layout_width="400dp"
@@ -240,6 +221,7 @@
                         app:layout_constraintStart_toEndOf="@id/leftColumn"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintHorizontal_weight="1" />
+                        -->
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -261,7 +243,7 @@
                     android:id="@+id/btnSatisfaction"
                     style="@style/ModernCardBase"
                     android:layout_marginEnd="20dp"
-                    app:cardBackgroundColor="@color/card_bg_purple_soft"
+                    app:cardBackgroundColor="@color/color_primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1">
@@ -305,7 +287,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnPainRound"
                     style="@style/ModernCardBase"
-                    app:cardBackgroundColor="@color/card_bg_orange_soft"
+                    app:cardBackgroundColor="@color/color_primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1">
@@ -349,7 +331,7 @@
                     android:id="@+id/btnEducation"
                     style="@style/ModernCardBase"
                     android:layout_marginEnd="20dp"
-                    app:cardBackgroundColor="@color/card_bg_orange_soft"
+                    app:cardBackgroundColor="@color/color_primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1">
@@ -392,7 +374,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnGoAdmis"
                     style="@style/ModernCardBase"
-                    app:cardBackgroundColor="@color/card_bg_blue_soft"
+                    app:cardBackgroundColor="@color/color_primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1">
@@ -435,7 +417,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnGoHab"
                     style="@style/ModernCardBase"
-                    app:cardBackgroundColor="@color/card_bg_blue_soft"
+                    app:cardBackgroundColor="@color/color_primary"
                     android:layout_marginEnd="20dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -8,19 +8,18 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBarSatisfaction"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:background="?attr/colorPrimary"
+        android:layout_height="56dp"
+        android:background="@color/color_primary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Encuesta de satisfacción"
         app:titleTextColor="@color/white"
         app:titleCentered="true" />
     <ImageView
-        android:id="@+id/btnMenu"
+        android:id="@+id/btnSatHome"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="18dp"
-
+        android:layout_marginTop="13dp"
         android:layout_gravity="start|top"
         android:src="@drawable/close"
         android:contentDescription="@string/content_description_settings" />
@@ -36,7 +35,7 @@
             android:id="@+id/tvSatIntro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Módulo de encuestas de satisfacción - Jersalud"
+            android:text="Módulo de encuestas de satisfacción - IMO"
             android:textStyle="bold"
             android:textSize="26sp"
             android:paddingBottom="8dp"
@@ -50,6 +49,7 @@
             android:textSize="20sp"
             android:paddingBottom="16dp"
             android:layout_marginStart="60dp"/>
+        <!--
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSatHome"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -60,7 +60,7 @@
             android:text="Volver al inicio"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="60dp"/>
-
+        -->
 
         <GridLayout
             android:id="@+id/gridCards"
@@ -81,7 +81,7 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             app:cardCornerRadius="16dp"
-            app:strokeColor="#6454a4"
+            app:strokeColor="#3454a4 "
             app:strokeWidth="2dp"
             android:layout_marginEnd="20dp">
 
@@ -94,6 +94,7 @@
                 <ImageView
                     android:id="@+id/imgAdmisiones"
                     android:src="@drawable/survey2"
+                    android:tint="@color/color_primary"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="15dp"
@@ -128,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            app:strokeColor="#6454a4"
+            app:strokeColor="#3454a4 "
             app:strokeWidth="2dp"
             app:cardCornerRadius="16dp">
 
@@ -141,6 +142,7 @@
                 <ImageView
                     android:id="@+id/imgAdmisiones"
                     android:src="@drawable/user"
+                    android:tint="@color/color_primary"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="15dp"

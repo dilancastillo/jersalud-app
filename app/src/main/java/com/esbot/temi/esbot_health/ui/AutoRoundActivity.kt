@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
@@ -168,7 +169,7 @@ class AutoRoundActivity : AppCompatActivity(),
         topics.forEach { topic ->
             val radioButton = RadioButton(this).apply {
                 text = topic.displayName
-                textSize = 16f
+                textSize = 25f
                 setOnClickListener {
                     selectedTopic = topic
                 }
@@ -182,8 +183,13 @@ class AutoRoundActivity : AppCompatActivity(),
         HospitalConfig.bedsMi.forEach { bed ->
             val checkBox = CheckBox(this).apply {
                 text = bed.label
-                textSize = 16f
+                textSize = 25f
                 isChecked = true
+                buttonTintList =
+                    ContextCompat.getColorStateList(
+                        context,
+                        R.color.color_primary
+                    )
                 setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
                         selectedBeds.add(bed)

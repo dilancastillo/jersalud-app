@@ -312,7 +312,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         currentBedIndex++
         if (currentBedIndex >= selectedBeds.size) {
             tvRunningState.text = "Ronda finalizada."
-            speak("He terminado la ronda de satisfacción de IPS Jersalud.")
+            speak("He terminado la ronda de satisfacción de Instituto Médico Oncológico IMO.")
             if (returnToNursing) {
                 speak("Voy a regresar a enfermería.")
                 robot.goTo(HospitalConfig.NURSING_LOCATION)
@@ -364,9 +364,9 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         waitingAvailability = true
         panelAvailability.visibility = View.VISIBLE
         panelQuestion.visibility = View.GONE
-        tvAvailabilityQuestion.text = "Hola, soy Temi. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido en IPS Jersalud?"
+        tvAvailabilityQuestion.text = "Hola, soy Temi. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido en Instituto Médico Oncológico IMO?"
 
-        speak("Hola. Soy Temi, el asistente de IPS Jersalud. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido?")
+        speak("Hola. Soy Temi, el asistente de Instituto Médico Oncológico IMO. ¿Podemos hacerle unas preguntas cortas sobre la atención que ha recibido?")
     }
 
     private fun startSurveyForCurrentBed() {
@@ -378,7 +378,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         currentAnswers.clear()
         currentQuestionIndex = 0
 
-        speak("Le haré algunas preguntas cortas sobre la atención recibida en IPS Jersalud. Puede responder tocando la pantalla o por voz.")
+        speak("Le haré algunas preguntas cortas sobre la atención recibida en Instituto Médico Oncológico IMO. Puede responder tocando la pantalla o por voz.")
         showCurrentQuestion()
     }
 

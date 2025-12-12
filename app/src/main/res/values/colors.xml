@@ -8,11 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="app_background">#F2F5F9</color>
+    <color name="app_background">#EBF3FF</color>
 
     <color name="primary_green">#2EC281</color>
+    <color name="color_primary">#3454a4</color>
     <color name="primary_green_dark">#25A06A</color>
-    <color name="banner">#3C6CDE</color>
+    <color name="banner">#3454a4</color>
     <color name="card_bg_green_soft">#E8F8F1</color>
     <color name="card_bg_blue_soft">#95C3ED</color>
     <color name="card_bg_orange_soft">#FFB887</color>

@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Paso 1 de 2"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/stepIndTopic"
@@ -40,7 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1. Selecciona el tema de educación"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="23sp"/>
 
             <LinearLayout
                 android:id="@+id/layoutIndTopicList"
@@ -63,14 +64,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2. Selecciona la cama del paciente"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="23sp"/>
 
             <TextView
                 android:id="@+id/tvIndBedFloor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Área / piso:" />
+                android:text="Área / piso:"
+                android:textSize="18sp"/>
 
             <RadioGroup
                 android:id="@+id/rgIndBedList"
@@ -221,6 +224,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="18sp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/color_primary"
                 android:text="Atrás" />
 
             <Button
@@ -229,6 +236,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/color_primary"
                 android:text="Siguiente" />
         </LinearLayout>
     </LinearLayout>

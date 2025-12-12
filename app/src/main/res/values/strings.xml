@@ -10,11 +10,11 @@
     </string>
 
     <string name="metadata_permissions">com.robotemi.sdk.metadata.PERMISSIONS</string>
-    <string name="main_title">Asistente Temi – Clínica Jersalud</string>
+    <string name="main_title">Asistente Temi – Instituto Médico Oncológico IMO</string>
     <string name="content_description_settings">Configuración</string>
     <string name="status_connecting">Estado: Conectando...</string>
     <string name="card_welcome_title">Hola, bienvenido</string>
-    <string name="card_welcome_body">Bienvenido a la Clínica Jersalud. Nuestro asistente Temi está a su disposición para acompañarlo y orientarlo durante su visita.</string>
+    <string name="card_welcome_body">Bienvenido al Instituto Médico Oncológico IMO. Nuestro asistente Temi está a su disposición para acompañarlo y orientarlo durante su visita.</string>
     <string name="btn_speak_with_patient">Hablar con el paciente ›</string>
 
     <string name="title_admissions">Ir a Admisiones</string>
@@ -41,7 +41,7 @@
     <string name="body_system">Opciones del robot.</string>
     <string name="btn_go_to_base">Ir a Base</string>
     <string name="btn_exit_app">Salir de la aplicación</string>
-    <string name="status_temi_ready">Estado: Temi listo en IPS Jersalud</string>
+    <string name="status_temi_ready">Estado: Temi listo en Instituto Médico Oncológico IMO</string>
 
-    <string name="voice_welcome_long_desc">Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en IPS Jersalud. ¿En qué puedo ayudarte?</string>
+    <string name="voice_welcome_long_desc">Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en Instituto Médico Oncológico IMO. ¿En qué puedo ayudarte?</string>
 </resources>

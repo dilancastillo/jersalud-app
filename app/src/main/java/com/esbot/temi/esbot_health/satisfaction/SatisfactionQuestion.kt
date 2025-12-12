@@ -35,7 +35,7 @@ object SatisfactionSurvey {
             SatisfactionQuestion(
                 id = "P001_SERVICE_EVALUATED",
                 label = "Servicio evaluado",
-                textTts = "Por favor indique el servicio que desea evaluar en IPS Jersalud.",
+                textTts = "Por favor indique el servicio que desea evaluar en Instituto Médico Oncológico IMO.",
                 type = SatisfactionQuestionType.LIKERT_5, // tipo no importa mucho; 5 opciones o más
                 options = listOf(
                     "ECIS-M (Visita de Caracterización familiar)",
@@ -56,8 +56,8 @@ object SatisfactionSurvey {
             ),
             SatisfactionQuestion(
                 id = "P002_RECOMMEND",
-                label = "¿Recomendaría a sus familiares y amigos Jersalud S.A.S?",
-                textTts = "¿Recomendaría a sus familiares y amigos Jersalud S.A.S?",
+                label = "¿Recomendaría a sus familiares y amigos Instituto Médico Oncológico IMO?",
+                textTts = "¿Recomendaría a sus familiares y amigos Instituto Médico Oncológico IMO?",
                 type = SatisfactionQuestionType.RECOMMEND_4,
                 options = listOf(
                     "Definitivamente Sí",
@@ -69,8 +69,8 @@ object SatisfactionSurvey {
             ),
             SatisfactionQuestion(
                 id = "P003_GLOBAL_EXPERIENCE",
-                label = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Jersalud S.A.S?",
-                textTts = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Jersalud S.A.S?",
+                label = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Instituto Médico Oncológico IMO?",
+                textTts = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Instituto Médico Oncológico IMO?",
                 type = SatisfactionQuestionType.LIKERT_5,
                 options = listOf(
                     "Muy Buena",

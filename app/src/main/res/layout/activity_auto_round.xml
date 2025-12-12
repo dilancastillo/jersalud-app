@@ -9,10 +9,11 @@
         android:id="@+id/topAppBarAuto"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
+        android:background="@color/color_primary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Ronda automática de educación"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        app:titleTextColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
             android:text="Ronda automática de educación"
-            android:textSize="20sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
         <TextView
@@ -40,7 +41,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
             android:text="Paso 1 de 4"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <View
             android:layout_width="match_parent"
@@ -63,12 +64,14 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepTopic"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#3454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -81,7 +84,7 @@
                             android:layout_height="wrap_content"
                             android:text="1. Selecciona el tema de educación"
                             android:textStyle="bold"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
 
                         <LinearLayout
                             android:id="@+id/layoutTopicList"
@@ -94,12 +97,14 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepBeds"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#6454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -112,14 +117,15 @@
                             android:layout_height="wrap_content"
                             android:text="2. Selecciona las camas a visitar"
                             android:textStyle="bold"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvBedsFloor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Área / piso:" />
+                            android:text="Área / piso:"
+                            android:textSize="18sp"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -129,11 +135,13 @@
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnBedsSelectAll"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                style="@style/Widget.MaterialComponents.Button"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Seleccionar todas" />
+                                android:text="Seleccionar todas"
+                                android:textSize="18sp"
+                                app:backgroundTint="@color/color_primary"/>
 
                             <Space
                                 android:layout_width="12dp"
@@ -141,11 +149,13 @@
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnBedsClear"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                style="@style/Widget.MaterialComponents.Button"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Limpiar selección" />
+                                android:text="Limpiar selección"
+                                android:textSize="18sp"
+                                app:backgroundTint="@color/color_primary"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -153,18 +163,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginTop="12dp" />
+                            android:layout_marginTop="12dp"
+                            app:buttonTint="@color/color_primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepRules"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#6454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -177,20 +190,24 @@
                             android:layout_height="wrap_content"
                             android:text="3. Ajusta las reglas de la ronda"
                             android:textStyle="bold"
-                            android:textSize="18sp" />
+                            android:textSize="25sp"/>
 
                         <CheckBox
                             android:id="@+id/cbAskAvailability"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Preguntar si es un buen momento antes de iniciar" />
+                            android:text="Preguntar si es un buen momento antes de iniciar"
+                            android:textSize="25sp"
+                            app:buttonTint="@color/color_primary"/>
 
                         <CheckBox
                             android:id="@+id/cbSkipIfNoResponse"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Saltar cama si no hay respuesta" />
+                            android:text="Saltar cama si no hay respuesta"
+                            android:textSize="25sp"
+                            app:buttonTint="@color/color_primary"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -201,7 +218,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Tiempo de espera (segundos):" />
+                                android:text="Tiempo de espera (segundos):"
+                                android:textSize="25sp"/>
 
                             <EditText
                                 android:id="@+id/etSkipSeconds"
@@ -209,7 +227,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:inputType="number"
-                                android:gravity="center" />
+                                android:gravity="center"
+                                android:textSize="25sp"/>
                         </LinearLayout>
 
                         <CheckBox
@@ -217,25 +236,31 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Al terminar, regresar a Enfermería" />
+                            android:text="Al terminar, regresar a Enfermería"
+                            android:textSize="25sp"
+                            app:buttonTint="@color/color_primary"/>
 
                         <CheckBox
                             android:id="@+id/cbAutoRepeatIfLow"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Repetir explicación automáticamente si la comprensión es baja" />
+                            android:text="Repetir explicación automáticamente si la comprensión es baja"
+                            android:textSize="25sp"
+                            app:buttonTint="@color/color_primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepSummary"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#6454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -248,24 +273,27 @@
                             android:layout_height="wrap_content"
                             android:text="4. Revisa la configuración"
                             android:textStyle="bold"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvSummary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginTop="8dp"
+                            android:textSize="25sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/panelRunning"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#6454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -397,7 +425,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
-                                android:text="Guardar comprensión" />
+                                android:text="Guardar comprensión"
+                                app:backgroundTint="@color/color_primary"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -418,7 +447,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Atrás" />
+                android:text="Atrás"
+                android:textSize="18sp"
+                android:textColor="@color/color_primary"/>
 
             <Space
                 android:layout_width="12dp"
@@ -430,7 +461,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Siguiente" />
+                android:text="Siguiente"
+                android:textSize="18sp"
+                app:backgroundTint="@color/color_primary" />/>
         </LinearLayout>
     </LinearLayout>
 
