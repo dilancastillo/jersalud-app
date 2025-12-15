@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     private lateinit var btnExitKiosk: android.widget.ImageView
     private lateinit var btnSatisfaction: MaterialCardView
     private lateinit var btnTranslate: android.widget.ImageView
+    private lateinit var btnSurvey: MaterialCardView
 
     // ----------------------------------------------------
     // CONSTANTES Y HELPERS DE LOCALIZACIÓN
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
         btnEducation = findViewById(R.id.btnEducation)
         btnSatisfaction = findViewById(R.id.btnSatisfaction)
         btnExitKiosk = findViewById(R.id.btnExitKiosk)
+        btnSurvey = findViewById(R.id.btnSurvey)
         btnTranslate = findViewById(R.id.btnTranslate) as android.widget.ImageView
 
         // ... [Resto de Listeners de navegación/Temi] ...
@@ -164,6 +166,24 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
                     .start()
             }
         }
+        btnSurvey.setOnClickListener {
+
+            val intent = Intent().apply {
+                setClassName(
+                    "dev.alejo.esbot",
+                    "dev.alejo.esbot.MainActivity"
+                )
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "No se pudo abrir la encuesta", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+        }
+
 
     }
 

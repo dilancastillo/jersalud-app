@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         app:titleTextColor="@color/white"
         android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
+        android:background="@color/color_primary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Ronda de satisfacción"
         app:titleCentered="true" />
@@ -70,8 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:strokeColor="#6454a4"
+                    app:strokeColor="#3454a4"
                     app:strokeWidth="2dp">
 
                     <LinearLayout
@@ -106,7 +105,8 @@
                                 style="@style/Widget.MaterialComponents.Button.TextButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Seleccionar todas" />
+                                android:text="Seleccionar todas"
+                                android:textColor="@color/color_primary"/>
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnSatBedsClear"
@@ -114,7 +114,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Limpiar" />
+                                android:text="Limpiar"
+                                android:textColor="@color/color_primary"/>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -126,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
-                    app:strokeColor="#6454a4"
+                    app:strokeColor="#3454a4"
                     app:strokeWidth="2dp">
 
                     <LinearLayout
@@ -160,12 +161,14 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/panelSatRunning"
+                    app:cardBackgroundColor="@color/text_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:strokeColor="#3454a4"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -179,7 +182,7 @@
                             android:layout_height="wrap_content"
                             android:text="Ronda en curso"
                             android:textStyle="bold"
-                            android:textSize="18sp" />
+                            android:textSize="22sp" />
 
                         <TextView
                             android:id="@+id/tvSatRunningState"
@@ -187,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Estado..."
-                            android:textSize="14sp" />
+                            android:textSize="20sp" />
 
                         <LinearLayout
                             android:id="@+id/panelSatAvailability"
@@ -201,7 +204,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="¿Podemos hacerle unas preguntas ahora?"
-                                android:textSize="16sp" />
+                                android:textSize="22sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -211,18 +214,26 @@
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnSatAvailYes"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:backgroundTint="@color/color_primary"
+                                    android:textColor="@color/white"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Sí, ahora" />
+                                    android:text="Sí, ahora"
+                                    android:textSize="18sp"/>
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnSatAvailNo"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:backgroundTint="@color/color_primary"
+                                    android:textColor="@color/white"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:layout_marginStart="8dp"
-                                    android:text="No es un buen momento" />
+                                    android:text="No es un buen momento"
+                                    android:textSize="18sp"/>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -239,7 +250,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Pregunta de satisfacción"
-                                android:textSize="16sp"
+                                android:textSize="22sp"
                                 android:textStyle="bold" />
 
                             <RadioGroup
@@ -258,17 +269,23 @@
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnSatVoice"
                                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:textColor="@color/color_primary"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Responder por voz" />
+                                    android:text="Responder por voz"
+                                    android:textSize="18sp"/>
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnSatNextQuestion"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:textColor="@color/white"
+                                    android:backgroundTint="@color/color_primary"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:layout_marginStart="8dp"
+                                    android:textSize="18sp"
                                     android:text="Siguiente" />
                             </LinearLayout>
                         </LinearLayout>
@@ -288,13 +305,13 @@
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/bgButtonsurvey"
+                android:backgroundTint="@color/color_primary"
                 android:id="@+id/btnSatStartRound"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="18sp"
-                android:text="Iniciar ronda" />
+                android:text="Iniciar ronda"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSatCancelRound"
@@ -303,7 +320,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textSize="18sp"
-                android:text="Cancelar" />
+                android:text="Cancelar"
+                android:textColor="@color/color_primary"/>
         </LinearLayout>
 
     </LinearLayout>

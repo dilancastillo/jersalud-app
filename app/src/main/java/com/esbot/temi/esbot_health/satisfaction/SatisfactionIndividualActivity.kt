@@ -44,6 +44,8 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
 
     private var selectedBed: BedInfo? = null
     private var inSurvey: Boolean = false
+    private var waitingForNext = false
+
 
     private val recordAudioPerm = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -78,24 +80,28 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
 
     override fun onAsrResult(asrResult: String, sttLanguage: SttLanguage) {
         runOnUiThread {
-            if (!inSurvey) return@runOnUiThread
+            val transcript = asrResult.lowercase(Locale.getDefault()).trim()
+            if (transcript.isBlank()) return@runOnUiThread
 
-            val transcript = asrResult
-                .lowercase(Locale.getDefault())
-                .trim()
-
-            if (transcript.isBlank()) {
-                Toast.makeText(
-                    this,
-                    "No entendí. Intenta de nuevo o usa los botones.",
-                    Toast.LENGTH_SHORT
-                ).show()
+            // Manejo de confirmación para pasar a la siguiente pregunta
+            if (waitingForNext) {
+                when {
+                    transcript.contains("sí") || transcript.contains("si") -> {
+                        waitingForNext = false
+                        goToNextQuestion()
+                    }
+                    transcript.contains("no") -> {
+                        waitingForNext = false
+                        speak("Está bien, puede revisar su respuesta antes de continuar.")
+                    }
+                }
                 return@runOnUiThread
             }
 
-            handleVoiceAnswer(transcript)
+            if (inSurvey) handleVoiceAnswer(transcript)
         }
     }
+
 
     private fun bindViews() {
         tvTitle = findViewById(R.id.tvSatIndTitle)
@@ -189,6 +195,35 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             }
         }
     }
+    private fun goToNextQuestion() {
+        if (!inSurvey) return
+
+        val checkedId = rgOptions.checkedRadioButtonId
+        if (checkedId == -1) {
+            Toast.makeText(this, "Selecciona una opción o responde por voz.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val index = rgOptions.indexOfChild(findViewById(checkedId))
+        val q = surveyQuestions[currentQuestionIndex]
+        val optText = (findViewById<RadioButton>(checkedId)).text.toString()
+
+        currentAnswers.add(
+            SatisfactionAnswer(
+                questionId = q.id,
+                questionLabel = q.label,
+                optionIndex = index,
+                optionText = optText
+            )
+        )
+
+        currentQuestionIndex++
+        if (currentQuestionIndex >= surveyQuestions.size) {
+            saveSessionAndFinish()
+        } else {
+            showCurrentQuestion()
+        }
+    }
 
     override fun onGoToLocationStatusChanged(
         location: String,
@@ -215,7 +250,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         currentAnswers.clear()
         currentQuestionIndex = 0
 
-        speak("Estamos en la ${bed.label}. Le haré algunas preguntas cortas sobre la atención recibida en Instituto Médico Oncológico IMO. Puede responder por voz o tocando la pantalla.")
+        speak("Estamos en la ${bed.label}. Le haré algunas preguntas cortas sobre la atención recibida en Instituto Médico Oncológico IMO, responde por voz.")
         showCurrentQuestion()
     }
 
@@ -227,12 +262,12 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         for (opt in q.options) {
             val rb = RadioButton(this).apply {
                 text = opt
-                textSize = 16f
+                textSize = 25f
             }
             rgOptions.addView(rb)
         }
-
-        speak(q.textTts + " Puedes responder diciendo la opción o tocándola en la pantalla.")
+        ensureMicAndListen()
+        //speak(q.textTts + " Puedes responder diciendo la opción o tocándola en la pantalla.")
     }
 
     private fun saveSessionAndFinish() {
@@ -281,6 +316,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         val index = when (q.type) {
             SatisfactionQuestionType.LIKERT_5 -> mapLikert5(cleaned)
             SatisfactionQuestionType.RECOMMEND_4 -> mapRecommend4(cleaned)
+            SatisfactionQuestionType.SINGLE_CHOICE_LIST -> mapSingleChoice(cleaned, q.options)
         }
 
         if (index == null || index !in q.options.indices) {
@@ -289,22 +325,44 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                 "No entendí la respuesta. Intenta de nuevo o usa la pantalla.",
                 Toast.LENGTH_SHORT
             ).show()
+            waitingForNext = true
             speak("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla.")
             return
         }
 
         val rb = rgOptions.getChildAt(index) as? RadioButton
         rb?.isChecked = true
-        speak("Registré su respuesta: ${q.options[index]}. Puedes tocar siguiente para continuar.")
+
+        // Pregunta por confirmación de pasar a la siguiente pregunta
+        waitingForNext = true
+        speak("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Di sí o no.")
     }
+    private fun mapSingleChoice(text: String, options: List<String>): Int? {
+        val spoken = text.lowercase()
+
+        return options.indexOfFirst { option ->
+            val normalizedOption = option
+                .lowercase()
+                .replace("(", "")
+                .replace(")", "")
+
+            // Coincidencia directa o parcial
+            spoken.contains(normalizedOption) ||
+                    normalizedOption.contains(spoken) ||
+                    spoken.contains(normalizedOption.split(" ").first())
+        }.takeIf { it >= 0 }
+    }
+
 
     private fun mapLikert5(text: String): Int? {
         return when {
-            text.contains("muy mala") || text.contains("muy insatisfecho") -> 0
-            text.contains("mala") || text.contains("insatisfecho") -> 1
+            text.contains("muy buena") || text.contains("muy satisfecho") -> 0
+            text.contains("buena") || text.contains("satisfecho") -> 1
             text.contains("regular") || text.contains("ni satisfecho") -> 2
-            text.contains("muy buena") || text.contains("muy satisfecho") -> 4
-            text.contains("buena") || text.contains("satisfecho") -> 3
+            text.contains("muy mala") || text.contains("muy insatisfecho") -> 4
+            text.contains("mala") || text.contains("insatisfecho") -> 3
+
+
             else -> {
                 Regex("""\d""").find(text)?.value?.toIntOrNull()?.let {
                     if (it in 1..5) it - 1 else null

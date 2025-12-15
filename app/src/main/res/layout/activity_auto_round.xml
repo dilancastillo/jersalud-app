@@ -103,7 +103,7 @@
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
                     app:cardCornerRadius="16dp"
-                    app:strokeColor="#6454a4"
+                    app:strokeColor="#3454a4"
                     app:strokeWidth="2dp">
 
                     <LinearLayout
@@ -343,7 +343,9 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Sí, ahora" />
+                                    android:text="Sí, ahora"
+                                    android:textSize="18sp"
+                                    app:backgroundTint="@color/color_primary"/>
 
                                 <Space
                                     android:layout_width="12dp"

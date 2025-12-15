@@ -42,6 +42,8 @@
     <string name="btn_go_to_base">Ir a Base</string>
     <string name="btn_exit_app">Salir de la aplicación</string>
     <string name="status_temi_ready">Estado: Temi listo en Instituto Médico Oncológico IMO</string>
+    <string name="title_survey2">App encuesta</string>
+    <string name="subtitle_survey2">Abrir App Survey</string>
 
     <string name="voice_welcome_long_desc">Hola, soy Temi. Estoy aquí para ayudarte a llegar a tu destino y a acompañarte en Instituto Médico Oncológico IMO. ¿En qué puedo ayudarte?</string>
 </resources>

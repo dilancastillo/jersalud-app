@@ -390,7 +390,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         for (opt in q.options) {
             val rb = RadioButton(this).apply {
                 text = opt
-                textSize = 16f
+                textSize = 25f
             }
             rgOptions.addView(rb)
         }
@@ -428,6 +428,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         val index = when (q.type) {
             SatisfactionQuestionType.LIKERT_5 -> mapLikert5(cleaned)
             SatisfactionQuestionType.RECOMMEND_4 -> mapRecommend4(cleaned)
+            SatisfactionQuestionType.SINGLE_CHOICE_LIST -> mapSingleChoice(cleaned, q.options)
         }
 
         if (index == null || index !in q.options.indices) {
@@ -444,6 +445,21 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         rb?.isChecked = true
 
         speak("Registré su respuesta: ${q.options[index]}. Puede tocar siguiente para continuar.")
+    }
+    private fun mapSingleChoice(text: String, options: List<String>): Int? {
+        val spoken = text.lowercase()
+
+        return options.indexOfFirst { option ->
+            val normalizedOption = option
+                .lowercase()
+                .replace("(", "")
+                .replace(")", "")
+
+            // Coincidencia directa o parcial
+            spoken.contains(normalizedOption) ||
+                    normalizedOption.contains(spoken) ||
+                    spoken.contains(normalizedOption.split(" ").first())
+        }.takeIf { it >= 0 }
     }
 
     private fun mapLikert5(text: String): Int? {

@@ -453,6 +453,46 @@
                             style="@style/CardBodyText" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnSurvey"
+                    style="@style/ModernCardBase"
+                    app:cardBackgroundColor="@color/color_primary"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_marginTop="35sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+                        <ImageView
+                            android:id="@+id/imgSurvey"
+                            android:src="@drawable/survey"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="15dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/title_survey2"
+                            style="@style/CardTitleText" />
+
+                        <TextView
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:text="@string/subtitle_survey2"
+                            style="@style/CardBodyText" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </GridLayout>
         </LinearLayout>
     </ScrollView>

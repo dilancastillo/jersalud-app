@@ -2,7 +2,8 @@ package com.esbot.temi.esbot_health.satisfaction
 
 enum class SatisfactionQuestionType {
     LIKERT_5,
-    RECOMMEND_4
+    RECOMMEND_4,
+    SINGLE_CHOICE_LIST
 }
 
 data class SatisfactionQuestion(
@@ -36,7 +37,7 @@ object SatisfactionSurvey {
                 id = "P001_SERVICE_EVALUATED",
                 label = "Servicio evaluado",
                 textTts = "Por favor indique el servicio que desea evaluar en Instituto Médico Oncológico IMO.",
-                type = SatisfactionQuestionType.LIKERT_5, // tipo no importa mucho; 5 opciones o más
+                type = SatisfactionQuestionType.SINGLE_CHOICE_LIST, // tipo no importa mucho; 5 opciones o más
                 options = listOf(
                     "ECIS-M (Visita de Caracterización familiar)",
                     "Medicina Laboral",
@@ -69,8 +70,8 @@ object SatisfactionSurvey {
             ),
             SatisfactionQuestion(
                 id = "P003_GLOBAL_EXPERIENCE",
-                label = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Instituto Médico Oncológico IMO?",
-                textTts = "¿Cómo calificaría su experiencia global respecto a los servicios de salud que recibió en Instituto Médico Oncológico IMO?",
+                label = "¿Cómo calificaría su experiencia global respecto a ?",
+                textTts = "¿Cómo calificaría su experiencia global respecto ?",
                 type = SatisfactionQuestionType.LIKERT_5,
                 options = listOf(
                     "Muy Buena",

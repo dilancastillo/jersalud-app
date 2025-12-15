@@ -15,7 +15,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginBottom="30dp"
-            android:tint="#6454a4"
+            android:tint="#3454a4"
             android:layout_gravity="start|top"
             android:src="@drawable/close"
             android:contentDescription="@string/content_description_settings" />
@@ -58,7 +58,7 @@
             android:textSize="18sp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:textColor="@color/white"
-            android:backgroundTint="@color/bgButtonsurvey"/>
+            android:backgroundTint="@color/color_primary"/>
 
         <ProgressBar
             android:id="@+id/progress"
@@ -99,7 +99,7 @@
             android:layout_marginTop="16dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:textColor="@color/white"
-            android:backgroundTint="@color/bgButtonsurvey"
+            android:backgroundTint="@color/color_primary"
             android:textSize="18sp"/>
 
     </LinearLayout>

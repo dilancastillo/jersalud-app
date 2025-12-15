@@ -2,6 +2,7 @@ package com.esbot.temi.esbot_health.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.esbot.temi.esbot_health.R
@@ -18,7 +19,7 @@ class SatisfactionHomeActivity : AppCompatActivity() {
     private lateinit var tvIntro: TextView
     private lateinit var btnAutoRound: MaterialCardView
     private lateinit var btnIndividual: MaterialCardView
-    private lateinit var btnHome: MaterialButton
+    private lateinit var btnHome: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
