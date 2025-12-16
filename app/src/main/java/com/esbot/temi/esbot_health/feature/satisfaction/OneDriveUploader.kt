@@ -1,4 +1,4 @@
-package com.esbot.temi.esbot_health.satisfaction
+package com.esbot.temi.esbot_health.feature.satisfaction
 
 import android.content.Context
 import android.util.Log

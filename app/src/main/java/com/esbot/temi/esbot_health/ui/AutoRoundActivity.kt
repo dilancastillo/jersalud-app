@@ -11,9 +11,12 @@ import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
 import com.robotemi.sdk.sequence.OnSequencePlayStatusChangedListener
 import com.esbot.temi.esbot_health.R
+import com.esbot.temi.esbot_health.core.showShortToast
+import com.esbot.temi.esbot_health.education.ComprehensionLevel
 import com.esbot.temi.esbot_health.education.BedInfo
 import com.esbot.temi.esbot_health.education.EducationEvent
 import com.esbot.temi.esbot_health.education.EducationLogStore
+import com.esbot.temi.esbot_health.education.EducationMode
 import com.esbot.temi.esbot_health.education.EducationTopic
 import com.esbot.temi.esbot_health.education.HospitalConfig
 import com.esbot.temi.esbot_health.education.SequencePlayer
@@ -552,22 +555,18 @@ class AutoRoundActivity : AppCompatActivity(),
         val topic = cfg.topic
 
         val level = when (rgComp.checkedRadioButtonId) {
-            R.id.rbCompFull -> "FULL"
-            R.id.rbCompPartial -> "PARTIAL"
-            R.id.rbCompNone -> "NONE"
+            R.id.rbCompFull -> ComprehensionLevel.FULL
+            R.id.rbCompPartial -> ComprehensionLevel.PARTIAL
+            R.id.rbCompNone -> ComprehensionLevel.NONE
             else -> {
-                Toast.makeText(
-                    this,
-                    "Selecciona un nivel de comprensión.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showShortToast("Selecciona un nivel de comprensión.")
                 return
             }
         }
 
         val notes = etCompNotes.text?.toString()?.trim().orEmpty()
         val needsReplay = cbCompReplay.isChecked &&
-                (level == "PARTIAL" || level == "NONE") &&
+                level != ComprehensionLevel.FULL &&
                 cfg.rules.autoRepeatIfLow
 
         val event = EducationEvent(
@@ -576,24 +575,26 @@ class AutoRoundActivity : AppCompatActivity(),
             topicName = topic.displayName,
             bedId = bed.id,
             bedLabel = bed.label,
-            mode = "AUTO_ROUND",
+            mode = EducationMode.AUTO_ROUND,
             comprehensionLevel = level,
             needsReplay = needsReplay,
             note = notes
         )
         EducationLogStore.appendEvent(this, event)
 
-        Toast.makeText(
-            this,
-            "Comprensión registrada para ${bed.label}.",
-            Toast.LENGTH_SHORT
-        ).show()
+        showShortToast("Comprensión registrada para ${bed.label}.")
 
         speak(
             when (level) {
-                "FULL" -> "Perfecto, he registrado que la explicación se entendió bien."
-                "PARTIAL" -> "He registrado que se entendió solo parcialmente. El equipo de enfermería puede reforzar esta información."
-                else -> "He registrado que la explicación no se entendió. Informaré al equipo de enfermería."
+                ComprehensionLevel.FULL ->
+                    "Perfecto, he registrado que la explicación se entendió bien."
+                ComprehensionLevel.PARTIAL ->
+                    "He registrado que se entendió solo parcialmente. El equipo de enfermería puede reforzar esta información."
+                ComprehensionLevel.NONE ->
+                    "He registrado que la explicación no se entendió. Informaré al equipo de enfermería."
+                ComprehensionLevel.NOT_AVAILABLE,
+                ComprehensionLevel.SKIPPED ->
+                    "He registrado que en esta cama no fue posible evaluar la comprensión en este momento."
             }
         )
 
@@ -618,8 +619,8 @@ class AutoRoundActivity : AppCompatActivity(),
             topicName = topic.displayName,
             bedId = bed.id,
             bedLabel = bed.label,
-            mode = "AUTO_ROUND",
-            comprehensionLevel = "SKIPPED",
+            mode = EducationMode.AUTO_ROUND,
+            comprehensionLevel = ComprehensionLevel.SKIPPED,
             needsReplay = false,
             note = reason
         )

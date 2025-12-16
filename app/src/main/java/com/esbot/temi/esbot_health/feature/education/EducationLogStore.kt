@@ -1,6 +1,7 @@
 package com.esbot.temi.esbot_health.education
 
 import android.content.Context
+import com.esbot.temi.esbot_health.core.toCsvField
 import java.io.File
 import java.io.FileOutputStream
 
@@ -10,8 +11,8 @@ data class EducationEvent(
     val topicName: String,
     val bedId: String,
     val bedLabel: String,
-    val mode: String,
-    val comprehensionLevel: String,
+    val mode: EducationMode,
+    val comprehensionLevel: ComprehensionLevel,
     val needsReplay: Boolean,
     val note: String
 )
@@ -21,7 +22,7 @@ object EducationLogStore {
     private const val FILE_NAME = "education_log.csv"
 
     fun appendEvent(context: Context, event: EducationEvent) {
-        try {
+        runCatching {
             val file = File(context.filesDir, FILE_NAME)
             val writeHeader = !file.exists() || file.length() == 0L
 
@@ -33,26 +34,25 @@ object EducationLogStore {
                     )
                 }
 
-                val safeTopicName = event.topicName.replace("\n", " ").replace(",", " ")
-                val safeBedLabel = event.bedLabel.replace("\n", " ").replace(",", " ")
-                val safeNote = event.note.replace("\n", " ").replace(",", " ")
-
                 val line = buildString {
                     append(event.timestampMillis); append(',')
                     append(event.topicId); append(',')
-                    append(safeTopicName); append(',')
+                    append(event.topicName.toCsvField()); append(',')
                     append(event.bedId); append(',')
-                    append(safeBedLabel); append(',')
-                    append(event.mode); append(',')
-                    append(event.comprehensionLevel); append(',')
+                    append(event.bedLabel.toCsvField()); append(',')
+                    append(event.mode.name); append(',')
+                    append(event.comprehensionLevel.name); append(',')
                     append(event.needsReplay); append(',')
-                    append(safeNote); append('\n')
+                    append(event.note.toCsvField()); append('\n')
                 }
 
                 fos.write(line.toByteArray())
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        }.onFailure { throwable ->
+            throwable.printStackTrace()
         }
     }
+
+    fun getLocalFile(context: Context): File =
+        File(context.filesDir, FILE_NAME)
 }

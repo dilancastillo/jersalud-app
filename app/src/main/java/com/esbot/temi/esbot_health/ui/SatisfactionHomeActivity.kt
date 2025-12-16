@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.esbot.temi.esbot_health.R
-import com.esbot.temi.esbot_health.satisfaction.SatisfactionAutoRoundActivity
-import com.esbot.temi.esbot_health.satisfaction.SatisfactionIndividualActivity
+import com.esbot.temi.esbot_health.feature.satisfaction.SatisfactionAutoRoundActivity
+import com.esbot.temi.esbot_health.feature.satisfaction.SatisfactionIndividualActivity
 import com.google.android.material.button.MaterialButton
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.TtsRequest

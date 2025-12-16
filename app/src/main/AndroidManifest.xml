@@ -60,11 +60,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".satisfaction.SatisfactionAutoRoundActivity"
+            android:name=".feature.satisfaction.SatisfactionAutoRoundActivity"
             android:exported="false" />
 
         <activity
-            android:name=".satisfaction.SatisfactionIndividualActivity"
+            android:name=".feature.satisfaction.SatisfactionIndividualActivity"
             android:exported="false" />
 
         <activity

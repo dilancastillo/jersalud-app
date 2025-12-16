@@ -1,4 +1,4 @@
-package com.esbot.temi.esbot_health.satisfaction
+package com.esbot.temi.esbot_health.feature.satisfaction.domain.model
 
 enum class SatisfactionQuestionType {
     LIKERT_5,
@@ -12,13 +12,6 @@ data class SatisfactionQuestion(
     val type: SatisfactionQuestionType,
     val options: List<String>,
     val isRegulatoryKey: Boolean
-)
-
-data class SatisfactionAnswer(
-    val questionId: String,
-    val questionLabel: String,
-    val optionIndex: Int,
-    val optionText: String
 )
 
 object SatisfactionSurvey {

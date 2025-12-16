@@ -1,4 +1,4 @@
-package com.esbot.temi.esbot_health.satisfaction
+package com.esbot.temi.esbot_health.feature.satisfaction
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -11,6 +11,10 @@ import androidx.core.content.ContextCompat
 import com.esbot.temi.esbot_health.R
 import com.esbot.temi.esbot_health.education.BedInfo
 import com.esbot.temi.esbot_health.education.HospitalConfig
+import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionAnswer
+import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionSession
+import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionQuestionType
+import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionSurvey
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
@@ -177,7 +181,8 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                     questionId = q.id,
                     questionLabel = q.label,
                     optionIndex = index,
-                    optionText = optText
+                    optionText = optText,
+                    isRegulatoryKey = q.isRegulatoryKey
                 )
             )
 

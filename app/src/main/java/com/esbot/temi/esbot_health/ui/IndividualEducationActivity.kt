@@ -10,8 +10,11 @@ import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
 import com.robotemi.sdk.sequence.OnSequencePlayStatusChangedListener
 import com.esbot.temi.esbot_health.R
 import com.esbot.temi.esbot_health.education.BedInfo
+import com.esbot.temi.esbot_health.core.showShortToast
+import com.esbot.temi.esbot_health.education.ComprehensionLevel
 import com.esbot.temi.esbot_health.education.EducationEvent
 import com.esbot.temi.esbot_health.education.EducationLogStore
+import com.esbot.temi.esbot_health.education.EducationMode
 import com.esbot.temi.esbot_health.education.EducationTopic
 import com.esbot.temi.esbot_health.education.HospitalConfig
 import com.esbot.temi.esbot_health.education.SequencePlayer
@@ -351,22 +354,18 @@ class IndividualEducationActivity : AppCompatActivity(),
         val bed = selectedBed ?: return
 
         val level = when (rgComp.checkedRadioButtonId) {
-            R.id.rbIndCompFull -> "FULL"
-            R.id.rbIndCompPartial -> "PARTIAL"
-            R.id.rbIndCompNone -> "NONE"
+            R.id.rbIndCompFull -> ComprehensionLevel.FULL
+            R.id.rbIndCompPartial -> ComprehensionLevel.PARTIAL
+            R.id.rbIndCompNone -> ComprehensionLevel.NONE
             else -> {
-                Toast.makeText(
-                    this,
-                    "Selecciona un nivel de comprensión.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showShortToast("Selecciona un nivel de comprensión.")
                 return
             }
         }
 
         val notes = etCompNotes.text?.toString()?.trim().orEmpty()
         val needsReplay = cbCompReplay.isChecked &&
-                (level == "PARTIAL" || level == "NONE")
+                level != ComprehensionLevel.FULL
 
         val event = EducationEvent(
             timestampMillis = System.currentTimeMillis(),
@@ -374,7 +373,7 @@ class IndividualEducationActivity : AppCompatActivity(),
             topicName = topic.displayName,
             bedId = bed.id,
             bedLabel = bed.label,
-            mode = "INDIVIDUAL",
+            mode = EducationMode.INDIVIDUAL,
             comprehensionLevel = level,
             needsReplay = needsReplay,
             note = notes
@@ -382,17 +381,19 @@ class IndividualEducationActivity : AppCompatActivity(),
 
         EducationLogStore.appendEvent(this, event)
 
-        Toast.makeText(
-            this,
-            "Comprensión registrada para ${bed.label}.",
-            Toast.LENGTH_SHORT
-        ).show()
+        showShortToast("Comprensión registrada para ${bed.label}.")
 
         speak(
             when (level) {
-                "FULL" -> "Perfecto, he registrado que la explicación se entendió bien."
-                "PARTIAL" -> "He registrado que la explicación se entendió parcialmente. El equipo de enfermería puede reforzar la información."
-                else -> "He registrado que la explicación no se entendió. El equipo de enfermería puede ayudarte a resolver tus dudas."
+                ComprehensionLevel.FULL ->
+                    "Perfecto, he registrado que la explicación se entendió bien."
+                ComprehensionLevel.PARTIAL ->
+                    "He registrado que la explicación se entendió parcialmente. El equipo de enfermería puede reforzar la información."
+                ComprehensionLevel.NONE ->
+                    "He registrado que la explicación no se entendió. El equipo de enfermería puede ayudarte a resolver tus dudas."
+                ComprehensionLevel.NOT_AVAILABLE,
+                ComprehensionLevel.SKIPPED ->
+                    "He registrado que en esta cama no fue posible evaluar la comprensión en este momento."
             }
         )
 
@@ -414,8 +415,8 @@ class IndividualEducationActivity : AppCompatActivity(),
             topicName = topic.displayName,
             bedId = bed.id,
             bedLabel = bed.label,
-            mode = "INDIVIDUAL",
-            comprehensionLevel = "NOT_AVAILABLE",
+            mode = EducationMode.INDIVIDUAL,
+            comprehensionLevel = ComprehensionLevel.NOT_AVAILABLE,
             needsReplay = false,
             note = reason
         )
