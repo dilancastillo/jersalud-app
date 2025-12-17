@@ -6,7 +6,7 @@ import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.Satisfactio
 import com.esbot.temi.esbot_health.feature.satisfaction.domain.repository.SatisfactionConfigRepository
 
 /**
- * Implementación sencilla que devuelve configuración "quemada":
+ * Implementación sencilla que devuelve configuración:
  * preguntas desde SatisfactionSurvey y modo por defecto AUTO.
  * */
 

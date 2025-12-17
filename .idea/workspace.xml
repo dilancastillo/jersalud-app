@@ -37,31 +37,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2b596f9-e933-4cbc-8068-09e1aacd71a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/core/ContextExtensions.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/core/CsvExtensions.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/repository/DefaultSatisfactionConfigRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/repository/FileSatisfactionLogRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/model/SatisfactionAnswer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/model/SatisfactionMode.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/model/SatisfactionRoundConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/model/SatisfactionSession.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/repository/SatisfactionConfigRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/repository/SatisfactionLogRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/usecase/StartSatisfactionRoundUseCase.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/local/SatisfactionCsvWriter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/local/SatisfactionOneDriveSync.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/usecase/FinishSatisfactionRoundUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/education/EducationLogStore.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/education/EducationTopic.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/education/HospitalConfig.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/education/SequencePlayer.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/satisfaction/OneDriveUploader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/OneDriveUploader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/satisfaction/SatisfactionAutoRoundActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/SatisfactionAutoRoundActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/satisfaction/SatisfactionIndividualActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/SatisfactionIndividualActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/satisfaction/SatisfactionLogStore.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/SatisfactionLogStore.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/satisfaction/SatisfactionQuestion.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/model/SatisfactionQuestion.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/ui/AutoRoundActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/ui/AutoRoundActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/ui/IndividualEducationActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/ui/IndividualEducationActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/ui/SatisfactionHomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/ui/SatisfactionHomeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/repository/DefaultSatisfactionConfigRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/repository/DefaultSatisfactionConfigRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/repository/FileSatisfactionLogRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/data/repository/FileSatisfactionLogRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/usecase/StartSatisfactionRoundUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/esbot/temi/esbot_health/feature/satisfaction/domain/usecase/StartSatisfactionRoundUseCase.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +54,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\usuario\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -111,22 +94,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.app.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "refactor/new-architecture",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/usuario/AndroidStudioProjects/Esbot_Health",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactor/new-architecture&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/usuario/AndroidStudioProjects/Esbot_Health&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\usuario\AndroidStudioProjects\Esbot_Health\app\src\main\java\com\esbot\temi\esbot_health\feature\satisfaction\domain\model" />
