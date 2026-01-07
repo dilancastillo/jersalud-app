@@ -29,7 +29,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
             android:text="Ronda automática de educación"
-            android:textSize="23sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
             android:text="Paso 1 de 4"
-            android:textSize="18sp" />
+            android:textSize="28sp" />
 
         <View
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                             android:layout_height="wrap_content"
                             android:text="1. Selecciona el tema de educación"
                             android:textStyle="bold"
-                            android:textSize="20sp" />
+                            android:textSize="28sp" />
 
                         <LinearLayout
                             android:id="@+id/layoutTopicList"
@@ -117,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:text="2. Selecciona las camas a visitar"
                             android:textStyle="bold"
-                            android:textSize="20sp" />
+                            android:textSize="28sp" />
 
                         <TextView
                             android:id="@+id/tvBedsFloor"
@@ -125,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Área / piso:"
-                            android:textSize="18sp"/>
+                            android:textSize="25sp"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Seleccionar todas"
-                                android:textSize="18sp"
+                                android:textSize="28sp"
                                 app:backgroundTint="@color/color_primary"/>
 
                             <Space
@@ -154,7 +154,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Limpiar selección"
-                                android:textSize="18sp"
+                                android:textSize="28sp"
                                 app:backgroundTint="@color/color_primary"/>
                         </LinearLayout>
 
@@ -190,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:text="3. Ajusta las reglas de la ronda"
                             android:textStyle="bold"
-                            android:textSize="25sp"/>
+                            android:textSize="36sp"/>
 
                         <CheckBox
                             android:id="@+id/cbAskAvailability"
@@ -198,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Preguntar si es un buen momento antes de iniciar"
-                            android:textSize="25sp"
+                            android:textSize="35sp"
                             app:buttonTint="@color/color_primary"/>
 
                         <CheckBox
@@ -206,7 +206,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Saltar cama si no hay respuesta"
-                            android:textSize="25sp"
+                            android:textSize="35sp"
                             app:buttonTint="@color/color_primary"/>
 
                         <LinearLayout
@@ -219,7 +219,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tiempo de espera (segundos):"
-                                android:textSize="25sp"/>
+                                android:textSize="35sp"/>
 
                             <EditText
                                 android:id="@+id/etSkipSeconds"
@@ -237,7 +237,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Al terminar, regresar a Enfermería"
-                            android:textSize="25sp"
+                            android:textSize="35sp"
                             app:buttonTint="@color/color_primary"/>
 
                         <CheckBox
@@ -246,7 +246,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Repetir explicación automáticamente si la comprensión es baja"
-                            android:textSize="25sp"
+                            android:textSize="35sp"
                             app:buttonTint="@color/color_primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -273,14 +273,14 @@
                             android:layout_height="wrap_content"
                             android:text="4. Revisa la configuración"
                             android:textStyle="bold"
-                            android:textSize="20sp" />
+                            android:textSize="36sp" />
 
                         <TextView
                             android:id="@+id/tvSummary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textSize="25sp"/>
+                            android:textSize="35sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -307,13 +307,14 @@
                             android:layout_height="wrap_content"
                             android:text="Ronda en curso"
                             android:textStyle="bold"
-                            android:textSize="18sp" />
+                            android:textSize="28sp" />
 
                         <TextView
                             android:id="@+id/tvRunningState"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
+                            android:textSize="20sp"
                             android:text="Estado..." />
 
                         <LinearLayout
@@ -329,7 +330,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="¿Podemos hablar ahora?"
-                                android:textSize="16sp" />
+                                android:textSize="40sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -344,7 +345,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Sí, ahora"
-                                    android:textSize="18sp"
+                                    android:textSize="28sp"
                                     app:backgroundTint="@color/color_primary"/>
 
                                 <Space
@@ -357,7 +358,9 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="No es buen momento" />
+                                    android:textSize="30sp"
+                                    android:text="No es buen momento"
+                                    android:textColor="@color/color_primary"/>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -373,7 +376,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="¿Qué tanto se entendió la explicación?"
-                                android:textSize="16sp" />
+                                android:textSize="28sp" />
 
                             <RadioGroup
                                 android:id="@+id/rgComp"
@@ -385,26 +388,30 @@
                                     android:id="@+id/rbCompFull"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Lo entendió bien" />
+                                    android:text="Lo entendió bien"
+                                    android:textSize="35sp"/>
 
                                 <RadioButton
                                     android:id="@+id/rbCompPartial"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Entendió a medias" />
+                                    android:text="Entendió a medias"
+                                    android:textSize="35sp"/>
 
                                 <RadioButton
                                     android:id="@+id/rbCompNone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="No lo entendió" />
+                                    android:text="No lo entendió"
+                                    android:textSize="35sp"/>
                             </RadioGroup>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Notas o dudas (opcional):" />
+                                android:text="Notas o dudas (opcional):"
+                                android:textSize="28sp"/>
 
                             <EditText
                                 android:id="@+id/etCompNotes"
@@ -419,6 +426,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
+                                android:textSize="35sp"
                                 android:text="Repetir explicación si comprensión es baja" />
 
                             <com.google.android.material.button.MaterialButton
@@ -428,6 +436,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
                                 android:text="Guardar comprensión"
+                                android:textSize="28sp"
                                 app:backgroundTint="@color/color_primary"/>
                         </LinearLayout>
 
@@ -450,7 +459,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Atrás"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:textColor="@color/color_primary"/>
 
             <Space
@@ -464,7 +473,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Siguiente"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 app:backgroundTint="@color/color_primary" />/>
         </LinearLayout>
     </LinearLayout>

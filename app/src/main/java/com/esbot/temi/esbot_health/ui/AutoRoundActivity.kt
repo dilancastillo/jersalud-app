@@ -169,7 +169,7 @@ class AutoRoundActivity : AppCompatActivity(),
         topics.forEach { topic ->
             val radioButton = RadioButton(this).apply {
                 text = topic.displayName
-                textSize = 25f
+                textSize = 35f
                 setOnClickListener {
                     selectedTopic = topic
                 }
@@ -183,7 +183,7 @@ class AutoRoundActivity : AppCompatActivity(),
         HospitalConfig.bedsMi.forEach { bed ->
             val checkBox = CheckBox(this).apply {
                 text = bed.label
-                textSize = 25f
+                textSize = 35f
                 isChecked = true
                 buttonTintList =
                     ContextCompat.getColorStateList(
@@ -494,6 +494,7 @@ class AutoRoundActivity : AppCompatActivity(),
             "Hola, soy Temi, el robot de la clínica.\n¿Podemos hablar unos minutos sobre:\n${topic.displayName}?"
 
         tvRunningState.text = "Esperando confirmación del paciente."
+        tvRunningState.textSize = 28f
 
         if (cfg.rules.skipIfNoResponse) {
             val timeoutMs = cfg.rules.skipTimeoutSeconds * 1000L
@@ -548,6 +549,7 @@ class AutoRoundActivity : AppCompatActivity(),
         cbCompReplay.isChecked = false
 
         tvRunningState.text = "Registra qué tanto se entendió la explicación."
+        tvRunningState.textSize = 35f
         speak("He terminado la explicación. En la pantalla puedes indicar qué tanto se entendió.")
 
     }

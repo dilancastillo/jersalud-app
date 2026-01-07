@@ -13,6 +13,7 @@
         android:background="@color/color_primary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Encuesta de Satisfacción individual"
+        app:titleTextAppearance="@style/ToolbarTitleLarge"
         app:titleCentered="true" />
 
     <LinearLayout
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="Sesión individual de satisfacción"
-            android:textSize="26sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <ScrollView
@@ -65,7 +66,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Seleccione la cama para la sesión"
-                            android:textSize="20sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                         <RadioGroup
@@ -98,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Pregunta de satisfacción"
-                            android:textSize="20sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                         <RadioGroup
@@ -122,14 +123,14 @@
                                 android:layout_weight="1"
                                 android:text="Responder por voz"
                                 android:textColor="@color/color_primary"
-                                android:textSize="20sp"/>
+                                android:textSize="30sp"/>
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnSatIndNextQuestion"
                                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                                 android:textColor="@color/white"
                                 android:backgroundTint="@color/color_primary"
-                                android:textSize="18sp"
+                                android:textSize="28sp"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -155,14 +156,14 @@
                 android:id="@+id/btnSatIndGo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:layout_weight="1"
                 android:text="Ir a la cama y empezar" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSatIndCancel"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:textSize="20sp"
+                android:textSize="28sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

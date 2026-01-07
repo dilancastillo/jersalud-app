@@ -12,6 +12,7 @@
         android:layout_height="56dp"
         android:background="@color/color_primary"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+        app:titleTextAppearance="@style/ToolbarTitleLarge"
         app:title="Ronda de satisfacción"
         app:titleCentered="true" />
 
@@ -29,7 +30,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
             android:text="Ronda automática corta de satisfacción"
-            android:textSize="26sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <TextView
@@ -41,7 +42,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
             android:text="Paso 1 de 3"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <View
             android:layout_width="match_parent"
@@ -85,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:text="Seleccione las camas para esta ronda"
                             android:textStyle="bold"
-                            android:textSize="22sp" />
+                            android:textSize="32sp" />
 
                         <LinearLayout
                             android:id="@+id/layoutSatBedList"
@@ -106,6 +107,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Seleccionar todas"
+                                android:textSize="18sp"
                                 android:textColor="@color/color_primary"/>
 
                             <com.google.android.material.button.MaterialButton
@@ -115,6 +117,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:text="Limpiar"
+                                android:textSize="18sp"
                                 android:textColor="@color/color_primary"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -310,7 +313,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:text="Iniciar ronda"/>
 
             <com.google.android.material.button.MaterialButton
@@ -319,7 +322,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:text="Cancelar"
                 android:textColor="@color/color_primary"/>
         </LinearLayout>

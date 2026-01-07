@@ -131,7 +131,7 @@ class IndividualEducationActivity : AppCompatActivity(),
         topics.forEach { topic ->
             val radio = RadioButton(this).apply {
                 text = topic.displayName
-                textSize = 25f
+                textSize = 35f
                 setOnClickListener {
                     selectedTopic = topic
                 }
@@ -146,7 +146,7 @@ class IndividualEducationActivity : AppCompatActivity(),
             val radio = RadioButton(this).apply {
                 id = View.generateViewId()
                 text = bed.label
-                textSize = 25f
+                textSize = 35f
                 if (index == 0) {
                     isChecked = true
                     selectedBed = bed

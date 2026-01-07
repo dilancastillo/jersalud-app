@@ -36,29 +36,20 @@ object SatisfactionSurvey {
             SatisfactionQuestion(
                 id = "P001_SERVICE_EVALUATED",
                 label = "Servicio evaluado",
-                textTts = "Por favor indique el servicio que desea evaluar en Instituto Médico Oncológico IMO.",
+                textTts = "Por favor indique el servicio que desea evaluar en Instituto Médico Oncológico IMO, 'Medicina Laboral', 'Terapia Física', 'Medicina General', 'Enfermería' ",
                 type = SatisfactionQuestionType.SINGLE_CHOICE_LIST, // tipo no importa mucho; 5 opciones o más
                 options = listOf(
-                    "ECIS-M (Visita de Caracterización familiar)",
                     "Medicina Laboral",
                     "Terapia Física",
                     "Medicina General",
-                    "Enfermería",
-                    "Odontología",
-                    "Farmacia",
-                    "Toma de muestra de laboratorio",
-                    "Admisión (activación y asignación de citas)",
-                    "Medicina Especializada",
-                    "Trabajo Social",
-                    "Psicología",
-                    "Administrativos"
+                    "Enfermería"
                 ),
                 isRegulatoryKey = false
             ),
             SatisfactionQuestion(
                 id = "P002_RECOMMEND",
-                label = "¿Recomendaría a sus familiares y amigos Instituto Médico Oncológico IMO?",
-                textTts = "¿Recomendaría a sus familiares y amigos Instituto Médico Oncológico IMO?",
+                label = "¿Recomendaría a sus familiares y amigos Instituto Médico Oncológico IMO, 'Definitivamente Sí', 'Probablemente Sí', 'Probablemente No', 'Definitivamente No'?",
+                textTts = "¿Recomendaría a sus familiares y amigos Instituto Médico Oncológico IMO, 'Definitivamente Sí', 'Probablemente Sí', 'Probablemente No', 'Definitivamente No'?",
                 type = SatisfactionQuestionType.RECOMMEND_4,
                 options = listOf(
                     "Definitivamente Sí",
@@ -70,8 +61,8 @@ object SatisfactionSurvey {
             ),
             SatisfactionQuestion(
                 id = "P003_GLOBAL_EXPERIENCE",
-                label = "¿Cómo calificaría su experiencia global respecto a ?",
-                textTts = "¿Cómo calificaría su experiencia global respecto ?",
+                label = "¿Cómo calificaría su experiencia global en IMO, 'Muy Buena', 'Buena', 'Regular', 'Mala', 'Muy mala'?",
+                textTts = "¿Cómo calificaría su experiencia global en IMO, 'Muy Buena', 'Buena', 'Regular', 'Mala', 'Muy mala'?",
                 type = SatisfactionQuestionType.LIKERT_5,
                 options = listOf(
                     "Muy Buena",

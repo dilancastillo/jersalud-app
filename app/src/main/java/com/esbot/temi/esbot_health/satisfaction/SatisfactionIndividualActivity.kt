@@ -86,13 +86,27 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             // Manejo de confirmación para pasar a la siguiente pregunta
             if (waitingForNext) {
                 when {
-                    transcript.contains("sí") || transcript.contains("si") -> {
+                    // Solo respuestas cortas y directas como confirmación
+                    transcript == "sí" ||
+                            transcript == "si" ||
+                            transcript == "see" ||
+                            transcript == "sí" ||
+                            transcript == "Sí" ||
+                            transcript.contains("siguiente") ||
+                            transcript.contains("continuar") ||
+                            transcript.contains("adelante") -> {
                         waitingForNext = false
                         goToNextQuestion()
                     }
-                    transcript.contains("no") -> {
+                    transcript.contains("No") || transcript.contains("no") &&
+                            !transcript.contains("probablemente") &&
+                            !transcript.contains("definitivamente") -> {
                         waitingForNext = false
                         speak("Está bien, puede revisar su respuesta antes de continuar.")
+                    }
+                    else -> {
+                        // Ignorar respuestas largas que no son confirmación
+                        speak("Por favor responde solo sí o no para continuar.")
                     }
                 }
                 return@runOnUiThread
@@ -128,7 +142,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             val rb = RadioButton(this).apply {
                 text = bed.label
                 id = View.generateViewId()
-                textSize = 25f
+                textSize = 35f
                 tag = bed
             }
             rgBeds.addView(rb)
@@ -262,7 +276,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         for (opt in q.options) {
             val rb = RadioButton(this).apply {
                 text = opt
-                textSize = 25f
+                textSize = 30f
             }
             rgOptions.addView(rb)
         }
@@ -326,45 +340,82 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                 Toast.LENGTH_SHORT
             ).show()
             waitingForNext = true
-            speak("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla.")
+            robot.askQuestion("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla.")
             return
         }
 
         val rb = rgOptions.getChildAt(index) as? RadioButton
         rb?.isChecked = true
 
-        // Pregunta por confirmación de pasar a la siguiente pregunta
         waitingForNext = true
-        speak("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Di sí o no.")
+
+        // Usar un Handler para hacer la pregunta DESPUÉS de un delay
+        // Esto evita que el mismo ASR callback active la confirmación
+        android.os.Handler(mainLooper).postDelayed({
+            if (waitingForNext) {  // Verificar que todavía estamos esperando
+                robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Di sí o no.")
+            }
+        }, 2000)  // Esperar 2 segundo
     }
     private fun mapSingleChoice(text: String, options: List<String>): Int? {
-        val spoken = text.lowercase()
+        val normalized = text.lowercase()
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+            .trim()
 
-        return options.indexOfFirst { option ->
-            val normalizedOption = option
-                .lowercase()
-                .replace("(", "")
-                .replace(")", "")
+        // Primero intenta coincidencia exacta o casi exacta
+        options.forEachIndexed { index, option ->
+            val normalizedOption = option.lowercase()
+                .replace("á", "a")
+                .replace("é", "e")
+                .replace("í", "i")
+                .replace("ó", "o")
+                .replace("ú", "u")
+                .trim()
 
-            // Coincidencia directa o parcial
-            spoken.contains(normalizedOption) ||
-                    normalizedOption.contains(spoken) ||
-                    spoken.contains(normalizedOption.split(" ").first())
-        }.takeIf { it >= 0 }
+            if (normalized == normalizedOption || normalized.contains(normalizedOption)) {
+                return index
+            }
+        }
+
+        // Luego busca palabras clave
+        return when {
+            normalized.contains("laboral") -> 0
+            normalized.contains("fisica") || normalized.contains("terapia") -> 1
+            normalized.contains("general") -> 2
+            normalized.contains("enfermeria") -> 3
+            else -> null
+        }
     }
 
 
     private fun mapLikert5(text: String): Int? {
+        val normalized = text.lowercase()
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+            .trim()
+
         return when {
-            text.contains("muy buena") || text.contains("muy satisfecho") -> 0
-            text.contains("buena") || text.contains("satisfecho") -> 1
-            text.contains("regular") || text.contains("ni satisfecho") -> 2
-            text.contains("muy mala") || text.contains("muy insatisfecho") -> 4
-            text.contains("mala") || text.contains("insatisfecho") -> 3
+            text.contains("Muy Buena") || text.contains("muy buena") -> 0
+            text.contains("Buena") || text.contains("buena") -> 1
+            text.contains("Regular") || text.contains("Regular") -> 2
+            text.contains("Muy mala") || text.contains("muy mala") -> 4
+            text.contains("Mala") || text.contains("mala") -> 3
 
+            // Regular
+            normalized.contains("regular") ||
+                    normalized.contains("ni satisfecho") ||
+                    normalized.contains("ni insatisfecho") -> 2
 
+            // Fallback numérico
             else -> {
-                Regex("""\d""").find(text)?.value?.toIntOrNull()?.let {
+                Regex("""\d""").find(normalized)?.value?.toIntOrNull()?.let {
                     if (it in 1..5) it - 1 else null
                 }
             }
@@ -372,17 +423,28 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     }
 
     private fun mapRecommend4(text: String): Int? {
+        val normalized = text.lowercase()
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+            .trim()
+
         return when {
-            text.contains("definitivamente sí") ||
-                    (text.contains("totalmente") && text.contains("sí")) -> 0
+            // Verificar primero las más específicas (con "definitivamente")
+            normalized.contains("definitivamente") && (normalized.contains("si") || normalized.contains("sí")) -> 0
 
-            text.contains("probablemente sí") ||
-                    (text.contains("sí") && !text.contains("definitivamente")) -> 1
+            normalized.contains("definitivamente") && normalized.contains("no") -> 3
 
-            text.contains("probablemente no") -> 2
+            // Luego las que tienen "probablemente"
+            normalized.contains("probablemente") && (normalized.contains("si") || normalized.contains("sí")) -> 1
 
-            text.contains("definitivamente no") ||
-                    (text.contains("no") && !text.contains("probablemente")) -> 3
+            normalized.contains("probablemente") && normalized.contains("no") -> 2
+
+            // Fallback: solo "sí" o "no" (con precaución)
+            normalized == "si" || normalized == "sí" -> 1
+            normalized == "no" -> 3
 
             else -> null
         }
