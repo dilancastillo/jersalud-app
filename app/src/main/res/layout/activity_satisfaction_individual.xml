@@ -130,7 +130,7 @@
                                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                                 android:textColor="@color/white"
                                 android:backgroundTint="@color/color_primary"
-                                android:textSize="28sp"
+                                android:textSize="30sp"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
