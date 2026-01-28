@@ -3,6 +3,8 @@ package com.esbot.temi.esbot_health.satisfaction
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -79,6 +81,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     }
 
     override fun onAsrResult(asrResult: String, sttLanguage: SttLanguage) {
+        if (!inSurvey) return
         runOnUiThread {
             val transcript = asrResult.lowercase(Locale.getDefault()).trim()
             if (transcript.isBlank()) return@runOnUiThread
@@ -87,20 +90,22 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             if (waitingForNext) {
                 when {
                     // Solo respuestas cortas y directas como confirmación
-                    transcript == "sí" ||
-                            transcript == "si" ||
-                            transcript == "see" ||
-                            transcript == "sí" ||
-                            transcript == "Sí" ||
-                            transcript.contains("siguiente") ||
-                            transcript.contains("continuar") ||
-                            transcript.contains("adelante") -> {
+                    transcript.contains("siguiente") ||
+                    transcript.contains("continuar") ||
+                    transcript.contains("adelante") ||
+                    transcript.contains("avanzar") ||
+                    transcript.contains("continua") -> {
                         waitingForNext = false
-                        goToNextQuestion()
+                        if (currentQuestionIndex >= surveyQuestions.size - 1) {
+                            saveSessionAndFinish()
+                        } else {
+                            goToNextQuestion()
+                        }
                     }
-                    transcript.contains("No") || transcript.contains("no") &&
-                            !transcript.contains("probablemente") &&
-                            !transcript.contains("definitivamente") -> {
+                    transcript.contains("Esperar") ||
+                    transcript.contains("quedarse") &&
+                    !transcript.contains("probablemente") &&
+                    !transcript.contains("definitivamente") -> {
                         waitingForNext = false
                         speak("Está bien, puede revisar su respuesta antes de continuar.")
                     }
@@ -114,6 +119,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
 
             if (inSurvey) handleVoiceAnswer(transcript)
         }
+
     }
 
 
@@ -187,6 +193,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                 ).show()
                 return@setOnClickListener
             }
+            resetAsrState()
 
             val index = rgOptions.indexOfChild(findViewById(checkedId))
             val q = surveyQuestions[currentQuestionIndex]
@@ -269,6 +276,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     }
 
     private fun showCurrentQuestion() {
+        resetAsrState()
         val q = surveyQuestions[currentQuestionIndex]
         tvQuestion.text = q.label
         rgOptions.removeAllViews()
@@ -294,8 +302,23 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         )
         SatisfactionLogStore.appendSession(this, session)
 
-        speak("Gracias por sus respuestas. Esto nos ayuda a mejorar la calidad de la atención.")
-        finish()
+        robot.finishConversation()
+        waitingForNext = false
+        inSurvey = false
+
+        // Hablar
+        robot.speak(
+            TtsRequest.create(
+                "Gracias por sus respuestas. Esto nos ayuda a mejorar la calidad de la atención.",
+                false
+            )
+        )
+
+        Log.i("saved", "Respuesta guardada")
+
+        Handler(mainLooper).postDelayed({
+            finish()
+        }, 3500)
     }
 
     private fun ensureMicAndListen() {
@@ -336,11 +359,11 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         if (index == null || index !in q.options.indices) {
             Toast.makeText(
                 this,
-                "No entendí la respuesta. Intenta de nuevo o usa la pantalla.",
+                "No entendí la respuesta. Intenta de nuevo o usa la pantalla. Puedes respodner ahora en voz alta",
                 Toast.LENGTH_SHORT
             ).show()
-            waitingForNext = true
-            robot.askQuestion("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla.")
+            waitingForNext = false
+            robot.askQuestion("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla. Puedes responder ahora en voz alta")
             return
         }
 
@@ -353,7 +376,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         // Esto evita que el mismo ASR callback active la confirmación
         android.os.Handler(mainLooper).postDelayed({
             if (waitingForNext) {  // Verificar que todavía estamos esperando
-                robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Di sí o no.")
+                robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Diga siguiente para continuar o diga esperar para quedarse en esta pregunta.")
             }
         }, 2000)  // Esperar 2 segundo
     }
@@ -403,7 +426,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
 
         return when {
             text.contains("Muy Buena") || text.contains("muy buena") -> 0
-            text.contains("Buena") || text.contains("buena") -> 1
+            text.contains("Buena") || text.contains("buena") || text.contains("vuela")-> 1
             text.contains("Regular") || text.contains("Regular") -> 2
             text.contains("Muy mala") || text.contains("muy mala") -> 4
             text.contains("Mala") || text.contains("mala") -> 3
@@ -453,4 +476,9 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     private fun speak(text: String) {
         robot.speak(TtsRequest.create(text, false))
     }
+    private fun resetAsrState() {
+        waitingForNext = false
+        robot.finishConversation() // 🔑 CIERRA el ciclo ASR actual
+    }
+
 }
