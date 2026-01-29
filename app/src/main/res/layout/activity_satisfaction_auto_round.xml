@@ -30,7 +30,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
             android:text="Ronda automática corta de satisfacción"
-            android:textSize="36sp"
+            android:textSize="40sp"
             android:textStyle="bold" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
             android:text="Paso 1 de 3"
-            android:textSize="30sp" />
+            android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:text="Seleccione las camas para esta ronda"
                             android:textStyle="bold"
-                            android:textSize="32sp" />
+                            android:textSize="35sp" />
 
                         <LinearLayout
                             android:id="@+id/layoutSatBedList"
@@ -107,7 +107,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Seleccionar todas"
-                                android:textSize="18sp"
+                                android:textSize="25sp"
                                 android:textColor="@color/color_primary"/>
 
                             <com.google.android.material.button.MaterialButton
@@ -117,12 +117,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:text="Limpiar"
-                                android:textSize="18sp"
+                                android:textSize="25sp"
                                 android:textColor="@color/color_primary"/>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--segundo-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepRulesSat"
                     app:cardBackgroundColor="@color/text_white"
@@ -144,24 +144,28 @@
                             android:layout_height="wrap_content"
                             android:text="Reglas de la ronda"
                             android:textStyle="bold"
-                            android:textSize="22sp" />
+                            android:textSize="35sp" />
 
                         <CheckBox
                             android:id="@+id/cbSatAskAvailability"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Preguntar si el paciente está disponible antes de iniciar la encuesta"
-                            android:textSize="23sp"/>
+                            android:button="@drawable/radio_big"
+                            android:paddingStart="10dp"
+                            android:textSize="40sp"/>
 
                         <CheckBox
                             android:id="@+id/cbSatReturnToNursing"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Volver a enfermería al finalizar la ronda"
-                            android:textSize="23sp"/>
+                            android:paddingStart="10dp"
+                            android:button="@drawable/radio_big"
+                            android:textSize="40sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--tercero-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/panelSatRunning"
                     app:cardBackgroundColor="@color/text_white"
@@ -185,7 +189,7 @@
                             android:layout_height="wrap_content"
                             android:text="Ronda en curso"
                             android:textStyle="bold"
-                            android:textSize="22sp" />
+                            android:textSize="45sp" />
 
                         <TextView
                             android:id="@+id/tvSatRunningState"
@@ -193,7 +197,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Estado..."
-                            android:textSize="20sp" />
+                            android:textSize="40sp" />
 
                         <LinearLayout
                             android:id="@+id/panelSatAvailability"
@@ -207,7 +211,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="¿Podemos hacerle unas preguntas ahora?"
-                                android:textSize="22sp" />
+                                android:textSize="40sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -224,7 +228,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Sí, ahora"
-                                    android:textSize="18sp"/>
+                                    android:textSize="25sp"/>
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnSatAvailNo"
@@ -236,10 +240,10 @@
                                     android:layout_weight="1"
                                     android:layout_marginStart="8dp"
                                     android:text="No es un buen momento"
-                                    android:textSize="18sp"/>
+                                    android:textSize="25sp"/>
                             </LinearLayout>
                         </LinearLayout>
-
+<!--cuarto - inicia encuesta -->
                         <LinearLayout
                             android:id="@+id/panelSatQuestion"
                             android:layout_width="match_parent"
@@ -253,7 +257,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Pregunta de satisfacción"
-                                android:textSize="22sp"
+                                android:textSize="35sp"
                                 android:textStyle="bold" />
 
                             <RadioGroup
@@ -261,6 +265,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
+                                android:paddingStart="10dp"
                                 android:paddingTop="8dp" />
 
                             <LinearLayout
@@ -277,7 +282,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Responder por voz"
-                                    android:textSize="18sp"/>
+                                    android:textSize="25sp"/>
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnSatNextQuestion"
@@ -288,7 +293,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:layout_marginStart="8dp"
-                                    android:textSize="18sp"
+                                    android:textSize="25sp"
                                     android:text="Siguiente" />
                             </LinearLayout>
                         </LinearLayout>

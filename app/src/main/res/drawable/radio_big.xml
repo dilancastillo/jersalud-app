@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ESTADO SELECCIONADO -->
+    <item android:state_checked="true">
+        <layer-list>
+
+            <!-- Círculo exterior -->
+            <item>
+                <shape android:shape="oval">
+                    <size
+                        android:width="45dp"
+                        android:height="45dp" />
+                    <solid android:color="#1976D2" />
+                </shape>
+            </item>
+
+            <!-- Círculo interior -->
+            <item
+                android:left="14dp"
+                android:top="14dp"
+                android:right="14dp"
+                android:bottom="14dp">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
+    <!-- ESTADO NO SELECCIONADO -->
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="45dp"
+                android:height="45dp" />
+            <stroke
+                android:width="4dp"
+                android:color="#666666" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+
+</selector>

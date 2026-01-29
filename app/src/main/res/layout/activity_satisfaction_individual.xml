@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="Sesión individual de satisfacción"
-            android:textSize="36sp"
+            android:textSize="45sp"
             android:textStyle="bold" />
 
         <ScrollView
@@ -66,7 +66,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Seleccione la cama para la sesión"
-                            android:textSize="30sp"
+                            android:textSize="40sp"
                             android:textStyle="bold" />
 
                         <RadioGroup
@@ -76,7 +76,7 @@
                             android:orientation="vertical"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--segunda-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/panelSatIndSurvey"
                     app:cardBackgroundColor="@color/text_white"
@@ -99,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Pregunta de satisfacción"
-                            android:textSize="30sp"
+                            android:textSize="40sp"
                             android:textStyle="bold" />
 
                         <RadioGroup

@@ -69,6 +69,9 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
     private var isRoundRunning: Boolean = false
     private var waitingAvailability: Boolean = false
     private var inQuestionMode: Boolean = false
+    private var waitingForNext = false
+
+
 
     private val recordAudioPerm =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -126,18 +129,42 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
                 .lowercase(Locale.getDefault())
                 .trim()
 
-            if (transcript.isBlank()) {
-                Toast.makeText(
-                    this,
-                    "No entendí la respuesta. Intenta de nuevo o usa la pantalla.",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (transcript.isBlank()) return@runOnUiThread
+
+            // CONFIRMACIÓN
+            if (waitingForNext) {
+                when {
+                    transcript.contains("siguiente") ||
+                            transcript.contains("continuar") ||
+                            transcript.contains("adelante") -> {
+
+                        waitingForNext = false
+                        goToNextQuestionByVoice()
+                    }
+
+                    transcript.contains("esperar") -> {
+                        waitingForNext = false
+                        speak("Está bien, puede cambiar su respuesta.")
+
+                        // NO cerrar la conversación
+                        android.os.Handler(mainLooper).postDelayed({
+                            ensureMicAndListen()
+                        }, 1500)
+                    }
+
+
+                    else -> {
+                        speak("Por favor responde solo 'continuar' o 'esperar'.")
+                    }
+                }
                 return@runOnUiThread
             }
 
+            // RESPUESTA NORMAL
             handleVoiceAnswer(transcript)
         }
     }
+
 
     private fun ensureMicAndListen() {
         if (!inQuestionMode) return
@@ -195,7 +222,11 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         for (bed in HospitalConfig.bedsMi) {
             val cb = CheckBox(this).apply {
                 text = bed.label
-                textSize = 25f
+                textSize = 55f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
                 tag = bed
             }
             layoutBedList.addView(cb)
@@ -265,6 +296,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
                     .show()
                 return@setOnClickListener
             }
+            resetAsrState()
             val index = rgOptions.indexOfChild(findViewById(checkedId))
             val q = surveyQuestions[currentQuestionIndex]
             val optText = (findViewById<RadioButton>(checkedId)).text.toString()
@@ -287,6 +319,8 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         }
 
         btnVoice.setOnClickListener {
+            if (!inQuestionMode) return@setOnClickListener
+            resetAsrState()
             ensureMicAndListen()
         }
     }
@@ -317,6 +351,10 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
                 speak("Voy a regresar a enfermería.")
                 robot.goTo(HospitalConfig.NURSING_LOCATION)
             }
+            android.os.Handler(mainLooper).postDelayed({
+                robot.finishConversation()
+                finish()
+            }, 4000)
             isRoundRunning = false
             return
         }
@@ -351,12 +389,32 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
                 } else {
                     goToNextBed()
                 }
-            } else if (status.equals("aborted", ignoreCase = true)
-                || status.equals("failed", ignoreCase = true)
+            } else if (
+                status.equals("abort", ignoreCase = true) ||
+                status.equals("fail", ignoreCase = true) ||
+                status.equals("blocked", ignoreCase = true) ||
+                status.equals("cancel", ignoreCase = true) ||
+                status.equals("timeout", ignoreCase = true)
             ) {
-                tvRunningState.text = "No se pudo llegar a la habitación. Saltando a la siguiente."
-                goToNextBed()
+                val bed = currentBed
+                if (bed != null) {
+                    saveFailedNavigation(
+                        bed = bed,
+                        status = status,
+                        reason = description
+                    )
+                }
+
+                tvRunningState.text =
+                    "No se pudo llegar a la habitación. Saltando a la siguiente."
+
+                // protección para no quedarse colgado
+                android.os.Handler(mainLooper).postDelayed({
+                    goToNextBed()
+                }, 500)
             }
+
+
         }
     }
 
@@ -378,7 +436,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         currentAnswers.clear()
         currentQuestionIndex = 0
 
-        speak("Le haré algunas preguntas cortas sobre la atención recibida en Instituto Médico Oncológico IMO. Puede responder tocando la pantalla o por voz.")
+        speak("Le haré algunas preguntas cortas sobre la atención recibida en Instituto Médico Oncológico IMO. Puede responder por voz.")
         showCurrentQuestion()
     }
 
@@ -390,15 +448,20 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         for (opt in q.options) {
             val rb = RadioButton(this).apply {
                 text = opt
-                textSize = 25f
+                textSize = 55f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
             }
             rgOptions.addView(rb)
         }
 
-        tvRunningState.text =
-            "Pregunta ${currentQuestionIndex + 1} de ${surveyQuestions.size} en ${currentBed?.label}"
-
-        speak(q.textTts + " Puedes responder diciendo la opción o tocándola en la pantalla.")
+//        tvRunningState.text =
+//            "Pregunta ${currentQuestionIndex + 1} de ${surveyQuestions.size} en ${currentBed?.label}"
+//
+//        speak(q.textTts + " Puedes responder diciendo la opción o tocándola en la pantalla.")
+        ensureMicAndListen()
     }
 
     private fun saveSessionAndMoveOn() {
@@ -418,6 +481,28 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
 
         goToNextBed()
     }
+    private fun saveFailedNavigation(
+        bed: BedInfo,
+        status: String,
+        reason: String
+    ) {
+        val session = SatisfactionSession(
+            timestampMillis = System.currentTimeMillis(),
+            mode = "AUTO",
+            bed = bed,
+            answers = listOf(
+                SatisfactionAnswer(
+                    questionId = "NAVIGATION",
+                    questionLabel = "Navigation failed",
+                    optionIndex = -1,
+                    optionText = "status=$status | reason=$reason"
+                )
+            )
+        )
+
+        SatisfactionLogStore.appendSession(this, session)
+    }
+
 
     private fun handleVoiceAnswer(transcript: String) {
         if (!inQuestionMode) return
@@ -432,46 +517,94 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         }
 
         if (index == null || index !in q.options.indices) {
-            Toast.makeText(
-                this,
-                "No entendí la respuesta. Intenta de nuevo o usa la pantalla.",
-                Toast.LENGTH_SHORT
-            ).show()
-            speak("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla.")
+            waitingForNext = false
+            robot.finishConversation()
+            speak(
+                "No entendí la respuesta. " +
+                        "Puede repetirla de nuevo."
+            )
+
+            //  volver a escuchar la MISMA pregunta
+            android.os.Handler(mainLooper).postDelayed({
+                ensureMicAndListen()
+            }, 3500)
+
             return
         }
 
         val rb = rgOptions.getChildAt(index) as? RadioButton
         rb?.isChecked = true
 
-        speak("Registré su respuesta: ${q.options[index]}. Puede tocar siguiente para continuar.")
+        waitingForNext = true
+
+        android.os.Handler(mainLooper).postDelayed({
+            if (waitingForNext) {
+                robot.askQuestion(
+                    "Registré su respuesta: ${q.options[index]}. " +
+                            "Diga 'siguiente' para continuar o diga 'esperar' para cambiar la respuesta."
+                )
+            }
+        }, 2000)
+
     }
     private fun mapSingleChoice(text: String, options: List<String>): Int? {
-        val spoken = text.lowercase()
+        val normalized = text.lowercase()
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+            .trim()
 
-        return options.indexOfFirst { option ->
-            val normalizedOption = option
-                .lowercase()
-                .replace("(", "")
-                .replace(")", "")
+        // Primero intenta coincidencia exacta o casi exacta
+        options.forEachIndexed { index, option ->
+            val normalizedOption = option.lowercase()
+                .replace("á", "a")
+                .replace("é", "e")
+                .replace("í", "i")
+                .replace("ó", "o")
+                .replace("ú", "u")
+                .trim()
 
-            // Coincidencia directa o parcial
-            spoken.contains(normalizedOption) ||
-                    normalizedOption.contains(spoken) ||
-                    spoken.contains(normalizedOption.split(" ").first())
-        }.takeIf { it >= 0 }
+            if (normalized == normalizedOption || normalized.contains(normalizedOption)) {
+                return index
+            }
+        }
+
+        // Luego busca palabras clave
+        return when {
+            normalized.contains("laboral") -> 0
+            normalized.contains("fisica") || normalized.contains("terapia") -> 1
+            normalized.contains("general") -> 2
+            normalized.contains("enfermeria") -> 3
+            else -> null
+        }
     }
 
     private fun mapLikert5(text: String): Int? {
-        return when {
-            text.contains("muy mala") || text.contains("muy insatisfecho") -> 0
-            text.contains("mala") || text.contains("insatisfecho") -> 1
-            text.contains("regular") || text.contains("ni satisfecho") -> 2
-            text.contains("buena") || text.contains("satisfecho") -> 3
-            text.contains("muy buena") || text.contains("muy satisfecho") -> 4
+        val normalized = text.lowercase()
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+            .trim()
 
+        return when {
+            text.contains("Muy Buena") || text.contains("muy buena") -> 0
+            text.contains("Buena") || text.contains("buena") || text.contains("vuela")-> 1
+            text.contains("Regular") || text.contains("Regular") -> 2
+            text.contains("Muy mala") || text.contains("muy mala") -> 4
+            text.contains("Mala") || text.contains("mala") -> 3
+
+            // Regular
+            normalized.contains("regular") ||
+                    normalized.contains("ni satisfecho") ||
+                    normalized.contains("ni insatisfecho") -> 2
+
+            // Fallback numérico
             else -> {
-                Regex("""\d""").find(text)?.value?.toIntOrNull()?.let {
+                Regex("""\d""").find(normalized)?.value?.toIntOrNull()?.let {
                     if (it in 1..5) it - 1 else null
                 }
             }
@@ -479,17 +612,28 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
     }
 
     private fun mapRecommend4(text: String): Int? {
+        val normalized = text.lowercase()
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+            .trim()
+
         return when {
-            text.contains("definitivamente sí") ||
-                    (text.contains("totalmente") && text.contains("sí")) -> 0
+            // Verificar primero las más específicas (con "definitivamente")
+            normalized.contains("definitivamente") && (normalized.contains("si") || normalized.contains("sí")) -> 0
 
-            text.contains("probablemente sí") ||
-                    (text.contains("sí") && !text.contains("definitivamente")) -> 1
+            normalized.contains("definitivamente") && normalized.contains("no") -> 3
 
-            text.contains("probablemente no") -> 2
+            // Luego las que tienen "probablemente"
+            normalized.contains("probablemente") && (normalized.contains("si") || normalized.contains("sí")) -> 1
 
-            text.contains("definitivamente no") ||
-                    (text.contains("no") && !text.contains("probablemente")) -> 3
+            normalized.contains("probablemente") && normalized.contains("no") -> 2
+
+            // Fallback: solo "sí" o "no" (con precaución)
+            normalized == "si" || normalized == "sí" -> 1
+            normalized == "no" -> 3
 
             else -> null
         }
@@ -498,4 +642,39 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
     private fun speak(text: String) {
         robot.speak(TtsRequest.create(text, false))
     }
+    private fun goToNextQuestionByVoice() {
+        resetAsrState()
+
+        val checkedId = rgOptions.checkedRadioButtonId
+        if (checkedId == -1) {
+            speak("Seleccione una opción antes de continuar.")
+            return
+        }
+
+        val index = rgOptions.indexOfChild(findViewById(checkedId))
+        val q = surveyQuestions[currentQuestionIndex]
+        val optText = (findViewById<RadioButton>(checkedId)).text.toString()
+
+        currentAnswers.add(
+            SatisfactionAnswer(
+                questionId = q.id,
+                questionLabel = q.label,
+                optionIndex = index,
+                optionText = optText
+            )
+        )
+
+        currentQuestionIndex++
+        if (currentQuestionIndex >= surveyQuestions.size) {
+            saveSessionAndMoveOn()
+        } else {
+            showCurrentQuestion()
+        }
+    }
+
+    private fun resetAsrState() {
+        waitingForNext = false
+        robot.finishConversation()
+    }
+
 }

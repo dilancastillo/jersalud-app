@@ -47,6 +47,8 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     private var selectedBed: BedInfo? = null
     private var inSurvey: Boolean = false
     private var waitingForNext = false
+    private var navigationHandled = false
+    private var inQuestionMode: Boolean = false
 
 
     private val recordAudioPerm = registerForActivityResult(
@@ -107,11 +109,16 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                     !transcript.contains("probablemente") &&
                     !transcript.contains("definitivamente") -> {
                         waitingForNext = false
-                        speak("Está bien, puede revisar su respuesta antes de continuar.")
+                        speak("Está bien, puede cambiar su respuesta.")
+
+                        // NO cerrar la conversación
+                        android.os.Handler(mainLooper).postDelayed({
+                            ensureMicAndListen()
+                        }, 1500)
                     }
                     else -> {
                         // Ignorar respuestas largas que no son confirmación
-                        speak("Por favor responde solo sí o no para continuar.")
+                        speak("Por favor responde solo 'continuar' o 'esperar'.")
                     }
                 }
                 return@runOnUiThread
@@ -148,7 +155,11 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             val rb = RadioButton(this).apply {
                 text = bed.label
                 id = View.generateViewId()
-                textSize = 35f
+                textSize = 60f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
                 tag = bed
             }
             rgBeds.addView(rb)
@@ -179,6 +190,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         }
 
         btnVoice.setOnClickListener {
+            resetAsrState()
             ensureMicAndListen()
         }
 
@@ -253,14 +265,24 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         description: String
     ) {
         runOnUiThread {
-            if (status.equals("complete", ignoreCase = true)) {
-                val bed = selectedBed
-                if (bed != null && location.equals(bed.locationName, ignoreCase = true)) {
+            val bed = selectedBed ?: return@runOnUiThread
+            if (!location.equals(bed.locationName, ignoreCase = true)) return@runOnUiThread
+            if (navigationHandled) return@runOnUiThread
+
+            when (status.lowercase()) {
+                "complete" -> {
+                    navigationHandled = true
                     startSurvey()
+                }
+
+                "abort", "blocked", "fail", "cancel", "timeout" -> {
+                    navigationHandled = true
+                    saveFailedNavigation(status, description)
                 }
             }
         }
     }
+
 
     private fun startSurvey() {
         val bed = selectedBed ?: return
@@ -284,7 +306,12 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         for (opt in q.options) {
             val rb = RadioButton(this).apply {
                 text = opt
-                textSize = 30f
+                textSize = 55f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
+
             }
             rgOptions.addView(rb)
         }
@@ -317,9 +344,44 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         Log.i("saved", "Respuesta guardada")
 
         Handler(mainLooper).postDelayed({
+            robot.goTo("home base")
             finish()
         }, 3500)
     }
+    private fun saveFailedNavigation(status: String, reason: String) {
+        val bed = selectedBed ?: return
+
+        val session = SatisfactionSession(
+            timestampMillis = System.currentTimeMillis(),
+            mode = "INDIVIDUAL",
+            bed = bed,
+            answers = listOf(
+                SatisfactionAnswer(
+                    questionId = "NAVIGATION",
+                    questionLabel = "Navigation failed",
+                    optionIndex = -1,
+                    optionText = "status=$status | reason=$reason"
+                )
+            )
+        )
+
+        SatisfactionLogStore.appendSession(this, session)
+
+        robot.finishConversation()
+        robot.speak(
+            TtsRequest.create(
+                "No pude llegar a la habitación. El evento fue registrado.",
+                false
+            )
+        )
+
+
+        Handler(mainLooper).postDelayed({
+            finish()
+            robot.goTo("home base")
+            }, 3500)
+    }
+
 
     private fun ensureMicAndListen() {
         if (!inSurvey) return
@@ -357,13 +419,18 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         }
 
         if (index == null || index !in q.options.indices) {
-            Toast.makeText(
-                this,
-                "No entendí la respuesta. Intenta de nuevo o usa la pantalla. Puedes respodner ahora en voz alta",
-                Toast.LENGTH_SHORT
-            ).show()
             waitingForNext = false
-            robot.askQuestion("No entendí la respuesta. Puedes intentar de nuevo, o tocar una opción en la pantalla. Puedes responder ahora en voz alta")
+            robot.finishConversation()
+            speak(
+                "No entendí la respuesta. " +
+                        "Puede repetirla de nuevo."
+            )
+
+            //  volver a escuchar la MISMA pregunta
+            android.os.Handler(mainLooper).postDelayed({
+                ensureMicAndListen()
+            }, 3500)
+
             return
         }
 
@@ -376,7 +443,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         // Esto evita que el mismo ASR callback active la confirmación
         android.os.Handler(mainLooper).postDelayed({
             if (waitingForNext) {  // Verificar que todavía estamos esperando
-                robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Diga siguiente para continuar o diga esperar para quedarse en esta pregunta.")
+                robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Diga 'siguiente' para continuar o diga 'esperar' para cambiar la respuesta.")
             }
         }, 2000)  // Esperar 2 segundo
     }
