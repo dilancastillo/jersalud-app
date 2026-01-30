@@ -21,9 +21,12 @@ import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
 import java.util.Locale
 
-class SatisfactionIndividualActivity : AppCompatActivity(),
+class SatisfactionIndividualActivity : AppCompatActivity()
+    ,
+
     OnGoToLocationStatusChangedListener,
     Robot.AsrListener {
+
     private lateinit var robot: Robot
 
     private lateinit var tvTitle: TextView
@@ -49,6 +52,10 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     private var waitingForNext = false
     private var navigationHandled = false
     private var inQuestionMode: Boolean = false
+    private var navigationRetryCount = 0
+    private val MAX_NAVIGATION_RETRIES = 5
+
+
 
 
     private val recordAudioPerm = registerForActivityResult(
@@ -99,26 +106,46 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                     transcript.contains("continua") -> {
                         waitingForNext = false
                         if (currentQuestionIndex >= surveyQuestions.size - 1) {
+                            val checkedId = rgOptions.checkedRadioButtonId
+                            if (checkedId != -1) {
+                                val index = rgOptions.indexOfChild(findViewById(checkedId))
+                                val q = surveyQuestions[currentQuestionIndex]
+                                val optText = (findViewById<RadioButton>(checkedId)).text.toString()
+
+                                currentAnswers.add(
+                                    SatisfactionAnswer(
+                                        questionId = q.id,
+                                        questionLabel = q.label,
+                                        optionIndex = index,
+                                        optionText = optText
+                                    )
+                                )
+                            }
                             saveSessionAndFinish()
                         } else {
                             goToNextQuestion()
                         }
                     }
-                    transcript.contains("Esperar") ||
-                    transcript.contains("quedarse") &&
-                    !transcript.contains("probablemente") &&
-                    !transcript.contains("definitivamente") -> {
-                        waitingForNext = false
-                        speak("Está bien, puede cambiar su respuesta.")
+                    transcript.contains("esperar") ||
+                            transcript.contains("quedarse") -> {
 
-                        // NO cerrar la conversación
-                        android.os.Handler(mainLooper).postDelayed({
-                            ensureMicAndListen()
-                        }, 1500)
+                        waitingForNext = false
+
+                        // NO cerrar conversación
+                        Handler(mainLooper).postDelayed({
+                            ensureMicAndListen() // vuelve a escuchar la MISMA pregunta
+                        }, 1200)
                     }
                     else -> {
-                        // Ignorar respuestas largas que no son confirmación
-                        speak("Por favor responde solo 'continuar' o 'esperar'.")
+                        speak("Por favor diga 'siguiente' para continuar o 'esperar' para cambiar la respuesta.")
+
+                        Handler(mainLooper).postDelayed({
+                            if (waitingForNext) {
+                                robot.askQuestion(
+                                    "Por favor diga 'siguiente' para continuar o 'esperar' para cambiar la respuesta."
+                                )
+                            }
+                        }, 2000)
                     }
                 }
                 return@runOnUiThread
@@ -275,10 +302,31 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
                     startSurvey()
                 }
 
-                "abort", "blocked", "fail", "cancel", "timeout" -> {
+                "blocked", "abort", "timeout" -> {
+                    if (navigationRetryCount < MAX_NAVIGATION_RETRIES) {
+                        navigationRetryCount++
+
+                        robot.speak(
+                            TtsRequest.create(
+                                "Hay un obstáculo en el camino. Intentaré nuevamente.",
+                                false
+                            )
+                        )
+
+                        Handler(mainLooper).postDelayed({
+                            robot.goTo(bed.locationName)
+                        }, 3000) // espera 3 segundos
+                    } else {
+                        navigationHandled = true
+                        saveFailedNavigation(status, description)
+                    }
+                }
+
+                "fail", "cancel" -> {
                     navigationHandled = true
                     saveFailedNavigation(status, description)
                 }
+
             }
         }
     }
@@ -429,7 +477,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
             //  volver a escuchar la MISMA pregunta
             android.os.Handler(mainLooper).postDelayed({
                 ensureMicAndListen()
-            }, 3500)
+            }, 1500)
 
             return
         }
@@ -440,12 +488,11 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
         waitingForNext = true
 
         // Usar un Handler para hacer la pregunta DESPUÉS de un delay
-        // Esto evita que el mismo ASR callback active la confirmación
         android.os.Handler(mainLooper).postDelayed({
             if (waitingForNext) {  // Verificar que todavía estamos esperando
                 robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Diga 'siguiente' para continuar o diga 'esperar' para cambiar la respuesta.")
             }
-        }, 2000)  // Esperar 2 segundo
+        }, 1000)  // Esperar 2 segundo
     }
     private fun mapSingleChoice(text: String, options: List<String>): Int? {
         val normalized = text.lowercase()
@@ -545,7 +592,7 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     }
     private fun resetAsrState() {
         waitingForNext = false
-        robot.finishConversation() // 🔑 CIERRA el ciclo ASR actual
+        robot.finishConversation() // CIERRA el ciclo ASR actual
     }
 
 }

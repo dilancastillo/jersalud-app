@@ -13,6 +13,7 @@
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Ronda automática de educación"
         app:titleCentered="true"
+        app:titleTextAppearance="@style/ToolbarTitleLarge"
         app:titleTextColor="@color/white"/>
 
     <LinearLayout
@@ -29,7 +30,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
             android:text="Ronda automática de educación"
-            android:textSize="36sp"
+            android:textSize="45sp"
             android:textStyle="bold" />
 
         <TextView
@@ -41,7 +42,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
             android:text="Paso 1 de 4"
-            android:textSize="28sp" />
+            android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
@@ -84,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:text="1. Selecciona el tema de educación"
                             android:textStyle="bold"
-                            android:textSize="28sp" />
+                            android:textSize="35sp" />
 
                         <LinearLayout
                             android:id="@+id/layoutTopicList"
@@ -94,7 +95,7 @@
                             android:layout_marginTop="12dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--dos-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepBeds"
                     app:cardBackgroundColor="@color/text_white"
@@ -117,7 +118,7 @@
                             android:layout_height="wrap_content"
                             android:text="2. Selecciona las camas a visitar"
                             android:textStyle="bold"
-                            android:textSize="28sp" />
+                            android:textSize="35sp" />
 
                         <TextView
                             android:id="@+id/tvBedsFloor"
@@ -125,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Área / piso:"
-                            android:textSize="25sp"/>
+                            android:textSize="35sp"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -140,7 +141,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Seleccionar todas"
-                                android:textSize="28sp"
+                                android:textSize="35sp"
                                 app:backgroundTint="@color/color_primary"/>
 
                             <Space
@@ -154,7 +155,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Limpiar selección"
-                                android:textSize="28sp"
+                                android:textSize="35sp"
                                 app:backgroundTint="@color/color_primary"/>
                         </LinearLayout>
 
@@ -167,7 +168,7 @@
                             app:buttonTint="@color/color_primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--tres-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepRules"
                     app:cardBackgroundColor="@color/text_white"
@@ -190,7 +191,7 @@
                             android:layout_height="wrap_content"
                             android:text="3. Ajusta las reglas de la ronda"
                             android:textStyle="bold"
-                            android:textSize="36sp"/>
+                            android:textSize="40sp"/>
 
                         <CheckBox
                             android:id="@+id/cbAskAvailability"
@@ -198,7 +199,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Preguntar si es un buen momento antes de iniciar"
-                            android:textSize="35sp"
+                            android:textSize="50sp"
+                            android:button="@drawable/radio_big"
                             app:buttonTint="@color/color_primary"/>
 
                         <CheckBox
@@ -206,7 +208,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Saltar cama si no hay respuesta"
-                            android:textSize="35sp"
+                            android:textSize="50sp"
+                            android:button="@drawable/radio_big"
                             app:buttonTint="@color/color_primary"/>
 
                         <LinearLayout
@@ -219,7 +222,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tiempo de espera (segundos):"
-                                android:textSize="35sp"/>
+                                android:textSize="50sp"/>
 
                             <EditText
                                 android:id="@+id/etSkipSeconds"
@@ -228,7 +231,7 @@
                                 android:layout_marginStart="8dp"
                                 android:inputType="number"
                                 android:gravity="center"
-                                android:textSize="25sp"/>
+                                android:textSize="35sp"/>
                         </LinearLayout>
 
                         <CheckBox
@@ -237,7 +240,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Al terminar, regresar a Enfermería"
-                            android:textSize="35sp"
+                            android:textSize="50sp"
+                            android:button="@drawable/radio_big"
                             app:buttonTint="@color/color_primary"/>
 
                         <CheckBox
@@ -246,11 +250,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Repetir explicación automáticamente si la comprensión es baja"
-                            android:textSize="35sp"
+                            android:textSize="50sp"
+                            android:button="@drawable/radio_big"
                             app:buttonTint="@color/color_primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--cuatro-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stepSummary"
                     app:cardBackgroundColor="@color/text_white"
@@ -273,17 +278,17 @@
                             android:layout_height="wrap_content"
                             android:text="4. Revisa la configuración"
                             android:textStyle="bold"
-                            android:textSize="36sp" />
+                            android:textSize="40sp" />
 
                         <TextView
                             android:id="@+id/tvSummary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textSize="35sp"/>
+                            android:textSize="40sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
+<!--quinto-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/panelRunning"
                     app:cardBackgroundColor="@color/text_white"
@@ -307,14 +312,14 @@
                             android:layout_height="wrap_content"
                             android:text="Ronda en curso"
                             android:textStyle="bold"
-                            android:textSize="28sp" />
+                            android:textSize="35sp" />
 
                         <TextView
                             android:id="@+id/tvRunningState"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:textSize="20sp"
+                            android:textSize="35sp"
                             android:text="Estado..." />
 
                         <LinearLayout
@@ -345,7 +350,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Sí, ahora"
-                                    android:textSize="28sp"
+                                    android:textSize="35sp"
                                     app:backgroundTint="@color/color_primary"/>
 
                                 <Space
@@ -358,7 +363,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:textSize="30sp"
+                                    android:textSize="35sp"
                                     android:text="No es buen momento"
                                     android:textColor="@color/color_primary"/>
                             </LinearLayout>
@@ -376,7 +381,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="¿Qué tanto se entendió la explicación?"
-                                android:textSize="28sp" />
+                                android:textSize="40sp" />
 
                             <RadioGroup
                                 android:id="@+id/rgComp"
@@ -389,13 +394,15 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Lo entendió bien"
-                                    android:textSize="35sp"/>
+                                    android:button="@drawable/radio_big"
+                                    android:textSize="60sp"/>
 
                                 <RadioButton
                                     android:id="@+id/rbCompPartial"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Entendió a medias"
+                                    android:button="@drawable/radio_big"
                                     android:textSize="35sp"/>
 
                                 <RadioButton
@@ -403,7 +410,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="No lo entendió"
-                                    android:textSize="35sp"/>
+                                    android:button="@drawable/radio_big"
+                                    android:textSize="60sp"/>
                             </RadioGroup>
 
                             <TextView
@@ -411,7 +419,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="Notas o dudas (opcional):"
-                                android:textSize="28sp"/>
+                                android:textSize="35sp"/>
 
                             <EditText
                                 android:id="@+id/etCompNotes"
@@ -426,7 +434,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:textSize="35sp"
+                                android:textSize="60sp"
+                                android:button="@drawable/radio_big"
                                 android:text="Repetir explicación si comprensión es baja" />
 
                             <com.google.android.material.button.MaterialButton
@@ -436,7 +445,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
                                 android:text="Guardar comprensión"
-                                android:textSize="28sp"
+                                android:textSize="35sp"
                                 app:backgroundTint="@color/color_primary"/>
                         </LinearLayout>
 
@@ -459,7 +468,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Atrás"
-                android:textSize="28sp"
+                android:textSize="35sp"
                 android:textColor="@color/color_primary"/>
 
             <Space
@@ -473,7 +482,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Siguiente"
-                android:textSize="28sp"
+                android:textSize="35sp"
                 app:backgroundTint="@color/color_primary" />/>
         </LinearLayout>
     </LinearLayout>

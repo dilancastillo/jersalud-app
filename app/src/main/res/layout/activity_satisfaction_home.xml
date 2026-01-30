@@ -13,6 +13,7 @@
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:title="Encuesta de satisfacción"
         app:titleTextColor="@color/white"
+        app:titleTextAppearance="@style/ToolbarTitleLarge"
         app:titleCentered="true" />
     <ImageView
         android:id="@+id/btnSatHome"
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Módulo de encuestas de satisfacción - IMO"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="45sp"
             android:paddingBottom="8dp"
             android:layout_marginStart="60dp"/>
 
@@ -46,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Elija si desea una ronda corta cama por cama o una sesión individual con el paciente o su acompañante."
-            android:textSize="28sp"
+            android:textSize="40sp"
             android:paddingBottom="16dp"
             android:layout_marginStart="60dp"/>
         <!--
@@ -95,8 +96,8 @@
                     android:id="@+id/imgAdmisiones"
                     android:src="@drawable/survey2"
                     android:tint="@color/color_primary"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
                     android:layout_marginBottom="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ronda automática corta"
-                    android:textSize="28sp"
+                    android:textSize="40sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -117,7 +118,7 @@
                     android:paddingTop="4dp"
                     android:textAlignment="center"
                     android:text="Temi visita varias camas y realiza una encuesta corta de satisfacción (incluye experiencia global y recomendación)."
-                    android:textSize="24sp"/>
+                    android:textSize="35sp"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -144,8 +145,8 @@
                     android:id="@+id/imgAdmisiones"
                     android:src="@drawable/user"
                     android:tint="@color/color_primary"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
                     android:layout_marginBottom="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sesión individual"
-                    android:textSize="28sp"
+                    android:textSize="40sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -166,7 +167,7 @@
                     android:paddingTop="4dp"
                     android:textAlignment="center"
                     android:text="Temi realiza la encuesta corta de satisfacción con un solo paciente o acompañante en una cama específica."
-                    android:textSize="24sp"/>
+                    android:textSize="35sp"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

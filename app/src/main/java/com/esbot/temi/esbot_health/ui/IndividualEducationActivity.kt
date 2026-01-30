@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.TtsRequest
 import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener
@@ -131,7 +132,11 @@ class IndividualEducationActivity : AppCompatActivity(),
         topics.forEach { topic ->
             val radio = RadioButton(this).apply {
                 text = topic.displayName
-                textSize = 35f
+                textSize = 60f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
                 setOnClickListener {
                     selectedTopic = topic
                 }
@@ -146,7 +151,11 @@ class IndividualEducationActivity : AppCompatActivity(),
             val radio = RadioButton(this).apply {
                 id = View.generateViewId()
                 text = bed.label
-                textSize = 35f
+                textSize = 60f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
                 if (index == 0) {
                     isChecked = true
                     selectedBed = bed

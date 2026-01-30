@@ -70,6 +70,10 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
     private var waitingAvailability: Boolean = false
     private var inQuestionMode: Boolean = false
     private var waitingForNext = false
+    private var navigationRetryCount = 0
+    private val MAX_NAVIGATION_RETRIES = 5
+
+
 
 
 
@@ -340,6 +344,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
         if (!isRoundRunning) return
 
         currentAnswers.clear()
+        navigationRetryCount = 0
         currentQuestionIndex = 0
         inQuestionMode = false
 
@@ -378,6 +383,7 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
             if (!isRoundRunning) return@runOnUiThread
 
             if (status.equals("complete", ignoreCase = true)) {
+                navigationRetryCount = 0
                 val bed = currentBed
                 if (bed != null) {
                     tvRunningState.text = "En ${bed.label}"
@@ -390,29 +396,72 @@ class SatisfactionAutoRoundActivity : AppCompatActivity(),
                     goToNextBed()
                 }
             } else if (
-                status.equals("abort", ignoreCase = true) ||
-                status.equals("fail", ignoreCase = true) ||
-                status.equals("blocked", ignoreCase = true) ||
-                status.equals("cancel", ignoreCase = true) ||
-                status.equals("timeout", ignoreCase = true)
+                status.equals("abort", true) ||
+                status.equals("fail", true) ||
+                status.equals("blocked", true) ||
+                status.equals("cancel", true) ||
+                status.equals("timeout", true)
             ) {
-                val bed = currentBed
-                if (bed != null) {
-                    saveFailedNavigation(
-                        bed = bed,
-                        status = status,
-                        reason = description
-                    )
+
+                val bed = currentBed ?: return@runOnUiThread
+
+                when (status.lowercase()) {
+
+                    "blocked", "abort", "timeout" -> {
+                        if (navigationRetryCount < MAX_NAVIGATION_RETRIES) {
+                            navigationRetryCount++
+
+                            tvRunningState.text =
+                                "Camino bloqueado. Reintentando ($navigationRetryCount/$MAX_NAVIGATION_RETRIES)..."
+
+                            robot.speak(
+                                TtsRequest.create(
+                                    "Hay un obstáculo. Intentaré nuevamente.",
+                                    false
+                                )
+                            )
+
+                            android.os.Handler(mainLooper).postDelayed({
+                                robot.goTo(bed.locationName)
+                            }, 3000)
+
+                        } else {
+                            navigationRetryCount = 0
+
+                            saveFailedNavigation(
+                                bed = bed,
+                                status = status,
+                                reason = description
+                            )
+
+                            tvRunningState.text =
+                                "No se pudo llegar a la habitación. Saltando a la siguiente."
+
+                            android.os.Handler(mainLooper).postDelayed({
+                                goToNextBed()
+                            }, 500)
+                        }
+                    }
+
+                    "fail", "cancel" -> {
+                        navigationRetryCount = 0
+
+                        saveFailedNavigation(
+                            bed = bed,
+                            status = status,
+                            reason = description
+                        )
+
+                        tvRunningState.text =
+                            "Destino no alcanzable. Saltando a la siguiente."
+
+                        android.os.Handler(mainLooper).postDelayed({
+                            goToNextBed()
+                        }, 500)
+                    }
                 }
-
-                tvRunningState.text =
-                    "No se pudo llegar a la habitación. Saltando a la siguiente."
-
-                // protección para no quedarse colgado
-                android.os.Handler(mainLooper).postDelayed({
-                    goToNextBed()
-                }, 500)
             }
+
 
 
         }

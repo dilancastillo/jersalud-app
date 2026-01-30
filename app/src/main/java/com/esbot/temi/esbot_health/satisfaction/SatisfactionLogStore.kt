@@ -4,6 +4,10 @@ import android.content.Context
 import com.esbot.temi.esbot_health.education.BedInfo
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 
 data class SatisfactionSession(
     val timestampMillis: Long,
@@ -16,6 +20,11 @@ object SatisfactionLogStore {
 
     private const val FILE_NAME = "satisfaction_log.csv"
 
+    private fun formatDate(millis: Long): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return sdf.format(Date(millis))
+    }
+
     fun appendSession(context: Context, session: SatisfactionSession) {
         try {
             val file = File(context.filesDir, FILE_NAME)
@@ -23,9 +32,11 @@ object SatisfactionLogStore {
 
             FileOutputStream(file, true).use { fos ->
                 if (writeHeader) {
+                    fos.write(byteArrayOf(0xEF.toByte(), 0xBB.toByte(), 0xBF.toByte()))
                     fos.write(
                         "timestampMillis,mode,bedId,bedLabel,questionId,questionLabel,optionIndex,optionText,isRegulatoryKey\n"
-                            .toByteArray()
+                            .toByteArray(Charsets.UTF_8)
+
                     )
                 }
 
@@ -35,7 +46,7 @@ object SatisfactionLogStore {
                     val safeOptText = answer.optionText.replace("\n", " ").replace(",", " ")
 
                     val line = buildString {
-                        append(session.timestampMillis); append(',')
+                        append(formatDate(session.timestampMillis)); append(',')
                         append(session.mode); append(',')
                         append(session.bed.id); append(',')
                         append(safeBedLabel); append(',')
@@ -47,7 +58,8 @@ object SatisfactionLogStore {
                         append('\n')
                     }
 
-                    fos.write(line.toByteArray())
+                    fos.write(line.toByteArray(Charsets.UTF_8)
+                    )
                 }
             }
 

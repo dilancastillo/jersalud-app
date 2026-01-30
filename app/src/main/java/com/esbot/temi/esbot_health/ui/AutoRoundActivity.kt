@@ -169,7 +169,11 @@ class AutoRoundActivity : AppCompatActivity(),
         topics.forEach { topic ->
             val radioButton = RadioButton(this).apply {
                 text = topic.displayName
-                textSize = 35f
+                textSize = 60f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
                 setOnClickListener {
                     selectedTopic = topic
                 }
@@ -183,7 +187,11 @@ class AutoRoundActivity : AppCompatActivity(),
         HospitalConfig.bedsMi.forEach { bed ->
             val checkBox = CheckBox(this).apply {
                 text = bed.label
-                textSize = 35f
+                textSize = 60f
+                buttonDrawable = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.radio_big
+                )
                 isChecked = true
                 buttonTintList =
                     ContextCompat.getColorStateList(
@@ -549,7 +557,7 @@ class AutoRoundActivity : AppCompatActivity(),
         cbCompReplay.isChecked = false
 
         tvRunningState.text = "Registra qué tanto se entendió la explicación."
-        tvRunningState.textSize = 35f
+        tvRunningState.textSize = 60f
         speak("He terminado la explicación. En la pantalla puedes indicar qué tanto se entendió.")
 
     }
