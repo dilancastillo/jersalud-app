@@ -165,33 +165,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="¿Qué tanto se entendió la explicación?"
-                    android:textSize="28sp" />
+                    android:textSize="35sp" />
 
                 <RadioGroup
                     android:id="@+id/rgIndComp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp">
 
                     <RadioButton
                         android:id="@+id/rbIndCompFull"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lo entendió bien"
-                        android:textSize="35sp"/>
+                        android:layout_width="170dp"
+                        android:layout_height="170dp"
+                        android:button="@null"
+                        android:background="@drawable/img_selected_understood"
+                        android:gravity="center"
+                        android:textSize="30sp"
+                        android:layout_marginEnd="28dp"
+                        android:layout_marginStart="28dp"/>
 
                     <RadioButton
                         android:id="@+id/rbIndCompPartial"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Entendió a medias"
-                        android:textSize="35sp"/>
+                        android:layout_width="170dp"
+                        android:layout_height="170dp"
+                        android:button="@null"
+                        android:background="@drawable/img_selected_neutral"
+                        android:gravity="center"
+                        android:textSize="30sp"
+                        android:layout_marginEnd="28dp"
+                        android:layout_marginStart="28dp"/>
 
                     <RadioButton
                         android:id="@+id/rbIndCompNone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No lo entendió"
-                        android:textSize="35sp"/>
+                        android:layout_width="170dp"
+                        android:layout_height="170dp"
+                        android:button="@null"
+                        android:background="@drawable/img_selected_notunderstand"
+                        android:gravity="center"
+                        android:textSize="30sp"
+                        android:layout_marginEnd="28dp"
+                        android:layout_marginStart="28dp"/>
                 </RadioGroup>
 
                 <TextView
@@ -199,7 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:text="Notas o dudas (opcional):" />
 
                 <EditText
@@ -215,7 +232,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textSize="35sp"
+                    android:textSize="40sp"
+                    android:button="@drawable/radio_big"
                     android:text="Repetir la explicación si la comprensión es baja" />
 
                 <Button
@@ -223,7 +241,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textSize="28sp"
+                    android:textSize="35sp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/color_primary"

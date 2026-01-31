@@ -1,6 +1,8 @@
 package com.esbot.temi.esbot_health.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -295,6 +297,7 @@ class IndividualEducationActivity : AppCompatActivity(),
         panelComprehension.visibility = View.GONE
         tvRunningState.text = "Sesión finalizada."
         speak("He terminado la sesión de educación.")
+        robot.goTo("enfermeria")
         finish()
     }
 
@@ -338,6 +341,12 @@ class IndividualEducationActivity : AppCompatActivity(),
             stopSession()
         } else {
             lastSequenceId = seqId
+//            Handler(mainLooper).postDelayed({
+//                if (isSessionRunning && lastSequenceId == seqId && panelComprehension.visibility != View.VISIBLE) {
+//                    lastSequenceId = null
+//                    showComprehensionPanel()
+//                }
+//            }, 0)
         }
     }
 
@@ -347,12 +356,15 @@ class IndividualEducationActivity : AppCompatActivity(),
         rgComp.clearCheck()
         etCompNotes.setText("")
         cbCompReplay.isChecked = false
-
-        tvRunningState.text = "Registra qué tanto se entendió la explicación."
-        speak(
-            "He terminado la explicación. " +
-                    "En la pantalla puedes indicar qué tanto se entendió y anotar dudas."
-        )
+        robot.cancelAllTtsRequests()
+        tvRunningState.text = "Registra qué| tanto se entendió la explicación."
+        tvRunningState.textSize = 45f
+        Handler(mainLooper).postDelayed({
+            speak(
+                "He terminado la explicación. " +
+                        "En la pantalla puedes indicar qué tanto se entendió y anotar dudas."
+            )
+        }, 2000)
     }
 
     private fun onSaveComprehension() {
@@ -405,12 +417,14 @@ class IndividualEducationActivity : AppCompatActivity(),
             }
         )
 
-        if (needsReplay) {
-            speak("Voy a repetir la explicación para reforzar la información.")
-            startEducationAtBed()
-        } else {
-            stopSession()
-        }
+        Handler(mainLooper).postDelayed({
+            if (needsReplay) {
+                speak("Voy a repetir la explicación para reforzar la información.")
+                startEducationAtBed()
+            } else {
+                stopSession()
+            }
+        }, 7500)
     }
 
     private fun markNotAvailable(reason: String) {
@@ -465,11 +479,16 @@ class IndividualEducationActivity : AppCompatActivity(),
     }
 
     override fun onSequencePlayStatusChanged(status: Int, sequenceId: String?) {
+        Log.d(
+            "TEMI_SEQ",
+            "status=$status sequenceId=$sequenceId lastSequenceId=$lastSequenceId"
+        )
         if (!isSessionRunning) return
-        val id = sequenceId ?: return
-        if (id != lastSequenceId) return
 
-        if (status == OnSequencePlayStatusChangedListener.IDLE) {
+        if (status == 0) {
+            isSessionRunning = false
+            lastSequenceId = null
+
             runOnUiThread {
                 showComprehensionPanel()
             }

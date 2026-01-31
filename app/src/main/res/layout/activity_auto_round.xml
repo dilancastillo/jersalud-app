@@ -381,37 +381,50 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="¿Qué tanto se entendió la explicación?"
-                                android:textSize="40sp" />
+                                android:textSize="35sp" />
 
                             <RadioGroup
                                 android:id="@+id/rgComp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp">
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_marginTop="8dp"
+                                android:paddingEnd="15dp"
+                                android:paddingStart="15dp">
 
                                 <RadioButton
                                     android:id="@+id/rbCompFull"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Lo entendió bien"
-                                    android:button="@drawable/radio_big"
-                                    android:textSize="60sp"/>
+                                    android:layout_width="170dp"
+                                    android:layout_height="170dp"
+                                    android:button="@null"
+                                    android:background="@drawable/img_selected_understood"
+                                    android:gravity="center"
+                                    android:textSize="30sp"
+                                    android:layout_marginEnd="28dp"
+                                    android:layout_marginStart="28dp"/>
 
                                 <RadioButton
                                     android:id="@+id/rbCompPartial"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Entendió a medias"
-                                    android:button="@drawable/radio_big"
-                                    android:textSize="35sp"/>
+                                    android:layout_width="170dp"
+                                    android:layout_height="170dp"
+                                    android:button="@null"
+                                    android:background="@drawable/img_selected_neutral"
+                                    android:gravity="center"
+                                    android:textSize="30sp"
+                                    android:layout_marginEnd="28dp"
+                                    android:layout_marginStart="28dp"/>
 
                                 <RadioButton
                                     android:id="@+id/rbCompNone"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="No lo entendió"
-                                    android:button="@drawable/radio_big"
-                                    android:textSize="60sp"/>
+                                    android:layout_width="170dp"
+                                    android:layout_height="170dp"
+                                    android:button="@null"
+                                    android:background="@drawable/img_selected_notunderstand"
+                                    android:gravity="center"
+                                    android:textSize="30sp"
+                                    android:layout_marginEnd="28dp"
+                                    android:layout_marginStart="28dp"/>
                             </RadioGroup>
 
                             <TextView
@@ -434,7 +447,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:textSize="60sp"
+                                android:textSize="40sp"
                                 android:button="@drawable/radio_big"
                                 android:text="Repetir explicación si comprensión es baja" />
 

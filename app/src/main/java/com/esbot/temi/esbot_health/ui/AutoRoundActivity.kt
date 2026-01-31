@@ -546,6 +546,18 @@ class AutoRoundActivity : AppCompatActivity(),
             goToNextBed()
         } else {
             lastSequenceId = seqId
+
+            // Failsafe: si Temi no avisa que terminó
+            handler.postDelayed({
+                if (
+                    isRoundRunning &&
+                    lastSequenceId == seqId &&
+                    panelComprehension.visibility != View.VISIBLE
+                ) {
+                    lastSequenceId = null
+                    showComprehensionPanel()
+                }
+            }, 0) // 2 minutos (ajusta según duración real)
         }
     }
 
@@ -557,7 +569,7 @@ class AutoRoundActivity : AppCompatActivity(),
         cbCompReplay.isChecked = false
 
         tvRunningState.text = "Registra qué tanto se entendió la explicación."
-        tvRunningState.textSize = 60f
+        tvRunningState.textSize = 45f
         speak("He terminado la explicación. En la pantalla puedes indicar qué tanto se entendió.")
 
     }
@@ -679,16 +691,18 @@ class AutoRoundActivity : AppCompatActivity(),
         if (id != lastSequenceId) return
 
         if (status == OnSequencePlayStatusChangedListener.IDLE) {
+            lastSequenceId = null
             runOnUiThread {
                 showComprehensionPanel()
             }
         }
     }
 
+
     data class RoundRules(
         val askAvailability: Boolean = true,
         val skipIfNoResponse: Boolean = true,
-        val skipTimeoutSeconds: Int = 30,
+        val skipTimeoutSeconds: Int = 5,
         val returnToNursingAtEnd: Boolean = true,
         val autoRepeatIfLow: Boolean = false
     )
