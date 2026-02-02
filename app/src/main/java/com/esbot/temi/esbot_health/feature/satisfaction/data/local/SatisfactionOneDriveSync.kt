@@ -1,12 +1,11 @@
 package com.esbot.temi.esbot_health.feature.satisfaction.data.local
 
-import android.content.Context
-import com.esbot.temi.esbot_health.feature.satisfaction.OneDriveUploader
+import com.esbot.temi.esbot_health.feature.satisfaction.data.remote.OneDriveUploader
 
 class SatisfactionOneDriveSync(
-    private val context: Context
+    private val csvWriter: SatisfactionCsvWriter
 ) {
     fun uploadLatestCsvAsync() {
-        OneDriveUploader.uploadSatisfactionCsvAsync(context)
+        OneDriveUploader.uploadSatisfactionCsvAsync(csvWriter.getFile())
     }
 }

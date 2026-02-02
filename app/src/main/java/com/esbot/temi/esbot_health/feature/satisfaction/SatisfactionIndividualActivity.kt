@@ -8,13 +8,21 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.esbot.temi.esbot_health.R
 import com.esbot.temi.esbot_health.education.BedInfo
 import com.esbot.temi.esbot_health.education.HospitalConfig
+import com.esbot.temi.esbot_health.feature.satisfaction.data.local.SatisfactionCsvWriter
+import com.esbot.temi.esbot_health.feature.satisfaction.data.local.SatisfactionOneDriveSync
+import com.esbot.temi.esbot_health.feature.satisfaction.data.repository.FileSatisfactionLogRepository
 import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionAnswer
-import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionSession
 import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionQuestionType
 import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionSurvey
+import com.esbot.temi.esbot_health.feature.satisfaction.domain.model.SatisfactionMode
+import com.esbot.temi.esbot_health.feature.satisfaction.domain.usecase.FinishSatisfactionRoundUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
@@ -54,6 +62,13 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
     ) { granted ->
         if (granted) startListeningForAnswer()
         else Toast.makeText(this, "Permiso de micrófono denegado.", Toast.LENGTH_SHORT).show()
+    }
+
+    private val finishSatisfactionRoundUseCase by lazy {
+        val csvWriter = SatisfactionCsvWriter(applicationContext)
+        val sync = SatisfactionOneDriveSync(csvWriter)
+        val repo = FileSatisfactionLogRepository(csvWriter, sync)
+        FinishSatisfactionRoundUseCase(repo)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -242,16 +257,20 @@ class SatisfactionIndividualActivity : AppCompatActivity(),
 
     private fun saveSessionAndFinish() {
         val bed = selectedBed ?: return
-        val session = SatisfactionSession(
-            timestampMillis = System.currentTimeMillis(),
-            mode = "INDIVIDUAL",
-            bed = bed,
-            answers = currentAnswers.toList()
-        )
-        SatisfactionLogStore.appendSession(this, session)
+        val answers = currentAnswers.toList()
 
-        speak("Gracias por sus respuestas. Esto nos ayuda a mejorar la calidad de la atención.")
-        finish()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                finishSatisfactionRoundUseCase(
+                    mode = SatisfactionMode.INDIVIDUAL,
+                    bed = bed,
+                    answers = answers
+                )
+            }
+
+            speak("Gracias por sus respuestas. Esto nos ayuda a mejorar la calidad de la atención.")
+            finish()
+        }
     }
 
     private fun ensureMicAndListen() {

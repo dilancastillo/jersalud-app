@@ -1,6 +1,5 @@
-package com.esbot.temi.esbot_health.feature.satisfaction
+package com.esbot.temi.esbot_health.feature.satisfaction.data.remote
 
-import android.content.Context
 import android.util.Log
 import java.io.BufferedOutputStream
 import java.io.File
@@ -23,21 +22,20 @@ object OneDriveUploader {
         accessToken = token
     }
 
-    fun uploadSatisfactionCsvAsync(context: Context) {
+    fun uploadSatisfactionCsvAsync(csvFile: File) {
         val token = accessToken
         if (token.isNullOrBlank()) {
             Log.w(TAG, "No hay accessToken configurado. No se subirá a OneDrive.")
             return
         }
 
-        val file = SatisfactionLogStore.getLocalFile(context)
-        if (!file.exists() || file.length() == 0L) {
+        if (!csvFile.exists() || csvFile.length() == 0L) {
             Log.w(TAG, "Archivo de log vacío o inexistente, no se sube.")
             return
         }
 
         thread {
-            uploadFileToOneDrive(file, token)
+            uploadFileToOneDrive(csvFile, token)
         }
     }
 
