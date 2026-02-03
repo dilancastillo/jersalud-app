@@ -277,6 +277,7 @@ class SatisfactionIndividualActivity : AppCompatActivity()
             )
         )
 
+        
         currentQuestionIndex++
         if (currentQuestionIndex >= surveyQuestions.size) {
             saveSessionAndFinish()
@@ -494,6 +495,140 @@ class SatisfactionIndividualActivity : AppCompatActivity()
             }
         }, 1000)  // Esperar 2 segundo
     }
+//    private fun mapSingleChoice(text: String, options: List<String>): Int? {
+//        val normalized = text.lowercase()
+//            .replace("á", "a")
+//            .replace("é", "e")
+//            .replace("í", "i")
+//            .replace("ó", "o")
+//            .replace("ú", "u")
+//            .trim()
+//
+//        // Primero intenta coincidencia exacta o casi exacta
+//        options.forEachIndexed { index, option ->
+//            val normalizedOption = option.lowercase()
+//                .replace("á", "a")
+//                .replace("é", "e")
+//                .replace("í", "i")
+//                .replace("ó", "o")
+//                .replace("ú", "u")
+//                .trim()
+//
+//            if (normalized == normalizedOption || normalized.contains(normalizedOption)) {
+//                return index
+//            }
+//        }
+//
+//        // Luego busca palabras clave
+//        return when {
+//            normalized.contains("laboral") -> 0
+//            normalized.contains("fisica") || normalized.contains("terapia") -> 1
+//            normalized.contains("general") -> 2
+//            normalized.contains("enfermeria") -> 3
+//            else -> null
+//        }
+//    }
+
+
+//    private fun mapLikert5(text: String): Int? {
+//        val normalized = text.lowercase()
+//            .replace("á", "a")
+//            .replace("é", "e")
+//            .replace("í", "i")
+//            .replace("ó", "o")
+//            .replace("ú", "u")
+//            .trim()
+//
+//        return when {
+//            text.contains("Muy Buena") || text.contains("muy buena") -> 0
+//            text.contains("Buena") || text.contains("buena") || text.contains("vuela")-> 1
+//            text.contains("Regular") || text.contains("Regular") -> 2
+//            text.contains("Muy mala") || text.contains("muy mala") -> 4
+//            text.contains("Mala") || text.contains("mala") -> 3
+//
+//            // Regular
+//            normalized.contains("regular") ||
+//                    normalized.contains("ni satisfecho") ||
+//                    normalized.contains("ni insatisfecho") -> 2
+//
+//            // Fallback numérico
+//            else -> {
+//                Regex("""\d""").find(normalized)?.value?.toIntOrNull()?.let {
+//                    if (it in 1..5) it - 1 else null
+//                }
+//            }
+//        }
+//    }
+private fun mapLikert5(text: String): Int? {
+    val normalized = text.lowercase()
+        .replace("á", "a")
+        .replace("é", "e")
+        .replace("í", "i")
+        .replace("ó", "o")
+        .replace("ú", "u")
+        .trim()
+
+    return when {
+        normalized.contains("muy buena") -> 0
+        normalized.contains("buena") -> 1
+        normalized.contains("regular") || normalized.contains("ni satisfecho") || normalized.contains("ni insatisfecho") -> 2
+        normalized.contains("mala") -> 3
+        normalized.contains("muy mala") -> 4
+        // Fallback numérico 1-5
+        else -> Regex("""\d""").find(normalized)?.value?.toIntOrNull()?.let {
+            if (it in 1..5) it - 1 else null
+        }
+    }
+}
+
+
+//    private fun mapRecommend4(text: String): Int? {
+//        val normalized = text.lowercase()
+//            .replace("á", "a")
+//            .replace("é", "e")
+//            .replace("í", "i")
+//            .replace("ó", "o")
+//            .replace("ú", "u")
+//            .trim()
+//
+//        return when {
+//            // Verificar primero las más específicas (con "definitivamente")
+//            normalized.contains("definitivamente") && (normalized.contains("si") || normalized.contains("sí")) -> 0
+//
+//            normalized.contains("definitivamente") && normalized.contains("no") -> 3
+//
+//            // Luego las que tienen "probablemente"
+//            normalized.contains("probablemente") && (normalized.contains("si") || normalized.contains("sí")) -> 1
+//
+//            normalized.contains("probablemente") && normalized.contains("no") -> 2
+//
+//            // Fallback: solo "sí" o "no" (con precaución)
+//            normalized == "si" || normalized == "sí" -> 1
+//            normalized == "no" -> 3
+//
+//            else -> null
+//        }
+//    }
+private fun mapRecommend4(text: String): Int? {
+    val normalized = text.lowercase()
+        .replace("á", "a")
+        .replace("é", "e")
+        .replace("í", "i")
+        .replace("ó", "o")
+        .replace("ú", "u")
+        .trim()
+
+    return when {
+        normalized.contains("definitivamente") && (normalized.contains("si") || normalized.contains("sí")) -> 0
+        normalized.contains("probablemente") && (normalized.contains("si") || normalized.contains("sí")) -> 1
+        normalized.contains("probablemente") && normalized.contains("no") -> 2
+        normalized.contains("definitivamente") && normalized.contains("no") -> 3
+        // fallback simple por "si"/"no"
+        normalized == "si" || normalized == "sí" -> 1
+        normalized == "no" -> 3
+        else -> null
+    }
+}
     private fun mapSingleChoice(text: String, options: List<String>): Int? {
         val normalized = text.lowercase()
             .replace("á", "a")
@@ -503,9 +638,9 @@ class SatisfactionIndividualActivity : AppCompatActivity()
             .replace("ú", "u")
             .trim()
 
-        // Primero intenta coincidencia exacta o casi exacta
+        // Primero coincidencia exacta o parcial con la lista de opciones
         options.forEachIndexed { index, option ->
-            val normalizedOption = option.lowercase()
+            val optNormalized = option.lowercase()
                 .replace("á", "a")
                 .replace("é", "e")
                 .replace("í", "i")
@@ -513,79 +648,21 @@ class SatisfactionIndividualActivity : AppCompatActivity()
                 .replace("ú", "u")
                 .trim()
 
-            if (normalized == normalizedOption || normalized.contains(normalizedOption)) {
+            if (normalized == optNormalized || normalized.contains(optNormalized)) {
                 return index
             }
         }
 
-        // Luego busca palabras clave
+        // Palabras clave generales (opcional, según tu contexto)
         return when {
-            normalized.contains("laboral") -> 0
-            normalized.contains("fisica") || normalized.contains("terapia") -> 1
-            normalized.contains("general") -> 2
-            normalized.contains("enfermeria") -> 3
+            normalized.contains("si") -> options.indexOfFirst { it.lowercase().contains("si") }.takeIf { it != -1 }
+            normalized.contains("no") -> options.indexOfFirst { it.lowercase().contains("no") }.takeIf { it != -1 }
+            normalized.contains("n/a") -> options.indexOfFirst { it.lowercase().contains("n/a") }.takeIf { it != -1 }
             else -> null
         }
     }
 
 
-    private fun mapLikert5(text: String): Int? {
-        val normalized = text.lowercase()
-            .replace("á", "a")
-            .replace("é", "e")
-            .replace("í", "i")
-            .replace("ó", "o")
-            .replace("ú", "u")
-            .trim()
-
-        return when {
-            text.contains("Muy Buena") || text.contains("muy buena") -> 0
-            text.contains("Buena") || text.contains("buena") || text.contains("vuela")-> 1
-            text.contains("Regular") || text.contains("Regular") -> 2
-            text.contains("Muy mala") || text.contains("muy mala") -> 4
-            text.contains("Mala") || text.contains("mala") -> 3
-
-            // Regular
-            normalized.contains("regular") ||
-                    normalized.contains("ni satisfecho") ||
-                    normalized.contains("ni insatisfecho") -> 2
-
-            // Fallback numérico
-            else -> {
-                Regex("""\d""").find(normalized)?.value?.toIntOrNull()?.let {
-                    if (it in 1..5) it - 1 else null
-                }
-            }
-        }
-    }
-
-    private fun mapRecommend4(text: String): Int? {
-        val normalized = text.lowercase()
-            .replace("á", "a")
-            .replace("é", "e")
-            .replace("í", "i")
-            .replace("ó", "o")
-            .replace("ú", "u")
-            .trim()
-
-        return when {
-            // Verificar primero las más específicas (con "definitivamente")
-            normalized.contains("definitivamente") && (normalized.contains("si") || normalized.contains("sí")) -> 0
-
-            normalized.contains("definitivamente") && normalized.contains("no") -> 3
-
-            // Luego las que tienen "probablemente"
-            normalized.contains("probablemente") && (normalized.contains("si") || normalized.contains("sí")) -> 1
-
-            normalized.contains("probablemente") && normalized.contains("no") -> 2
-
-            // Fallback: solo "sí" o "no" (con precaución)
-            normalized == "si" || normalized == "sí" -> 1
-            normalized == "no" -> 3
-
-            else -> null
-        }
-    }
 
     private fun speak(text: String) {
         robot.speak(TtsRequest.create(text, false))
