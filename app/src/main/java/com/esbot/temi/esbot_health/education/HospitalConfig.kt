@@ -12,9 +12,7 @@ object HospitalConfig {
     const val NURSING_LOCATION: String = "enfermeria"
 
     val bedsMi: List<BedInfo> = listOf(
-        BedInfo("MI_301A", "Hab 301 – Cama A", "hab301a"),
-        BedInfo("MI_302A", "Hab 302 – Cama A", "hab302a"),
-        BedInfo("MI_302B", "Hab 302 – Cama B", "hab302b"),
-        BedInfo("MI_303A", "Hab 303 – Cama A", "hab303a")
+        BedInfo("cubiculo1", "Cubiculo 1", "cubiculo1"),
+        BedInfo("cubiculo2", "Cubiculo 2", "cubiculo2")
     )
 }

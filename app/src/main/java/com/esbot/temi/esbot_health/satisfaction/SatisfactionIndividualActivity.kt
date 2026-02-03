@@ -49,7 +49,6 @@ class SatisfactionIndividualActivity : AppCompatActivity()
 
     private var selectedBed: BedInfo? = null
     private var inSurvey: Boolean = false
-    private var waitingForNext = false
     private var navigationHandled = false
     private var inQuestionMode: Boolean = false
     private var navigationRetryCount = 0
@@ -91,70 +90,15 @@ class SatisfactionIndividualActivity : AppCompatActivity()
 
     override fun onAsrResult(asrResult: String, sttLanguage: SttLanguage) {
         if (!inSurvey) return
+
         runOnUiThread {
             val transcript = asrResult.lowercase(Locale.getDefault()).trim()
             if (transcript.isBlank()) return@runOnUiThread
 
-            // Manejo de confirmación para pasar a la siguiente pregunta
-            if (waitingForNext) {
-                when {
-                    // Solo respuestas cortas y directas como confirmación
-                    transcript.contains("siguiente") ||
-                    transcript.contains("continuar") ||
-                    transcript.contains("adelante") ||
-                    transcript.contains("avanzar") ||
-                    transcript.contains("continua") -> {
-                        waitingForNext = false
-                        if (currentQuestionIndex >= surveyQuestions.size - 1) {
-                            val checkedId = rgOptions.checkedRadioButtonId
-                            if (checkedId != -1) {
-                                val index = rgOptions.indexOfChild(findViewById(checkedId))
-                                val q = surveyQuestions[currentQuestionIndex]
-                                val optText = (findViewById<RadioButton>(checkedId)).text.toString()
-
-                                currentAnswers.add(
-                                    SatisfactionAnswer(
-                                        questionId = q.id,
-                                        questionLabel = q.label,
-                                        optionIndex = index,
-                                        optionText = optText
-                                    )
-                                )
-                            }
-                            saveSessionAndFinish()
-                        } else {
-                            goToNextQuestion()
-                        }
-                    }
-                    transcript.contains("esperar") ||
-                            transcript.contains("quedarse") -> {
-
-                        waitingForNext = false
-
-                        // NO cerrar conversación
-                        Handler(mainLooper).postDelayed({
-                            ensureMicAndListen() // vuelve a escuchar la MISMA pregunta
-                        }, 1200)
-                    }
-                    else -> {
-                        speak("Por favor diga 'siguiente' para continuar o 'esperar' para cambiar la respuesta.")
-
-                        Handler(mainLooper).postDelayed({
-                            if (waitingForNext) {
-                                robot.askQuestion(
-                                    "Por favor diga 'siguiente' para continuar o 'esperar' para cambiar la respuesta."
-                                )
-                            }
-                        }, 2000)
-                    }
-                }
-                return@runOnUiThread
-            }
-
-            if (inSurvey) handleVoiceAnswer(transcript)
+            handleVoiceAnswer(transcript)
         }
-
     }
+
 
 
     private fun bindViews() {
@@ -277,7 +221,7 @@ class SatisfactionIndividualActivity : AppCompatActivity()
             )
         )
 
-        
+
         currentQuestionIndex++
         if (currentQuestionIndex >= surveyQuestions.size) {
             saveSessionAndFinish()
@@ -364,7 +308,10 @@ class SatisfactionIndividualActivity : AppCompatActivity()
             }
             rgOptions.addView(rb)
         }
-        ensureMicAndListen()
+        Handler(mainLooper).postDelayed({
+            ensureMicAndListen()
+        }, 500)
+
         //speak(q.textTts + " Puedes responder diciendo la opción o tocándola en la pantalla.")
     }
 
@@ -379,7 +326,6 @@ class SatisfactionIndividualActivity : AppCompatActivity()
         SatisfactionLogStore.appendSession(this, session)
 
         robot.finishConversation()
-        waitingForNext = false
         inSurvey = false
 
         // Hablar
@@ -458,8 +404,9 @@ class SatisfactionIndividualActivity : AppCompatActivity()
 
     private fun handleVoiceAnswer(transcript: String) {
         if (!inSurvey) return
+
         val q = surveyQuestions[currentQuestionIndex]
-        val cleaned = transcript.trim().lowercase(Locale.getDefault())
+        val cleaned = transcript.lowercase(Locale.getDefault()).trim()
 
         val index = when (q.type) {
             SatisfactionQuestionType.LIKERT_5 -> mapLikert5(cleaned)
@@ -468,33 +415,42 @@ class SatisfactionIndividualActivity : AppCompatActivity()
         }
 
         if (index == null || index !in q.options.indices) {
-            waitingForNext = false
             robot.finishConversation()
-            speak(
-                "No entendí la respuesta. " +
-                        "Puede repetirla de nuevo."
-            )
+            speak("No entendí la respuesta, por favor repita.")
 
-            //  volver a escuchar la MISMA pregunta
-            android.os.Handler(mainLooper).postDelayed({
+            Handler(mainLooper).postDelayed({
                 ensureMicAndListen()
-            }, 1500)
+            }, 1200)
 
             return
         }
 
+        // Marcar visualmente la opción
         val rb = rgOptions.getChildAt(index) as? RadioButton
         rb?.isChecked = true
 
-        waitingForNext = true
+        // Guardar respuesta
+        currentAnswers.add(
+            SatisfactionAnswer(
+                questionId = q.id,
+                questionLabel = q.label,
+                optionIndex = index,
+                optionText = q.options[index]
+            )
+        )
 
-        // Usar un Handler para hacer la pregunta DESPUÉS de un delay
-        android.os.Handler(mainLooper).postDelayed({
-            if (waitingForNext) {  // Verificar que todavía estamos esperando
-                robot.askQuestion("Registré su respuesta: ${q.options[index]}. ¿Desea pasar a la siguiente pregunta? Diga 'siguiente' para continuar o diga 'esperar' para cambiar la respuesta.")
+        // Avanzar inmediatamente
+        currentQuestionIndex++
+
+        Handler(mainLooper).postDelayed({
+            if (currentQuestionIndex >= surveyQuestions.size) {
+                saveSessionAndFinish()
+            } else {
+                showCurrentQuestion()
             }
-        }, 1000)  // Esperar 2 segundo
+        }, 600) // delay corto para que el usuario vea el cambio
     }
+
 //    private fun mapSingleChoice(text: String, options: List<String>): Int? {
 //        val normalized = text.lowercase()
 //            .replace("á", "a")
@@ -559,6 +515,7 @@ class SatisfactionIndividualActivity : AppCompatActivity()
 //            }
 //        }
 //    }
+//    abajo arreglado
 private fun mapLikert5(text: String): Int? {
     val normalized = text.lowercase()
         .replace("á", "a")
@@ -630,37 +587,34 @@ private fun mapRecommend4(text: String): Int? {
     }
 }
     private fun mapSingleChoice(text: String, options: List<String>): Int? {
-        val normalized = text.lowercase()
-            .replace("á", "a")
-            .replace("é", "e")
-            .replace("í", "i")
-            .replace("ó", "o")
-            .replace("ú", "u")
-            .trim()
 
-        // Primero coincidencia exacta o parcial con la lista de opciones
-        options.forEachIndexed { index, option ->
-            val optNormalized = option.lowercase()
+        fun normalize(s: String): String =
+            s.lowercase()
                 .replace("á", "a")
                 .replace("é", "e")
                 .replace("í", "i")
                 .replace("ó", "o")
                 .replace("ú", "u")
+                .replace(".", "")
+                .replace(",", "")
                 .trim()
 
-            if (normalized == optNormalized || normalized.contains(optNormalized)) {
-                return index
-            }
-        }
+        val t = normalize(text)
 
-        // Palabras clave generales (opcional, según tu contexto)
+        // DEBUG CLAVE
+        Log.d("VOICE", "ASR='$text' | normalized='$t'")
+
         return when {
-            normalized.contains("si") -> options.indexOfFirst { it.lowercase().contains("si") }.takeIf { it != -1 }
-            normalized.contains("no") -> options.indexOfFirst { it.lowercase().contains("no") }.takeIf { it != -1 }
-            normalized.contains("n/a") -> options.indexOfFirst { it.lowercase().contains("n/a") }.takeIf { it != -1 }
+            // NO APLICA (primero, porque contiene "no")
+            t.contains("no aplica") || t == "no" -> 1
+
+            // SI APLICA
+            t.contains("si aplica") || t.contains("aplica") || t == "si" -> 0
+
             else -> null
         }
     }
+
 
 
 
@@ -668,7 +622,6 @@ private fun mapRecommend4(text: String): Int? {
         robot.speak(TtsRequest.create(text, false))
     }
     private fun resetAsrState() {
-        waitingForNext = false
         robot.finishConversation() // CIERRA el ciclo ASR actual
     }
 
