@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.esbot.temi.esbot_health.R
+import com.esbot.temi.esbot_health.core.MqttController
+import com.esbot.temi.esbot_health.core.RobotController
 import com.google.android.material.card.MaterialCardView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.constants.HomeScreenMode
@@ -38,6 +40,9 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     private lateinit var btnSatisfaction: MaterialCardView
     private lateinit var btnTranslate: android.widget.ImageView
     private lateinit var btnSurvey: MaterialCardView
+    private lateinit var robotController: RobotController
+
+
 
     // ----------------------------------------------------
     // CONSTANTES Y HELPERS DE LOCALIZACIÓN
@@ -45,6 +50,7 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
     private val PREFS_NAME = "Settings"
     private val KEY_LANG = "MyLang"
     private val DEFAULT_LANG = "es"
+    private lateinit var mqttController: MqttController
 
     // Helper para leer la preferencia de idioma
     private fun getLocalePreference(context: Context): String {
@@ -183,6 +189,16 @@ class MainActivity : AppCompatActivity(), OnRobotReadyListener, OnGoToLocationSt
                 e.printStackTrace()
             }
         }
+        robotController = RobotController(Robot.getInstance())
+        mqttController = MqttController(
+            robotController = robotController,
+            onStatus = { status ->
+                Log.d("MAIN_MQTT", "Estado MQTT: $status")
+            }
+        )
+
+        mqttController.connect()
+
 
 
     }

@@ -39,7 +39,20 @@ enum class EducationTopic(
         id = "postop",
         displayName = "Cuidados posoperatorios",
         sequenceName = "Cuidados posoperatorios"
+    ),
+    cubiculo1(
+    id = "postop",
+    displayName = "IMO - Quimioterapia",
+    sequenceName = "IMO - Quimioterapia"
+    ),
+    cubiculo2(
+    id = "postop",
+    displayName = "IMO - Radioterapia",
+    sequenceName = "IMO - Radioterapia"
     );
+
+    //IMO - Quimioterapia
+
 
     companion object {
         fun allTopics(): List<EducationTopic> = values().toList()
