@@ -605,9 +605,9 @@ class AutoRoundActivity : AppCompatActivity(),
             bedId = bed.id,
             bedLabel = bed.label,
             mode = "AUTO_ROUND",
-            comprehensionLevel = level,
-            needsReplay = needsReplay,
-            note = notes
+            comprehensionLevel = level
+//            needsReplay = needsReplay
+//            note = notes
         )
         EducationLogStore.appendEvent(this, event)
 
@@ -647,9 +647,9 @@ class AutoRoundActivity : AppCompatActivity(),
             bedId = bed.id,
             bedLabel = bed.label,
             mode = "AUTO_ROUND",
-            comprehensionLevel = "SKIPPED",
-            needsReplay = false,
-            note = reason
+            comprehensionLevel = "SKIPPED"
+//            needsReplay = false
+//            note = reason
         )
         EducationLogStore.appendEvent(this, event)
     }

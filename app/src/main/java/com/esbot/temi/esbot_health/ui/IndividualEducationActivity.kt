@@ -59,8 +59,8 @@ class IndividualEducationActivity : AppCompatActivity(),
     private lateinit var rbCompFull: RadioButton
     private lateinit var rbCompPartial: RadioButton
     private lateinit var rbCompNone: RadioButton
-    private lateinit var etCompNotes: EditText
-    private lateinit var cbCompReplay: CheckBox
+//    private lateinit var etCompNotes: EditText
+//    private lateinit var cbCompReplay: CheckBox
     private lateinit var btnCompSave: Button
 
     private lateinit var btnPrevStep: Button
@@ -117,8 +117,8 @@ class IndividualEducationActivity : AppCompatActivity(),
         rbCompFull = findViewById(R.id.rbIndCompFull)
         rbCompPartial = findViewById(R.id.rbIndCompPartial)
         rbCompNone = findViewById(R.id.rbIndCompNone)
-        etCompNotes = findViewById(R.id.etIndCompNotes)
-        cbCompReplay = findViewById(R.id.cbIndCompReplay)
+//        etCompNotes = findViewById(R.id.etIndCompNotes)
+//        cbCompReplay = findViewById(R.id.cbIndCompReplay)
         btnCompSave = findViewById(R.id.btnIndCompSave)
 
         btnPrevStep = findViewById(R.id.btnIndPrevStep)
@@ -354,10 +354,10 @@ class IndividualEducationActivity : AppCompatActivity(),
         panelAvailability.visibility = View.GONE
         panelComprehension.visibility = View.VISIBLE
         rgComp.clearCheck()
-        etCompNotes.setText("")
-        cbCompReplay.isChecked = false
+//        etCompNotes.setText("")
+//        cbCompReplay.isChecked = false
         robot.cancelAllTtsRequests()
-        tvRunningState.text = "Registra qué| tanto se entendió la explicación."
+        tvRunningState.text = "Registra ¿Qué tanto se entendió la explicación.?"
         tvRunningState.textSize = 45f
         Handler(mainLooper).postDelayed({
             speak(
@@ -381,13 +381,14 @@ class IndividualEducationActivity : AppCompatActivity(),
                     "Selecciona un nivel de comprensión.",
                     Toast.LENGTH_SHORT
                 ).show()
+                speak("Selecciona un nivel de comprensión")
                 return
             }
         }
 
-        val notes = etCompNotes.text?.toString()?.trim().orEmpty()
-        val needsReplay = cbCompReplay.isChecked &&
-                (level == "PARTIAL" || level == "NONE")
+//        val notes = etCompNotes.text?.toString()?.trim().orEmpty()
+//        val needsReplay = cbCompReplay.isChecked &&
+//                (level == "PARTIAL" || level == "NONE")
 
         val event = EducationEvent(
             timestampMillis = System.currentTimeMillis(),
@@ -396,9 +397,9 @@ class IndividualEducationActivity : AppCompatActivity(),
             bedId = bed.id,
             bedLabel = bed.label,
             mode = "INDIVIDUAL",
-            comprehensionLevel = level,
-            needsReplay = needsReplay,
-            note = notes
+            comprehensionLevel = level
+//            needsReplay = needsReplay
+//            note = notes
         )
 
         EducationLogStore.appendEvent(this, event)
@@ -418,12 +419,12 @@ class IndividualEducationActivity : AppCompatActivity(),
         )
 
         Handler(mainLooper).postDelayed({
-            if (needsReplay) {
-                speak("Voy a repetir la explicación para reforzar la información.")
-                startEducationAtBed()
-            } else {
+//            if (needsReplay) {
+//                speak("Voy a repetir la explicación para reforzar la información.")
+//                startEducationAtBed()
+//            } else {
                 stopSession()
-            }
+           // }
         }, 7500)
     }
 
@@ -438,9 +439,9 @@ class IndividualEducationActivity : AppCompatActivity(),
             bedId = bed.id,
             bedLabel = bed.label,
             mode = "INDIVIDUAL",
-            comprehensionLevel = "NOT_AVAILABLE",
-            needsReplay = false,
-            note = reason
+            comprehensionLevel = "NOT_AVAILABLE"
+//            needsReplay = false
+//            note = reason
         )
         EducationLogStore.appendEvent(this, event)
     }

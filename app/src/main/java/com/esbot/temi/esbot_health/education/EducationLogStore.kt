@@ -11,9 +11,9 @@ data class EducationEvent(
     val bedId: String,
     val bedLabel: String,
     val mode: String,
-    val comprehensionLevel: String,
-    val needsReplay: Boolean,
-    val note: String
+    val comprehensionLevel: String
+//    val needsReplay: Boolean
+//    val note: String
 )
 
 object EducationLogStore {
@@ -35,7 +35,7 @@ object EducationLogStore {
 
                 val safeTopicName = event.topicName.replace("\n", " ").replace(",", " ")
                 val safeBedLabel = event.bedLabel.replace("\n", " ").replace(",", " ")
-                val safeNote = event.note.replace("\n", " ").replace(",", " ")
+//                val safeNote = event.note.replace("\n", " ").replace(",", " ")
 
                 val line = buildString {
                     append(event.timestampMillis); append(',')
@@ -45,8 +45,8 @@ object EducationLogStore {
                     append(safeBedLabel); append(',')
                     append(event.mode); append(',')
                     append(event.comprehensionLevel); append(',')
-                    append(event.needsReplay); append(',')
-                    append(safeNote); append('\n')
+//                    append(event.needsReplay); append(',')
+//                    append(safeNote); append('\n')
                 }
 
                 fos.write(line.toByteArray())

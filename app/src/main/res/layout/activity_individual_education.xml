@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollIndEdu"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -88,7 +89,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="16dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/tvIndRunningHeader"
@@ -158,14 +160,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="12dp"
-                android:visibility="gone">
+                android:visibility="gone"
+                tools:visibility="visible">
 
-                <TextView
-                    android:id="@+id/tvIndCompTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="¿Qué tanto se entendió la explicación?"
-                    android:textSize="35sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvIndCompTitle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="¿Qué tanto se entendió la explicación?"-->
+<!--                    android:textSize="45sp" />-->
 
                 <RadioGroup
                     android:id="@+id/rgIndComp"
@@ -173,14 +176,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="58dp"
                     android:paddingEnd="15dp"
                     android:paddingStart="15dp">
 
                     <RadioButton
                         android:id="@+id/rbIndCompFull"
-                        android:layout_width="170dp"
-                        android:layout_height="170dp"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
                         android:button="@null"
                         android:background="@drawable/img_selected_understood"
                         android:gravity="center"
@@ -190,8 +193,8 @@
 
                     <RadioButton
                         android:id="@+id/rbIndCompPartial"
-                        android:layout_width="170dp"
-                        android:layout_height="170dp"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
                         android:button="@null"
                         android:background="@drawable/img_selected_neutral"
                         android:gravity="center"
@@ -201,8 +204,8 @@
 
                     <RadioButton
                         android:id="@+id/rbIndCompNone"
-                        android:layout_width="170dp"
-                        android:layout_height="170dp"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
                         android:button="@null"
                         android:background="@drawable/img_selected_notunderstand"
                         android:gravity="center"
@@ -211,36 +214,36 @@
                         android:layout_marginStart="28dp"/>
                 </RadioGroup>
 
-                <TextView
-                    android:id="@+id/tvIndCompNotesLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textSize="30sp"
-                    android:text="Notas o dudas (opcional):" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvIndCompNotesLabel"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:textSize="30sp"-->
+<!--                    android:text="Notas o dudas (opcional):" />-->
 
-                <EditText
-                    android:id="@+id/etIndCompNotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:inputType="textMultiLine"
-                    android:gravity="top|start"
-                    android:background="@android:drawable/edit_text" />
+<!--                <EditText-->
+<!--                    android:id="@+id/etIndCompNotes"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:inputType="textMultiLine"-->
+<!--                    android:gravity="top|start"-->
+<!--                    android:background="@android:drawable/edit_text" />-->
 
-                <CheckBox
-                    android:id="@+id/cbIndCompReplay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textSize="40sp"
-                    android:button="@drawable/radio_big"
-                    android:text="Repetir la explicación si la comprensión es baja" />
+<!--                <CheckBox-->
+<!--                    android:id="@+id/cbIndCompReplay"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:textSize="40sp"-->
+<!--                    android:button="@drawable/radio_big"-->
+<!--                    android:text="Repetir la explicación si la comprensión es baja" />-->
 
                 <Button
                     android:id="@+id/btnIndCompSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="58dp"
                     android:textSize="35sp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textColor="@color/white"
