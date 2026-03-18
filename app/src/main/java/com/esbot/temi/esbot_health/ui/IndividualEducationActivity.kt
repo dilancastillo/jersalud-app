@@ -301,22 +301,22 @@ class IndividualEducationActivity : AppCompatActivity(),
         finish()
     }
 
-    private fun onArrivedAtBed() {
-        val topic = selectedTopic ?: return
-        val bed = selectedBed ?: return
-
-        tvRunningState.text = "En ${bed.label}."
-        panelAvailability.visibility = View.VISIBLE
-        panelComprehension.visibility = View.GONE
-
-        tvAvailabilityQuestion.text =
-            "Hola, soy Temi, el robot de la clínica.\n" +
-                    "¿Podemos hablar unos minutos sobre:\n${topic.displayName}?"
-        speak(
-            "Hola, soy Temi, el robot de la clínica. " +
-                    "¿Podemos hablar unos minutos sobre ${topic.displayName}?"
-        )
-    }
+//    private fun onArrivedAtBed() {
+//        val topic = selectedTopic ?: return
+//        val bed = selectedBed ?: return
+//
+//        tvRunningState.text = "En ${bed.label}."
+//        panelAvailability.visibility = View.VISIBLE
+//        panelComprehension.visibility = View.GONE
+//
+//        tvAvailabilityQuestion.text =
+//            "Hola, soy Temi, el robot de la clínica.\n" +
+//                    "¿Podemos hablar unos minutos sobre:\n${topic.displayName}?"
+//        speak(
+//            "Hola, soy Temi, el robot de la clínica. " +
+//                    "¿Podemos hablar unos minutos sobre ${topic.displayName}?"
+//        )
+//    }
 
     private fun startEducationAtBed() {
         val topic = selectedTopic ?: return
@@ -464,7 +464,7 @@ class IndividualEducationActivity : AppCompatActivity(),
 
         if (status == "complete") {
             runOnUiThread {
-                onArrivedAtBed()
+                startEducationAtBed()
             }
         } else if (status == "error" || status == "abort") {
             runOnUiThread {
