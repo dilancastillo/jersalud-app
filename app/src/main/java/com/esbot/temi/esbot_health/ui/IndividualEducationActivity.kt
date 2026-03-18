@@ -18,10 +18,12 @@ import com.esbot.temi.esbot_health.education.EducationLogStore
 import com.esbot.temi.esbot_health.education.EducationTopic
 import com.esbot.temi.esbot_health.education.HospitalConfig
 import com.esbot.temi.esbot_health.education.SequencePlayer
+import com.robotemi.sdk.SttLanguage
 
 class IndividualEducationActivity : AppCompatActivity(),
     OnGoToLocationStatusChangedListener,
-    OnSequencePlayStatusChangedListener {
+    OnSequencePlayStatusChangedListener,
+    Robot.AsrListener{
 
     private lateinit var robot: Robot
 
@@ -84,11 +86,13 @@ class IndividualEducationActivity : AppCompatActivity(),
         super.onStart()
         robot.addOnGoToLocationStatusChangedListener(this)
         robot.addOnSequencePlayStatusChangedListener(this)
+        robot.addAsrListener(this)
     }
 
     override fun onStop() {
         robot.removeOnGoToLocationStatusChangedListener(this)
         robot.removeOnSequencePlayStatusChangedListener(this)
+        robot.removeAsrListener(this)
         super.onStop()
     }
 
@@ -359,14 +363,36 @@ class IndividualEducationActivity : AppCompatActivity(),
 //        etCompNotes.setText("")
 //        cbCompReplay.isChecked = false
         robot.cancelAllTtsRequests()
-        tvRunningState.text = "Registra ¿Qué tanto se entendió la explicación.?"
+        tvRunningState.text = "¿Qué tanto se entendió la explicación.?"
         tvRunningState.textSize = 45f
-        Handler(mainLooper).postDelayed({
-            speak(
-                "He terminado la explicación. " +
-                        "En la pantalla puedes indicar qué tanto se entendió y anotar dudas."
-            )
-        }, 2000)
+        robot.askQuestion("He terminado la explicación. ¿Qué tanto se entendió la charla?. Puedes decir 'Bien', 'Regular' o 'Mal'")
+    }
+    override fun onAsrResult(asrResult: String, sttLanguage: SttLanguage) {
+
+        if (panelComprehension.visibility != View.VISIBLE) return
+
+        val respuesta = asrResult.lowercase().trim()
+
+        val radioId = when {
+            "bien" in respuesta -> R.id.rbIndCompFull
+            "regular" in respuesta -> R.id.rbIndCompPartial
+            "mal" in respuesta -> R.id.rbIndCompNone
+            else -> null
+        }
+
+        radioId?.let {
+            runOnUiThread {
+                rgComp.check(it)
+                robot.finishConversation()
+                onSaveComprehension()
+            }
+        } ?: run {
+            runOnUiThread {
+                Handler(mainLooper).postDelayed({
+                    showComprehensionPanel()
+                }, 2500)
+            }
+        }
     }
 
     private fun onSaveComprehension() {
@@ -374,9 +400,9 @@ class IndividualEducationActivity : AppCompatActivity(),
         val bed = selectedBed ?: return
 
         val level = when (rgComp.checkedRadioButtonId) {
-            R.id.rbIndCompFull -> "FULL"
-            R.id.rbIndCompPartial -> "PARTIAL"
-            R.id.rbIndCompNone -> "NONE"
+            R.id.rbIndCompFull -> "bien"
+            R.id.rbIndCompPartial -> "regular"
+            R.id.rbIndCompNone -> "mal"
             else -> {
                 Toast.makeText(
                     this,
@@ -411,11 +437,11 @@ class IndividualEducationActivity : AppCompatActivity(),
             "Comprensión registrada para ${bed.label}.",
             Toast.LENGTH_SHORT
         ).show()
-
+        robot.finishConversation()
         speak(
             when (level) {
-                "FULL" -> "Perfecto, he registrado que la explicación se entendió bien."
-                "PARTIAL" -> "He registrado que la explicación se entendió parcialmente. El equipo de enfermería puede reforzar la información."
+                "bien" -> "Perfecto, he registrado que la explicación se entendió bien."
+                "regular" -> "He registrado que la explicación se entendió parcialmente. El equipo de enfermería puede reforzar la información."
                 else -> "He registrado que la explicación no se entendió. El equipo de enfermería puede ayudarte a resolver tus dudas."
             }
         )
