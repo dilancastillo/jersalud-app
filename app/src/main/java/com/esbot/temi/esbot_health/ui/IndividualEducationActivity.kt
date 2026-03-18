@@ -353,6 +353,8 @@ class IndividualEducationActivity : AppCompatActivity(),
     private fun showComprehensionPanel() {
         panelAvailability.visibility = View.GONE
         panelComprehension.visibility = View.VISIBLE
+        btnPrevStep.visibility = View.GONE
+        btnNextStep.visibility = View.GONE
         rgComp.clearCheck()
 //        etCompNotes.setText("")
 //        cbCompReplay.isChecked = false
