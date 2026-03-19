@@ -1,12 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Estado seleccionado -->
-    <item android:state_checked="true"
-        android:drawable="@drawable/understood_selected"/>
+    <!-- Fondo tipo card -->
+    <item>
+        <shape>
+            <solid android:color="#FFFFFF"/>
+            <corners android:radius="20dp"/>
+            <stroke
+                android:width="2dp"
+                android:color="#E0E0E0"/>
+        </shape>
+    </item>
 
-    <!-- Estado no seleccionado -->
+    <!-- Tu selector con padding -->
     <item
-        android:drawable="@drawable/understood"/>
+        android:left="30dp"
+        android:top="30dp"
+        android:right="30dp"
+        android:bottom="30dp">
+        <selector>
 
-</selector>
+            <!-- Seleccionado -->
+            <item android:state_checked="true"
+                android:drawable="@drawable/understood_selected"/>
+
+            <!-- No seleccionado -->
+            <item
+                android:drawable="@drawable/understood"/>
+
+        </selector>
+    </item>
+
+</layer-list>

@@ -20,14 +20,30 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvIndStep"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Paso 1 de 2"
-            android:textSize="35sp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_chip"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_refresh"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/tvIndStep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Paso 1 de 2"
+                android:textSize="30sp" />
+        </LinearLayout>
+<!--aqui iria icono para tvIndStep -->
+
 
         <LinearLayout
             android:id="@+id/stepIndTopic"
@@ -92,21 +108,43 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <TextView
-                android:id="@+id/tvIndRunningHeader"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sesión en curso"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_chip"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:layout_marginBottom="16dp">
 
-            <TextView
-                android:id="@+id/tvIndRunningState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="35sp"
-                android:text="Estado..." />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_topic"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvIndRunningHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sesión en curso"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="#333"/>
+            </LinearLayout>
+<!--aqui inicia el contenedor-->
+                <TextView
+                    android:id="@+id/tvIndRunningState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:background="#F5F5F5"
+                    android:text="Estado..." />
+
+
 
             <LinearLayout
                 android:id="@+id/panelIndAvailability"
@@ -159,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="12dp"
+                android:background="#F5F5F5"
                 android:visibility="gone"
                 tools:visibility="visible">
 
@@ -187,9 +225,11 @@
                         android:button="@null"
                         android:background="@drawable/img_selected_understood"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:textSize="30sp"
                         android:layout_marginEnd="28dp"
-                        android:layout_marginStart="28dp"/>
+                        android:layout_marginStart="28dp"
+                        android:elevation="4dp"/>
 
                     <RadioButton
                         android:id="@+id/rbIndCompPartial"
@@ -241,10 +281,12 @@
 
                 <Button
                     android:id="@+id/btnIndCompSave"
-                    android:layout_width="match_parent"
+                    android:layout_width="600dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="58dp"
+                    android:layout_marginBottom="50dp"
                     android:textSize="35sp"
+                    android:layout_gravity="center_horizontal"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/color_primary"
