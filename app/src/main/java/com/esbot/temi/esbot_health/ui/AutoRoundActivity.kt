@@ -81,12 +81,11 @@ class AutoRoundActivity : AppCompatActivity(),
     private lateinit var rbCompFull: RadioButton
     private lateinit var rbCompPartial: RadioButton
     private lateinit var rbCompNone: RadioButton
-    private lateinit var etCompNotes: EditText
-    private lateinit var cbCompReplay: CheckBox
     private lateinit var btnCompSave: Button
 
     private lateinit var btnPrevStep: Button
     private lateinit var btnNextStep: Button
+    private lateinit var label_tvRunningState: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,12 +151,11 @@ class AutoRoundActivity : AppCompatActivity(),
         rbCompFull = findViewById(R.id.rbCompFull)
         rbCompPartial = findViewById(R.id.rbCompPartial)
         rbCompNone = findViewById(R.id.rbCompNone)
-        etCompNotes = findViewById(R.id.etCompNotes)
-        cbCompReplay = findViewById(R.id.cbCompReplay)
         btnCompSave = findViewById(R.id.btnCompSave)
 
         btnPrevStep = findViewById(R.id.btnPrevStep)
         btnNextStep = findViewById(R.id.btnNextStep)
+        label_tvRunningState = findViewById(R.id.label_tvRunningState)
 
         tvRoundTitle.text = "Ronda automática de educación"
         tvBedsFloor.text = "Área / piso: ${HospitalConfig.FLOOR_NAME}"
@@ -359,7 +357,6 @@ class AutoRoundActivity : AppCompatActivity(),
         stepBeds.visibility = View.GONE
         stepRules.visibility = View.GONE
         stepSummary.visibility = View.GONE
-        panelRunning.visibility = View.GONE
 
         when (currentStep) {
             ConfigStep.TOPIC -> {
@@ -430,6 +427,7 @@ class AutoRoundActivity : AppCompatActivity(),
         cancelAvailabilityTimeout()
         panelAvailability.visibility = View.GONE
         panelComprehension.visibility = View.GONE
+        panelRunning.visibility = View.GONE
 
         currentBedIndex += 1
         if (currentBedIndex >= cfg.beds.size) {
@@ -462,6 +460,7 @@ class AutoRoundActivity : AppCompatActivity(),
 
         if (cfg?.rules?.returnToNursingAtEnd == true) {
             speak("He terminado la ronda. Voy a Enfermería.")
+            finish()
             try {
                 robot.goTo(HospitalConfig.NURSING_LOCATION)
             } catch (e: Exception) {
@@ -469,6 +468,7 @@ class AutoRoundActivity : AppCompatActivity(),
             }
         } else {
             speak("He terminado la ronda de educación.")
+            finish()
         }
 
         btnPrevStep.isEnabled = true
@@ -481,6 +481,7 @@ class AutoRoundActivity : AppCompatActivity(),
     private fun onArrivedAtCurrentBed() {
         val cfg = currentConfig ?: return
         val bed = currentBed ?: return
+        panelRunning.visibility = View.VISIBLE
 
         tvRunningState.text = "En ${bed.label}."
 
@@ -564,9 +565,11 @@ class AutoRoundActivity : AppCompatActivity(),
     private fun showComprehensionPanel() {
         panelAvailability.visibility = View.GONE
         panelComprehension.visibility = View.VISIBLE
+        btnPrevStep.visibility = View.GONE
+        btnNextStep.visibility = View.GONE
+        label_tvRunningState.visibility= View.GONE
+
         rgComp.clearCheck()
-        etCompNotes.setText("")
-        cbCompReplay.isChecked = false
 
         tvRunningState.text = "Registra qué tanto se entendió la explicación."
         tvRunningState.textSize = 45f
@@ -580,9 +583,9 @@ class AutoRoundActivity : AppCompatActivity(),
         val topic = cfg.topic
 
         val level = when (rgComp.checkedRadioButtonId) {
-            R.id.rbCompFull -> "FULL"
-            R.id.rbCompPartial -> "PARTIAL"
-            R.id.rbCompNone -> "NONE"
+            R.id.rbCompFull -> "bien"
+            R.id.rbCompPartial -> "regular"
+            R.id.rbCompNone -> "mal"
             else -> {
                 Toast.makeText(
                     this,
@@ -593,10 +596,6 @@ class AutoRoundActivity : AppCompatActivity(),
             }
         }
 
-        val notes = etCompNotes.text?.toString()?.trim().orEmpty()
-        val needsReplay = cbCompReplay.isChecked &&
-                (level == "PARTIAL" || level == "NONE") &&
-                cfg.rules.autoRepeatIfLow
 
         val event = EducationEvent(
             timestampMillis = System.currentTimeMillis(),
@@ -619,20 +618,14 @@ class AutoRoundActivity : AppCompatActivity(),
 
         speak(
             when (level) {
-                "FULL" -> "Perfecto, he registrado que la explicación se entendió bien."
-                "PARTIAL" -> "He registrado que se entendió solo parcialmente. El equipo de enfermería puede reforzar esta información."
+                "bien" -> "Perfecto, he registrado que la explicación se entendió bien."
+                "regular" -> "He registrado que se entendió solo parcialmente. El equipo de enfermería puede reforzar esta información."
                 else -> "He registrado que la explicación no se entendió. Informaré al equipo de enfermería."
             }
         )
-
-
-        if (needsReplay) {
-            speak("Voy a repetir la explicación para reforzar la información.")
-            startEducationAtCurrentBed()
-        } else {
             panelComprehension.visibility = View.GONE
             goToNextBed()
-        }
+
     }
 
     private fun markBedAsSkipped(reason: String) {

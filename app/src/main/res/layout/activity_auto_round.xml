@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootAutoRound"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -29,20 +30,91 @@
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
+            android:textAlignment="center"
             android:text="Ronda automática de educación"
             android:textSize="45sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvRoundStep"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="8dp"
-            android:text="Paso 1 de 4"
-            android:textSize="35sp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_chip"
+            android:layout_marginStart="24dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_refresh"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/tvRoundStep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="8dp"
+                android:text="Paso 1 de 4"
+                android:textSize="35sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_chip"
+            android:layout_marginStart="24dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_ubication"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/tvRunningHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ronda en curso"
+                android:textStyle="bold"
+                android:textSize="35sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/label_tvRunningState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_chip"
+            android:layout_marginStart="24dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_road"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/tvRunningState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ronda en curso"
+                android:textStyle="bold"
+                android:textSize="35sp" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -291,14 +363,12 @@
 <!--quinto-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/panelRunning"
-                    app:cardBackgroundColor="@color/text_white"
+                    app:cardBackgroundColor="#F5F5F5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="#6454a4"
-                    app:strokeWidth="2dp">
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -306,21 +376,14 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <TextView
-                            android:id="@+id/tvRunningHeader"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Ronda en curso"
-                            android:textStyle="bold"
-                            android:textSize="35sp" />
 
-                        <TextView
-                            android:id="@+id/tvRunningState"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="35sp"
-                            android:text="Estado..." />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvRunningState"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="4dp"-->
+<!--                            android:textSize="35sp"-->
+<!--                            android:text="Estado..." />-->
 
                         <LinearLayout
                             android:id="@+id/panelAvailability"
@@ -375,11 +438,13 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_marginTop="16dp"
-                            android:visibility="gone">
+                            android:visibility="gone"
+                            tools:visibility="visible">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textAlignment="center"
                                 android:text="¿Qué tanto se entendió la explicación?"
                                 android:textSize="35sp" />
 
@@ -395,19 +460,20 @@
 
                                 <RadioButton
                                     android:id="@+id/rbCompFull"
-                                    android:layout_width="170dp"
-                                    android:layout_height="170dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:button="@null"
                                     android:background="@drawable/img_selected_understood"
                                     android:gravity="center"
                                     android:textSize="30sp"
                                     android:layout_marginEnd="28dp"
-                                    android:layout_marginStart="28dp"/>
+                                    android:layout_marginStart="28dp"
+                                    android:elevation="4dp"/>
 
                                 <RadioButton
                                     android:id="@+id/rbCompPartial"
-                                    android:layout_width="170dp"
-                                    android:layout_height="170dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:button="@null"
                                     android:background="@drawable/img_selected_neutral"
                                     android:gravity="center"
@@ -417,8 +483,8 @@
 
                                 <RadioButton
                                     android:id="@+id/rbCompNone"
-                                    android:layout_width="170dp"
-                                    android:layout_height="170dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:button="@null"
                                     android:background="@drawable/img_selected_notunderstand"
                                     android:gravity="center"
@@ -427,29 +493,21 @@
                                     android:layout_marginStart="28dp"/>
                             </RadioGroup>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Notas o dudas (opcional):"
-                                android:textSize="35sp"/>
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="Notas o dudas (opcional):"-->
+<!--                                android:textSize="35sp"/>-->
 
-                            <EditText
-                                android:id="@+id/etCompNotes"
-                                android:layout_width="match_parent"
-                                android:layout_height="80dp"
-                                android:background="@android:drawable/edit_text"
-                                android:gravity="top|start"
-                                android:inputType="textMultiLine" />
-
-                            <CheckBox
-                                android:id="@+id/cbCompReplay"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:textSize="40sp"
-                                android:button="@drawable/radio_big"
-                                android:text="Repetir explicación si comprensión es baja" />
+<!--                            <CheckBox-->
+<!--                                android:id="@+id/cbCompReplay"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:textSize="40sp"-->
+<!--                                android:button="@drawable/radio_big"-->
+<!--                                android:text="Repetir explicación si comprensión es baja" />-->
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnCompSave"
