@@ -1,6 +1,7 @@
 package com.esbot.temi.esbot_health.education
 
 import android.content.Context
+import com.example.app_advertising.core.SheetController
 import java.io.File
 import java.io.FileOutputStream
 
@@ -28,7 +29,7 @@ object EducationLogStore {
             FileOutputStream(file, true).use { fos ->
                 if (writeHeader) {
                     fos.write(
-                        "timestampMillis,topicId,topicName,bedId,bedLabel,mode,comprehensionLevel,needsReplay,note\n"
+                        "timestampMillis,topicId,topicName,bedId,bedLabel,mode,comprehensionLevel\n"
                             .toByteArray()
                     )
                 }
@@ -38,21 +39,43 @@ object EducationLogStore {
 //                val safeNote = event.note.replace("\n", " ").replace(",", " ")
 
                 val line = buildString {
-                    append(event.timestampMillis); append(',')
+                    val date = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                        .format(java.util.Date(event.timestampMillis))
+
+                    append(date); append(',')
                     append(event.topicId); append(',')
                     append(safeTopicName); append(',')
                     append(event.bedId); append(',')
                     append(safeBedLabel); append(',')
                     append(event.mode); append(',')
-                    append(event.comprehensionLevel); append(',')
+                    append(event.comprehensionLevel);
 //                    append(event.needsReplay); append(',')
-//                    append(safeNote); append('\n')
+                    append('\n')
                 }
 
                 fos.write(line.toByteArray())
+                try {
+                    sendEducationEvent(event)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+    fun sendEducationEvent(event: com.esbot.temi.esbot_health.education.EducationEvent) {
+
+        val sheetEvent = SheetController.SheetEvent(
+            timestampMillis = event.timestampMillis,
+            topicId = event.topicId,
+            topicName = event.topicName,
+            bedId = event.bedId,
+            bedLabel = event.bedLabel,
+            mode = event.mode,
+            comprehensionLevel = event.comprehensionLevel
+        )
+
+        SheetController().sendToSheet(sheetEvent)
     }
 }

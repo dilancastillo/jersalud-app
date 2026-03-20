@@ -453,7 +453,7 @@ class IndividualEducationActivity : AppCompatActivity(),
 //            } else {
                 stopSession()
            // }
-        }, 7500)
+        }, 4500)
     }
 
     private fun markNotAvailable(reason: String) {
