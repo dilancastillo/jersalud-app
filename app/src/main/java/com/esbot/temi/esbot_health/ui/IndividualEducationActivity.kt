@@ -418,6 +418,7 @@ class IndividualEducationActivity : AppCompatActivity(),
 //        val needsReplay = cbCompReplay.isChecked &&
 //                (level == "PARTIAL" || level == "NONE")
 
+//        en esta parte es donde se guarda la respuesta del usuario para EducationLogStore 
         val event = EducationEvent(
             timestampMillis = System.currentTimeMillis(),
             topicId = topic.id,
